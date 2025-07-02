@@ -1,0 +1,16 @@
+{
+        "orgName": "expansiva",
+        "plugins": {},
+        "reasons": {},
+        "services": [],
+        "servicesConfigEnabled": false,
+        "designSystems": [],
+        "links": [],
+        "languages": [
+            {
+                "language": "en",
+                "name": "English",
+                "path": "/"
+            }
+        ]
+    }
