@@ -1,0 +1,74 @@
+/// <mls shortName="organismProductSearch" project="102009" enhancement="enhancementStyle" />
+
+                
+
+// organism: organism-product-search
+organism-product-search-102009 {
+  margin-bottom: @spacing-lg;
+  
+  .search-container {
+    position: relative;
+    max-width: 500px;
+    
+    .search-bar {
+      display: flex;
+      background: @color-surface;
+      border: 1px solid @color-border;
+      border-radius: @border-radius-md;
+      overflow: hidden;
+      box-shadow: @shadow-sm;
+      
+      .search-input {
+        flex: 1;
+        padding: @spacing-md;
+        border: none;
+        outline: none;
+        font-size: @font-size-md;
+        background: transparent;
+        color: @color-text-normal;
+        
+        &::placeholder {
+          color: @color-text-disabled;
+        }
+      }
+      
+      .search-button {
+        padding: @spacing-md;
+        background: @color-primary;
+        border: none;
+        color: @color-background;
+        cursor: pointer;
+        transition: @transition-fast;
+        
+        &:hover {
+          background: @color-link-hover;
+        }
+      }
+    }
+    
+    .search-suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: @color-surface;
+      border: 1px solid @color-border;
+      border-top: none;
+      border-radius: 0 0 @border-radius-md @border-radius-md;
+      box-shadow: @shadow-md;
+      z-index: 100;
+      
+      .suggestion-item {
+        padding: @spacing-sm @spacing-md;
+        cursor: pointer;
+        transition: @transition-fast;
+        
+        &:hover {
+          background: @color-overlay;
+        }
+      }
+    }
+  }
+}
+
+

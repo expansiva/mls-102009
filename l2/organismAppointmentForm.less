@@ -1,0 +1,185 @@
+/// <mls shortName="organismAppointmentForm" project="102009" enhancement="enhancementStyle" />
+
+                
+
+// organism: organism-appointment-form
+organism-appointment-form-102009 {
+  .appointment-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 @spacing-md;
+    
+    .form-header {
+      text-align: center;
+      margin-bottom: @spacing-xl;
+      
+      h1 {
+        font-size: @font-size-xxl;
+        font-weight: @font-weight-bold;
+        color: @color-text-normal;
+        margin-bottom: @spacing-xs;
+      }
+      
+      p {
+        font-size: @font-size-lg;
+        color: @color-text-secondary;
+      }
+    }
+    
+    .form-section {
+      margin-bottom: @spacing-xl;
+      
+      h3 {
+        font-size: @font-size-xl;
+        font-weight: @font-weight-bold;
+        color: @color-text-normal;
+        margin-bottom: @spacing-md;
+      }
+    }
+    
+    .service-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: @spacing-md;
+      
+      .service-option {
+        cursor: pointer;
+        
+        input[type="radio"] {
+          display: none;
+        }
+        
+        .service-card {
+          border: 2px solid @color-border;
+          border-radius: @border-radius-md;
+          padding: @spacing-md;
+          transition: @transition-base;
+          background: @color-surface;
+          display: flex;
+          align-items: center;
+          gap: @spacing-md;
+          
+          &:hover {
+            border-color: @color-primary;
+            box-shadow: @shadow-sm;
+          }
+          
+          img {
+            width: 60px;
+            height: 60px;
+            border-radius: @border-radius-sm;
+            object-fit: cover;
+          }
+          
+          .service-info {
+            flex: 1;
+            
+            h4 {
+              font-size: @font-size-lg;
+              font-weight: @font-weight-bold;
+              color: @color-text-normal;
+              margin-bottom: @spacing-xs;
+            }
+            
+            p {
+              font-size: @font-size-sm;
+              color: @color-text-secondary;
+              margin-bottom: @spacing-xs;
+            }
+            
+            .price {
+              font-size: @font-size-lg;
+              font-weight: @font-weight-bold;
+              color: @color-primary;
+            }
+          }
+        }
+        
+        input[type="radio"]:checked + .service-card {
+          border-color: @color-primary;
+          background: @color-overlay;
+        }
+      }
+    }
+    
+    .datetime-selection {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: @spacing-lg;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+      
+      .date-picker {
+        label {
+          display: block;
+          font-weight: @font-weight-bold;
+          color: @color-text-normal;
+          margin-bottom: @spacing-xs;
+        }
+        
+        input[type="date"] {
+          width: 100%;
+          padding: @spacing-sm;
+          border: 2px solid @color-border;
+          border-radius: @border-radius-sm;
+          font-size: @font-size-md;
+          transition: @transition-base;
+          
+          &:focus {
+            outline: none;
+            border-color: @color-primary;
+          }
+        }
+      }
+      
+      .time-slots {
+        label {
+          display: block;
+          font-weight: @font-weight-bold;
+          color: @color-text-normal;
+          margin-bottom: @spacing-xs;
+        }
+        
+        .time-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: @spacing-xs;
+          
+          @media (max-width: 480px) {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          
+          .time-slot {
+            padding: @spacing-sm;
+            border: 2px solid @color-border;
+            border-radius: @border-radius-sm;
+            background: @color-surface;
+            cursor: pointer;
+            transition: @transition-base;
+            font-size: @font-size-sm;
+            
+            &:hover {
+              border-color: @color-primary;
+            }
+            
+            &.selected {
+              background: @color-primary;
+              color: white;
+              border-color: @color-primary;
+            }
+            
+            &:disabled {
+              background: @color-text-disabled;
+              cursor: not-allowed;
+              opacity: 0.5;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+

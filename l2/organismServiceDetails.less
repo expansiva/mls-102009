@@ -1,0 +1,164 @@
+/// <mls shortName="organismServiceDetails" project="102009" enhancement="enhancementStyle" />
+
+                
+
+// organism: organism-service-details
+organism-service-details-102009 {
+  .service-details-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 @spacing-md;
+    
+    .details-header {
+      display: flex;
+      align-items: center;
+      gap: @spacing-md;
+      margin-bottom: @spacing-xl;
+      
+      .btn-back {
+        padding: @spacing-sm @spacing-md;
+        background-color: @color-surface;
+        color: @color-primary;
+        border: 1px solid @color-border;
+        border-radius: @border-radius-sm;
+        cursor: pointer;
+        transition: @transition-base;
+        font-size: @font-size-md;
+        
+        &:hover {
+          background-color: @color-primary;
+          color: white;
+        }
+      }
+      
+      h2 {
+        font-size: @font-size-xxl;
+        font-weight: @font-weight-bold;
+        color: @color-primary;
+        line-height: @line-height-sm;
+      }
+    }
+    
+    .details-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: @spacing-xl;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+      
+      .details-image {
+        img {
+          width: 100%;
+          height: 400px;
+          object-fit: cover;
+          border-radius: @border-radius-md;
+          box-shadow: @shadow-sm;
+        }
+      }
+      
+      .details-info {
+        .service-description,
+        .service-includes,
+        .service-pricing,
+        .service-duration {
+          margin-bottom: @spacing-lg;
+          
+          h3 {
+            font-size: @font-size-xl;
+            font-weight: @font-weight-bold;
+            color: @color-primary;
+            margin-bottom: @spacing-sm;
+            line-height: @line-height-sm;
+          }
+          
+          p {
+            color: @color-text-secondary;
+            line-height: @line-height-md;
+          }
+        }
+        
+        .service-includes {
+          ul {
+            list-style: none;
+            padding: 0;
+            
+            li {
+              padding: @spacing-xs 0;
+              color: @color-text-secondary;
+              position: relative;
+              padding-left: @spacing-md;
+              
+              &:before {
+                content: '✓';
+                color: @color-success;
+                font-weight: @font-weight-bold;
+                position: absolute;
+                left: 0;
+              }
+            }
+          }
+        }
+        
+        .pricing-table {
+          .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: @spacing-sm;
+            background-color: @color-surface;
+            border-radius: @border-radius-sm;
+            margin-bottom: @spacing-xs;
+            
+            .price-size {
+              color: @color-text-normal;
+              font-weight: @font-weight-normal;
+            }
+            
+            .price-value {
+              color: @color-accent;
+              font-weight: @font-weight-bold;
+              font-size: @font-size-lg;
+            }
+          }
+        }
+        
+        .booking-section {
+          margin-top: @spacing-xl;
+          padding-top: @spacing-lg;
+          border-top: 1px solid @color-border;
+          
+          .btn-schedule {
+            width: 100%;
+            padding: @spacing-md;
+            background-color: @color-secondary;
+            color: white;
+            border: none;
+            border-radius: @border-radius-sm;
+            font-size: @font-size-lg;
+            font-weight: @font-weight-bold;
+            cursor: pointer;
+            transition: @transition-base;
+            margin-bottom: @spacing-sm;
+            
+            &:hover {
+              background-color: @color-accent;
+              transform: translateY(-2px);
+              box-shadow: @shadow-md;
+            }
+          }
+          
+          .booking-note {
+            text-align: center;
+            color: @color-text-secondary;
+            font-size: @font-size-sm;
+            line-height: @line-height-md;
+          }
+        }
+      }
+    }
+  }
+}
+
+
