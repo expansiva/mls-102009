@@ -1,0 +1,136 @@
+/// <mls shortName="organismAppointmentsHistory" project="102009" enhancement="enhancementStyle" />
+
+                
+
+// organism: organism-appointments-history
+organism-appointments-history-102009 {
+  .appointments-history-container {
+    background: @color-surface;
+    border-radius: @border-radius-md;
+    padding: @spacing-xl;
+    margin-bottom: @spacing-xl;
+    box-shadow: @shadow-sm;
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: @spacing-lg;
+      
+      h2 {
+        font-size: @font-size-xl;
+        font-weight: @font-weight-bold;
+        color: @color-text-normal;
+        margin: 0;
+      }
+      
+      .filter-options {
+        .filter-select {
+          padding: @spacing-sm @spacing-md;
+          border: 1px solid @color-border;
+          border-radius: @border-radius-sm;
+          background: white;
+          cursor: pointer;
+        }
+      }
+    }
+    
+    .appointments-list {
+      .appointment-card {
+        background: white;
+        border-radius: @border-radius-md;
+        padding: @spacing-lg;
+        margin-bottom: @spacing-md;
+        box-shadow: @shadow-sm;
+        display: flex;
+        align-items: center;
+        gap: @spacing-lg;
+        transition: @transition-base;
+        
+        &:hover {
+          box-shadow: @shadow-md;
+        }
+        
+        .appointment-date {
+          background: @color-primary;
+          color: white;
+          border-radius: @border-radius-sm;
+          padding: @spacing-md;
+          text-align: center;
+          min-width: 60px;
+          
+          .day {
+            display: block;
+            font-size: @font-size-lg;
+            font-weight: @font-weight-bold;
+            line-height: 1;
+          }
+          
+          .month {
+            display: block;
+            font-size: @font-size-xs;
+            margin-top: @spacing-xs;
+          }
+        }
+        
+        .appointment-info {
+          flex: 1;
+          
+          h3 {
+            font-size: @font-size-lg;
+            font-weight: @font-weight-bold;
+            color: @color-text-normal;
+            margin: 0 0 @spacing-xs 0;
+          }
+          
+          .appointment-time {
+            color: @color-text-secondary;
+            margin: 0 0 @spacing-xs 0;
+          }
+          
+          .appointment-professional {
+            color: @color-text-secondary;
+            font-size: @font-size-sm;
+            margin: 0;
+          }
+        }
+        
+        .appointment-status {
+          text-align: right;
+          
+          .status-badge {
+            display: block;
+            padding: @spacing-xs @spacing-sm;
+            border-radius: @border-radius-xs;
+            font-size: @font-size-xs;
+            font-weight: @font-weight-bold;
+            margin-bottom: @spacing-xs;
+            
+            &.concluido {
+              background: @color-success;
+              color: white;
+            }
+            
+            &.agendado {
+              background: @color-warning;
+              color: white;
+            }
+            
+            &.cancelado {
+              background: @color-error;
+              color: white;
+            }
+          }
+          
+          .appointment-price {
+            font-size: @font-size-lg;
+            font-weight: @font-weight-bold;
+            color: @color-primary;
+          }
+        }
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,169 @@
+/// <mls shortName="organismAdminAppointments" project="102009" enhancement="enhancementStyle" />
+
+                
+
+// organism: organism-admin-appointments
+organism-admin-appointments-102009 {
+  .admin-section {
+    background-color: @color-background;
+    border-radius: @border-radius-md;
+    padding: @spacing-lg;
+    margin-bottom: @spacing-lg;
+    box-shadow: @shadow-sm;
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: @spacing-lg;
+      
+      h2 {
+        color: @color-text-normal;
+        font-size: @font-size-xl;
+        font-weight: @font-weight-bold;
+        margin: 0;
+      }
+      
+      .filter-controls {
+        display: flex;
+        gap: @spacing-sm;
+        
+        .filter-select, .date-filter {
+          padding: @spacing-xs @spacing-sm;
+          border: 1px solid @color-border;
+          border-radius: @border-radius-xs;
+          font-size: @font-size-sm;
+        }
+      }
+    }
+    
+    .appointments-list {
+      display: flex;
+      flex-direction: column;
+      gap: @spacing-md;
+      
+      .appointment-card {
+        display: grid;
+        grid-template-columns: 120px 1fr auto auto;
+        gap: @spacing-md;
+        padding: @spacing-md;
+        border: 1px solid @color-border;
+        border-radius: @border-radius-sm;
+        align-items: center;
+        transition: @transition-base;
+        
+        &:hover {
+          box-shadow: @shadow-md;
+        }
+        
+        &.confirmed {
+          border-left: 4px solid @color-success;
+        }
+        
+        &.pending {
+          border-left: 4px solid @color-warning;
+        }
+        
+        .appointment-time {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          
+          .date {
+            font-weight: @font-weight-bold;
+            color: @color-text-normal;
+            font-size: @font-size-sm;
+          }
+          
+          .time {
+            color: @color-primary;
+            font-weight: @font-weight-bold;
+            font-size: @font-size-lg;
+          }
+        }
+        
+        .appointment-details {
+          h4 {
+            margin: 0 0 @spacing-xs 0;
+            color: @color-text-normal;
+            font-size: @font-size-md;
+          }
+          
+          .pet-info {
+            color: @color-text-secondary;
+            font-size: @font-size-sm;
+            margin: @spacing-xs 0;
+          }
+          
+          .contact {
+            color: @color-text-secondary;
+            font-size: @font-size-sm;
+            margin: @spacing-xs 0 0 0;
+          }
+        }
+        
+        .appointment-status {
+          .status {
+            padding: @spacing-xs @spacing-sm;
+            border-radius: @border-radius-xs;
+            font-size: @font-size-xs;
+            font-weight: @font-weight-bold;
+            
+            &.confirmed {
+              background-color: @color-success;
+              color: white;
+            }
+            
+            &.pending {
+              background-color: @color-warning;
+              color: white;
+            }
+          }
+        }
+        
+        .appointment-actions {
+          display: flex;
+          gap: @spacing-xs;
+          
+          button {
+            padding: @spacing-xs @spacing-sm;
+            border: none;
+            border-radius: @border-radius-xs;
+            cursor: pointer;
+            font-size: @font-size-xs;
+            transition: @transition-base;
+          }
+          
+          .btn-edit {
+            background-color: @color-secondary;
+            color: white;
+            
+            &:hover {
+              opacity: 0.9;
+            }
+          }
+          
+          .btn-confirm {
+            background-color: @color-success;
+            color: white;
+            
+            &:hover {
+              opacity: 0.9;
+            }
+          }
+          
+          .btn-cancel {
+            background-color: @color-error;
+            color: white;
+            
+            &:hover {
+              opacity: 0.9;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+

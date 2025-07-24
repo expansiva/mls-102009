@@ -1,0 +1,158 @@
+/// <mls shortName="organismCartSummary" project="102009" enhancement="enhancementStyle" />
+
+                
+
+// organism: organism-cart-summary
+organism-cart-summary-102009 {
+  .summary-container {
+    background: @color-surface;
+    border-radius: @border-radius-md;
+    padding: @spacing-lg;
+    box-shadow: @shadow-sm;
+    position: sticky;
+    top: @spacing-lg;
+  }
+  
+  .summary-title {
+    font-size: @font-size-xl;
+    font-weight: @font-weight-bold;
+    color: @color-primary;
+    margin-bottom: @spacing-lg;
+    border-bottom: 2px solid @color-border;
+    padding-bottom: @spacing-sm;
+  }
+  
+  .summary-details {
+    margin-bottom: @spacing-lg;
+    
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: @spacing-sm 0;
+      font-size: @font-size-md;
+      
+      &.discount {
+        color: @color-success;
+        font-weight: @font-weight-bold;
+      }
+      
+      &.total {
+        font-size: @font-size-lg;
+        font-weight: @font-weight-bold;
+        color: @color-primary;
+      }
+    }
+    
+    .free-shipping {
+      color: @color-success;
+      font-weight: @font-weight-bold;
+    }
+    
+    .summary-divider {
+      border: none;
+      border-top: 1px solid @color-border;
+      margin: @spacing-md 0;
+    }
+  }
+  
+  .coupon-section {
+    margin-bottom: @spacing-lg;
+    
+    h3 {
+      font-size: @font-size-lg;
+      font-weight: @font-weight-bold;
+      margin-bottom: @spacing-sm;
+      color: @color-text-normal;
+    }
+    
+    .coupon-input-group {
+      display: flex;
+      gap: @spacing-xs;
+      
+      .coupon-input {
+        flex: 1;
+        padding: @spacing-sm;
+        border: 1px solid @color-border;
+        border-radius: @border-radius-sm;
+        font-size: @font-size-sm;
+        
+        &:focus {
+          outline: none;
+          border-color: @color-primary;
+          box-shadow: 0 0 0 2px @color-overlay;
+        }
+      }
+      
+      .apply-coupon-btn {
+        background: @color-secondary;
+        color: @color-text-normal;
+        border: none;
+        padding: @spacing-sm @spacing-md;
+        border-radius: @border-radius-sm;
+        font-weight: @font-weight-bold;
+        cursor: pointer;
+        transition: @transition-fast;
+        
+        &:hover {
+          background: @color-accent;
+          color: @color-background;
+        }
+      }
+    }
+  }
+  
+  .shipping-info {
+    h3 {
+      font-size: @font-size-lg;
+      font-weight: @font-weight-bold;
+      margin-bottom: @spacing-sm;
+      color: @color-text-normal;
+    }
+    
+    .shipping-option {
+      display: flex;
+      align-items: flex-start;
+      gap: @spacing-sm;
+      padding: @spacing-sm;
+      border: 1px solid @color-border;
+      border-radius: @border-radius-sm;
+      margin-bottom: @spacing-xs;
+      cursor: pointer;
+      transition: @transition-fast;
+      
+      &:hover {
+        border-color: @color-primary;
+        background: @color-overlay;
+      }
+      
+      &.selected {
+        border-color: @color-primary;
+        background: @color-overlay;
+      }
+      
+      input[type="radio"] {
+        margin-top: 2px;
+      }
+      
+      label {
+        flex: 1;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: @spacing-xs;
+        
+        strong {
+          color: @color-text-normal;
+        }
+        
+        span {
+          font-size: @font-size-sm;
+          color: @color-text-secondary;
+        }
+      }
+    }
+  }
+}
+
+

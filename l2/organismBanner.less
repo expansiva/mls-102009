@@ -1,0 +1,66 @@
+/// <mls shortName="organismBanner" project="102009" enhancement="enhancementStyle" />
+
+                
+
+// organism: organism-banner
+organism-banner-102009 {
+  .hero-banner {
+    background: linear-gradient(135deg, @color-surface 0%, @color-overlay 100%);
+    padding: @spacing-xxl 0;
+  }
+  
+  .banner-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 @spacing-md;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: @spacing-xl;
+    align-items: center;
+  }
+  
+  .banner-content {
+    .banner-title {
+      font-size: 3rem;
+      font-weight: @font-weight-bold;
+      color: @color-primary;
+      margin-bottom: @spacing-md;
+      line-height: @line-height-sm;
+    }
+    
+    .banner-subtitle {
+      font-size: @font-size-lg;
+      color: @color-text-secondary;
+      margin-bottom: @spacing-xl;
+      line-height: @line-height-lg;
+    }
+    
+    .banner-actions {
+      display: flex;
+      gap: @spacing-md;
+      flex-wrap: wrap;
+    }
+  }
+  
+  .banner-image {
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: @border-radius-lg;
+      box-shadow: @shadow-lg;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .banner-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    
+    .banner-content .banner-title {
+      font-size: 2rem;
+    }
+  }
+}
+
+
