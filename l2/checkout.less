@@ -1,0 +1,42 @@
+/// <mls shortName="checkout" project="102009" enhancement="enhancementStyle" />
+
+                
+
+// page: checkout
+checkout-102009 {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: @color-background;
+  font-family: @font-family-primary;
+  
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: @color-background;
+    box-shadow: @shadow-sm;
+  }
+  
+  main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: @spacing-lg @spacing-md;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: @spacing-xl;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      padding: @spacing-md @spacing-sm;
+      gap: @spacing-lg;
+    }
+  }
+  
+  footer {
+    margin-top: @spacing-xl;
+  }
+}
+
+

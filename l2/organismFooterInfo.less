@@ -1,0 +1,104 @@
+/// <mls shortName="organismFooterInfo" project="102009" enhancement="enhancementStyle" />
+
+                
+
+// organism: organism-footer-info
+organism-footer-info-102009 {
+  .site-footer {
+    background-color: @color-text-normal;
+    color: white;
+    padding: @spacing-xxl 0 @spacing-lg;
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: @spacing-xl;
+    margin-bottom: @spacing-xl;
+  }
+  
+  .footer-section {
+    .footer-title {
+      font-size: @font-size-xl;
+      font-weight: @font-weight-bold;
+      color: @color-secondary;
+      margin-bottom: @spacing-md;
+    }
+    
+    .footer-subtitle {
+      font-size: @font-size-lg;
+      font-weight: @font-weight-bold;
+      margin-bottom: @spacing-md;
+      color: white;
+    }
+    
+    .footer-description {
+      color: rgba(255, 255, 255, 0.8);
+      line-height: @line-height-lg;
+      margin-bottom: @spacing-md;
+    }
+  }
+  
+  .social-links {
+    display: flex;
+    gap: @spacing-sm;
+    
+    .social-link {
+      display: inline-block;
+      padding: @spacing-xs;
+      border-radius: @border-radius-xs;
+      transition: @transition-base;
+      
+      &:hover {
+        background-color: @color-primary;
+      }
+      
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+  
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      margin-bottom: @spacing-xs;
+      
+      a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: @transition-base;
+        
+        &:hover {
+          color: @color-secondary;
+        }
+      }
+    }
+  }
+  
+  .contact-details {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: @line-height-lg;
+    
+    p {
+      margin-bottom: @spacing-sm;
+    }
+    
+    strong {
+      color: white;
+    }
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding-top: @spacing-lg;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+
