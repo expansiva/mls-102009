@@ -1,0 +1,124 @@
+/// <mls shortName="organismOrderSummary" project="102009" enhancement="enhancementStyle" />
+
+                
+
+// organism: organism-order-summary
+organism-order-summary-102009 {
+  .order-summary-container {
+    background: @color-surface;
+    border-radius: @border-radius-md;
+    padding: @spacing-lg;
+    box-shadow: @shadow-sm;
+    position: sticky;
+    top: 100px;
+    
+    h2 {
+      color: @color-primary;
+      font-size: @font-size-xl;
+      font-weight: @font-weight-bold;
+      margin-bottom: @spacing-lg;
+      text-align: center;
+    }
+    
+    .order-items {
+      margin-bottom: @spacing-lg;
+      
+      .order-item {
+        display: flex;
+        align-items: center;
+        padding: @spacing-md;
+        border-bottom: 1px solid @color-border;
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        .item-image {
+          width: 60px;
+          height: 60px;
+          object-fit: cover;
+          border-radius: @border-radius-sm;
+          margin-right: @spacing-md;
+        }
+        
+        .item-details {
+          flex: 1;
+          
+          h4 {
+            color: @color-text-normal;
+            font-size: @font-size-md;
+            font-weight: @font-weight-bold;
+            margin-bottom: @spacing-xs;
+          }
+          
+          p {
+            color: @color-text-secondary;
+            font-size: @font-size-sm;
+            margin-bottom: @spacing-xs;
+          }
+          
+          .item-price {
+            color: @color-primary;
+            font-weight: @font-weight-bold;
+            font-size: @font-size-lg;
+          }
+        }
+      }
+    }
+    
+    .order-totals {
+      margin-bottom: @spacing-lg;
+      
+      .total-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: @spacing-xs 0;
+        color: @color-text-normal;
+        
+        &.discount {
+          color: @color-success;
+        }
+        
+        &.final {
+          border-top: 2px solid @color-primary;
+          padding-top: @spacing-sm;
+          margin-top: @spacing-sm;
+          font-size: @font-size-lg;
+          font-weight: @font-weight-bold;
+          color: @color-primary;
+        }
+      }
+    }
+    
+    .delivery-info {
+      padding: @spacing-md;
+      background: @color-background;
+      border-radius: @border-radius-sm;
+      border-left: 4px solid @color-secondary;
+      
+      h3 {
+        color: @color-text-normal;
+        font-size: @font-size-lg;
+        font-weight: @font-weight-bold;
+        margin-bottom: @spacing-sm;
+      }
+      
+      p {
+        color: @color-text-secondary;
+        font-size: @font-size-sm;
+        margin-bottom: @spacing-xs;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+        
+        strong {
+          color: @color-text-normal;
+        }
+      }
+    }
+  }
+}
+
+

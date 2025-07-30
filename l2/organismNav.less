@@ -1,0 +1,98 @@
+/// <mls shortName="organismNav" project="102009" enhancement="enhancementStyle" />
+
+                
+
+// organism: organism-nav
+organism-nav-102009 {
+  .navbar {
+    background-color: white;
+    box-shadow: @shadow-sm;
+    position: sticky;
+    top: 0;
+    z-index: @z-index-dropdown;
+  }
+  
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 @spacing-md;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+  
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: @spacing-sm;
+    
+    .logo {
+      height: 40px;
+      width: auto;
+    }
+    
+    .brand-name {
+      font-size: @font-size-xl;
+      font-weight: @font-weight-bold;
+      color: @color-primary;
+    }
+  }
+  
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: @spacing-lg;
+    
+    .nav-link {
+      text-decoration: none;
+      color: @color-text-normal;
+      font-weight: @font-weight-normal;
+      transition: @transition-base;
+      padding: @spacing-xs @spacing-sm;
+      border-radius: @border-radius-xs;
+      
+      &:hover, &.active {
+        color: @color-primary;
+        background-color: @color-overlay;
+      }
+      
+      &.login-btn {
+        background-color: @color-primary;
+        color: white;
+        
+        &:hover {
+          background-color: @color-link-visited;
+        }
+      }
+    }
+  }
+  
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: @color-primary;
+      margin: 3px 0;
+      transition: @transition-fast;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .nav-menu {
+      display: none;
+    }
+    
+    .nav-toggle {
+      display: flex;
+    }
+  }
+}
+
+

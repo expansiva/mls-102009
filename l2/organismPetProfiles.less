@@ -1,0 +1,137 @@
+/// <mls shortName="organismPetProfiles" project="102009" enhancement="enhancementStyle" />
+
+                
+
+// organism: organism-pet-profiles
+organism-pet-profiles-102009 {
+  .pet-profiles-container {
+    background: @color-surface;
+    border-radius: @border-radius-md;
+    padding: @spacing-xl;
+    margin-bottom: @spacing-xl;
+    box-shadow: @shadow-sm;
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: @spacing-lg;
+      
+      h2 {
+        font-size: @font-size-xl;
+        font-weight: @font-weight-bold;
+        color: @color-text-normal;
+        margin: 0;
+      }
+      
+      .add-pet-btn {
+        background: @color-secondary;
+        color: white;
+        border: none;
+        padding: @spacing-sm @spacing-lg;
+        border-radius: @border-radius-sm;
+        cursor: pointer;
+        font-weight: @font-weight-bold;
+        transition: @transition-base;
+        
+        &:hover {
+          background: @color-accent;
+        }
+      }
+    }
+    
+    .pets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: @spacing-lg;
+      
+      .pet-card {
+        background: white;
+        border-radius: @border-radius-md;
+        padding: @spacing-lg;
+        box-shadow: @shadow-sm;
+        transition: @transition-base;
+        
+        &:hover {
+          box-shadow: @shadow-md;
+          transform: translateY(-2px);
+        }
+        
+        .pet-image {
+          text-align: center;
+          margin-bottom: @spacing-md;
+          
+          img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid @color-primary;
+          }
+        }
+        
+        .pet-info {
+          text-align: center;
+          margin-bottom: @spacing-md;
+          
+          h3 {
+            font-size: @font-size-lg;
+            font-weight: @font-weight-bold;
+            color: @color-text-normal;
+            margin: 0 0 @spacing-xs 0;
+          }
+          
+          .pet-breed {
+            color: @color-text-secondary;
+            font-size: @font-size-md;
+            margin: 0 0 @spacing-xs 0;
+          }
+          
+          .pet-age {
+            color: @color-primary;
+            font-weight: @font-weight-bold;
+            margin: 0 0 @spacing-sm 0;
+          }
+          
+          .pet-details {
+            display: flex;
+            justify-content: center;
+            gap: @spacing-sm;
+            
+            .detail-item {
+              background: @color-overlay;
+              color: @color-primary;
+              padding: @spacing-xs @spacing-sm;
+              border-radius: @border-radius-xs;
+              font-size: @font-size-xs;
+              font-weight: @font-weight-bold;
+            }
+          }
+        }
+        
+        .pet-actions {
+          display: flex;
+          justify-content: center;
+          gap: @spacing-sm;
+          
+          .btn-icon {
+            background: @color-surface;
+            border: 1px solid @color-border;
+            border-radius: @border-radius-sm;
+            padding: @spacing-sm;
+            cursor: pointer;
+            transition: @transition-base;
+            
+            &:hover {
+              background: @color-primary;
+              color: white;
+              border-color: @color-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+

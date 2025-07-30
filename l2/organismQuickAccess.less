@@ -1,0 +1,61 @@
+/// <mls shortName="organismQuickAccess" project="102009" enhancement="enhancementStyle" />
+
+                
+// organism: organism-quick-access
+organism-quick-access-102009 {
+  .quick-access-section {
+    padding: @spacing-xxl 0;
+    background: linear-gradient(135deg, @color-primary 0%, @color-link-visited 100%);
+    color: white;
+  }
+  
+  .quick-access-content {
+    text-align: center;
+    
+    .section-title {
+      color: white;
+    }
+    
+    .section-subtitle {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+  
+  .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: @spacing-xl;
+    margin-top: @spacing-xl;
+  }
+  
+  .quick-action-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: @spacing-xl;
+    border-radius: @border-radius-md;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    .action-icon {
+      margin-bottom: @spacing-md;
+      
+      img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    
+    .action-title {
+      font-size: @font-size-xl;
+      font-weight: @font-weight-bold;
+      margin-bottom: @spacing-sm;
+    }
+    
+    .action-description {
+      margin-bottom: @spacing-lg;
+      opacity: 0.9;
+    }
+  }
+}
+
+
