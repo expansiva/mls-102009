@@ -1,0 +1,82 @@
+/// <mls shortName="organismContactDetails" project="102009" folder="petshop" groupName="petshop" enhancement="_100554_enhancementStyle" />
+
+// organism: organism-contact-details
+petshop--organism-contact-details-102009 {
+  background: @bg-primary-color;
+  border-radius: @space-16;
+  box-shadow: 0 2px 12px 0 fade(@grey-color-dark, 10%);
+  padding: @space-48 @space-40;
+  min-width: 320px;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: @space-24;
+  font-family: @font-family-primary;
+
+  h2 {
+    color: @text-primary-color;
+    font-size: @font-size-24;
+    font-weight: @font-weight-bold;
+    margin-bottom: @space-16;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: @space-16;
+    font-size: @font-size-16;
+    color: @text-primary-color-darker;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: @space-16;
+    line-height: @line-height-large;
+  }
+
+  .contact-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: @bg-secondary-color-lighter;
+    border-radius: 50%;
+    color: @text-primary-color;
+    font-size: @font-size-20;
+  }
+
+  .contact-label {
+    font-weight: @font-weight-bold;
+    margin-right: @space-8;
+  }
+
+  .social-links {
+    display: flex;
+    gap: @space-16;
+    margin-top: @space-16;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: @bg-secondary-color-lighter;
+    color: @text-primary-color;
+    font-size: @font-size-20;
+    transition: background @transition-normal, color @transition-normal;
+    text-decoration: none;
+
+    &:hover {
+      background: @text-primary-color;
+      color: @bg-primary-color;
+    }
+  }
+}
+
+

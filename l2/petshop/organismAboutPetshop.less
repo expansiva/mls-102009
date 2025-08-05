@@ -1,0 +1,58 @@
+/// <mls shortName="organismAboutPetshop" project="102009" folder="petshop" groupName="petshop" enhancement="_100554_enhancementStyle" />
+
+
+// organism: organism-about-petshop
+petshop--organism-about-petshop-102009 {
+
+  background: @bg-primary-color;
+  padding: @space-48 0;
+
+  .about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  h2 {
+    color: @text-primary-color;
+    font-size: @font-size-24;
+    font-weight: @font-weight-bold;
+    margin-bottom: @space-24;
+  }
+
+  .about-text {
+    font-size: @font-size-16;
+    color: @text-primary-color-lighter;
+    line-height: @line-height-large;
+    margin-bottom: @space-16;
+  }
+
+  .about-values {
+    display: flex;
+    gap: @space-24;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: @space-16;
+
+    .value {
+      background: @bg-secondary-color-lighter;
+      border-radius: 12px;
+      padding: @space-16 @space-24;
+      color: @text-secondary-color-darker;
+      font-size: @font-size-12;
+      font-weight: @font-weight-bold;
+      box-shadow: 0 1px 4px @grey-color-light;
+    }
+  }
+
+  @media (max-width: @breakpoint-medium) {
+    .about-values {
+      gap: @space-8;
+    }
+  }
+}
+
+

@@ -1,0 +1,101 @@
+/// <mls shortName="organismAdminSidebar" project="102009" folder="petshop" groupName="petshop" enhancement="_100554_enhancementStyle" />
+
+petshop--organism-admin-sidebar-102009 {
+  .admin-sidebar {
+    background: @bg-secondary-color-lighter;
+    padding: @space-24 @space-16;
+    min-width: 220px;
+    font-family: @font-family-primary;
+    border-right: 1px solid @grey-color;
+
+    .admin-sidebar__title {
+      font-size: @font-size-16;
+      color: @text-primary-color-darker;
+      margin-bottom: @space-16;
+      font-weight: @font-weight-bold;
+    }
+
+    .admin-sidebar__shortcuts {
+      list-style: none;
+      margin: 0 0 @space-24 0;
+      padding: 0;
+
+      .admin-sidebar__shortcut {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: @text-primary-color;
+        text-decoration: none;
+        padding: @space-8 @space-8;
+        border-radius: 4px;
+        margin-bottom: @space-8;
+        transition: background @transition-slow;
+
+        &:hover,
+        &:focus {
+          background: @bg-primary-color-hover;
+          color: @text-primary-color-darker;
+        }
+      }
+    }
+
+    .admin-sidebar__badge {
+      display: inline-block;
+      padding: 0 @space-8;
+      border-radius: 12px;
+      font-size: @font-size-12;
+      font-weight: @font-weight-bold;
+
+      &--info {
+        background: @bg-primary-color-darker;
+        color: @text-primary-color-lighter;
+      }
+
+      &--success {
+        background: @bg-secondary-color;
+        color: @text-secondary-color-darker;
+      }
+
+      &--warning {
+        background: @warning-color;
+        color: #fff;
+      }
+    }
+
+    .admin-sidebar__status {
+      margin-top: @space-24;
+    }
+
+    .admin-sidebar__status-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      .admin-sidebar__status-label {
+        color: @text-primary-color;
+        font-size: @font-size-12;
+      }
+
+      .admin-sidebar__status-value {
+        margin-left: @space-8;
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: @space-8;
+      }
+    }
+  }
+
+  @media (max-width: @breakpoint-medium) {
+    .admin-sidebar {
+      min-width: 100%;
+      border-right: none;
+      border-bottom: 1px solid @grey-color;
+    }
+  }
+}
+
+
