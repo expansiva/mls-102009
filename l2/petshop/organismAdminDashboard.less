@@ -1,0 +1,79 @@
+/// <mls shortName="organismAdminDashboard" project="102009" folder="petshop" groupName="petshop" enhancement="_100554_enhancementStyle" />
+
+petshop--organism-admin-dashboard-102009 {
+  .admin-dashboard {
+    background: @bg-primary-color;
+    padding: @space-32;
+    font-family: @font-family-primary;
+
+    .admin-dashboard__title {
+      font-size: @font-size-24;
+      color: @text-primary-color-darker;
+      margin-bottom: @space-24;
+      font-weight: @font-weight-bold;
+    }
+
+    .admin-dashboard__metrics {
+      display: flex;
+      gap: @space-32;
+      margin-bottom: @space-32;
+
+      .admin-dashboard__metric {
+        background: @bg-secondary-color-lighter;
+        border-radius: 8px;
+        padding: @space-24;
+        min-width: 160px;
+        text-align: center;
+
+        .admin-dashboard__metric-label {
+          color: @text-primary-color;
+          font-size: @font-size-12;
+          margin-bottom: @space-8;
+          display: block;
+        }
+
+        .admin-dashboard__metric-value {
+          color: @text-secondary-color-darker;
+          font-size: @font-size-24;
+          font-weight: @font-weight-bold;
+        }
+      }
+    }
+
+    .admin-dashboard__charts {
+      display: flex;
+      gap: @space-32;
+
+      .admin-dashboard__chart {
+        background: @bg-secondary-color-lighter;
+        border-radius: 8px;
+        padding: @space-16;
+        flex: 1;
+        text-align: center;
+
+        img {
+          width: 100%;
+          max-width: 260px;
+          height: auto;
+          margin-bottom: @space-8;
+        }
+
+        .admin-dashboard__chart-label {
+          color: @text-primary-color;
+          font-size: @font-size-12;
+        }
+      }
+    }
+  }
+
+  @media (max-width: @breakpoint-medium) {
+
+    .admin-dashboard__metrics,
+    .admin-dashboard__charts {
+      flex-direction: column;
+      gap: @space-16;
+    }
+  }
+}
+
+

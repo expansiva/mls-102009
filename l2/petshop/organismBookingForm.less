@@ -1,0 +1,109 @@
+/// <mls shortName="organismBookingForm" project="102009" folder="petshop" groupName="petshop" enhancement="_100554_enhancementStyle" />
+
+// organism: organism-booking-form
+petshop--organism-booking-form-102009 {
+  background: @bg-primary-color;
+  border-radius: @space-16;
+  box-shadow: 0 2px 8px 0 fade(@grey-color-dark, 20%);
+  padding: @space-32 @space-40;
+  margin-bottom: @space-32;
+  max-width: 480px;
+  width: 100%;
+  font-family: @font-family-primary;
+
+  @media (max-width: @breakpoint-medium) {
+    padding: @space-16 @space-8;
+    max-width: 100%;
+  }
+
+  h2 {
+    color: @text-primary-color;
+    font-size: @font-size-24;
+    font-weight: @font-weight-bold;
+    margin-bottom: @space-24;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: @space-16;
+  }
+
+  label {
+    font-size: @font-size-16;
+    color: @text-primary-color-darker;
+    margin-bottom: @space-8;
+    font-weight: @font-weight-normal;
+  }
+
+  input,
+  select {
+    padding: @space-8;
+    border: 1px solid @grey-color-dark;
+    border-radius: @space-8;
+    font-size: @font-size-16;
+    font-family: @font-family-primary;
+    background: @bg-primary-color-lighter;
+    color: @text-primary-color-darker;
+    transition: border-color @transition-normal;
+
+    &:focus {
+      border-color: @text-primary-color;
+      outline: none;
+    }
+  }
+
+  .form-row {
+    display: flex;
+    gap: @space-16;
+
+    @media (max-width: @breakpoint-small) {
+      flex-direction: column;
+      gap: @space-8;
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: @space-24;
+  }
+
+  button[type="submit"] {
+    background: @text-secondary-color;
+    color: @bg-primary-color;
+    border: none;
+    border-radius: @space-8;
+    padding: @space-8 @space-32;
+    font-size: @font-size-16;
+    font-weight: @font-weight-bold;
+    cursor: pointer;
+    transition: background @transition-normal;
+
+    &:hover {
+      background: @text-secondary-color-hover;
+    }
+
+    &:disabled {
+      background: @text-secondary-color-disabled;
+      cursor: not-allowed;
+    }
+  }
+
+  .form-error {
+    color: @error-color;
+    font-size: @font-size-12;
+    margin-top: @space-8;
+  }
+
+  .confirmation-message {
+    color: @success-color;
+    font-size: @font-size-16;
+    text-align: center;
+    margin-top: @space-16;
+  }
+}
+
+
