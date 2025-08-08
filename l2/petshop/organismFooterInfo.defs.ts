@@ -7,7 +7,7 @@ export const defs: mls.l4.BaseDefs = {
     "projectId": 102009,
     "folder": "petshop",
     "shortName": "organismFooterInfo",
-    "type": "widget",
+    "type": "organism",
     "devFidelity": "scaffold",
     "group": "petshop",
     "tags": [

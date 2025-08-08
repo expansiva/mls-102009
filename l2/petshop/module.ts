@@ -1,7 +1,8 @@
 /// <mls shortName="module" project="102009" folder="petshop" enhancement="_blank" />
 
 export const moduleConfig = {
-  theme: "petshop"
+  theme: "petshop",
+  initialPage:"home"
 }
 
 export const payload3 = {
