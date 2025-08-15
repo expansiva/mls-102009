@@ -1,0 +1,73 @@
+/// <mls shortName="organismFeaturedPackages" project="102009" folder="travelagency" groupName="travelagency" enhancement="_100554_enhancementStyle" />
+
+ 
+  travelagency--organism-featured-packages-102009 {
+    .featured-packages {
+      margin: @space-32 0;
+    }
+    .featured-title {
+      font-size: @font-size-24;
+      color: @text-primary-color;
+      font-weight: @font-weight-bold;
+      margin-bottom: @space-24;
+      font-family: @font-family-primary;
+    }
+    .packages-list {
+      display: flex;
+      gap: @space-24;
+      @media (max-width: @breakpoint-medium) {
+        flex-direction: column;
+        gap: @space-16;
+      }
+    }
+    .package-card {
+      background: @bg-primary-color;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px 0 @grey-color-light;
+      overflow: hidden;
+      flex: 1;
+      min-width: 220px;
+      max-width: 320px;
+      display: flex;
+      flex-direction: column;
+      @media (max-width: @breakpoint-medium) {
+        max-width: 100%;
+      }
+    }
+    .package-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+    .package-info {
+      padding: @space-16;
+      display: flex;
+      flex-direction: column;
+      gap: @space-8;
+    }
+    .package-destination {
+      font-size: @font-size-20;
+      color: @text-primary-color;
+      font-weight: @font-weight-bold;
+      margin: 0;
+    }
+    .package-price {
+      font-size: @font-size-16;
+      color: @text-secondary-color;
+      margin: 0;
+    }
+    .package-details-link {
+      color: @link-color;
+      font-size: @font-size-16;
+      text-decoration: none;
+      font-weight: @font-weight-bold;
+      margin-top: @space-8;
+      transition: color @transition-normal;
+      &:hover, &:focus {
+        color: @link-color-hover;
+      }
+    }
+  }
+
+

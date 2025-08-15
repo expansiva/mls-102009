@@ -1,0 +1,94 @@
+/// <mls shortName="organismFooterInfo" project="102009" folder="travel" groupName="travel" enhancement="_100554_enhancementStyle" />
+
+ 
+  travel--organism-footer-info-102009 {
+    .footer-info {
+      background: @bg-primary-color-darker;
+      color: @text-primary-color-darker;
+      padding: @space-32 0 @space-16 0;
+      font-family: @font-family-primary;
+      border-top: 1px solid @grey-color;
+      margin-top: @space-32;
+    }
+    .footer-info__main {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: @space-32;
+      max-width: 1200px;
+      margin: 0 auto @space-16 auto;
+      flex-wrap: wrap;
+      @media (max-width: @breakpoint-medium) {
+        flex-direction: column;
+        gap: @space-16;
+        align-items: flex-start;
+      }
+    }
+    .footer-info__brand {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: @space-8;
+    }
+    .footer-info__logo {
+      height: 36px;
+      width: auto;
+      margin-bottom: @space-8;
+    }
+    .footer-info__slogan {
+      font-size: @font-size-16;
+      color: @text-primary-color-darker;
+      font-weight: @font-weight-bold;
+    }
+    .footer-info__contacts {
+      display: flex;
+      flex-direction: column;
+      gap: @space-8;
+      font-size: @font-size-16;
+    }
+    .footer-info__contact {
+      color: @text-primary-color-darker;
+    }
+    .footer-info__social {
+      display: flex;
+      gap: @space-16;
+      margin-top: @space-8;
+    }
+    .footer-info__social-link {
+      display: inline-block;
+      img {
+        width: 28px;
+        height: 28px;
+        filter: grayscale(0.2);
+        transition: filter @transition-normal;
+      }
+      &:hover img, &:focus img {
+        filter: grayscale(0) brightness(1.2);
+        outline: none;
+      }
+    }
+    .footer-info__links {
+      display: flex;
+      gap: @space-24;
+      justify-content: center;
+      margin: @space-16 0;
+      a {
+        color: @text-primary-color;
+        text-decoration: none;
+        font-size: @font-size-16;
+        &:hover, &:focus {
+          color: @text-primary-color-hover;
+          text-decoration: underline;
+          outline: none;
+        }
+      }
+    }
+    .footer-info__copyright {
+      text-align: center;
+      color: @grey-color-darker;
+      font-size: @font-size-12;
+      margin-top: @space-8;
+    }
+  }
+
+

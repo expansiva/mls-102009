@@ -1,0 +1,80 @@
+/// <mls shortName="organismHeroBanner" project="102009" folder="travel" groupName="travel" enhancement="_100554_enhancementStyle" />
+
+ 
+  travel--organism-hero-banner-102009 {
+    .hero-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: @bg-primary-color-lighter;
+      padding: @space-40 @space-32;
+      gap: @space-32;
+      min-height: 340px;
+      @media (max-width: @breakpoint-medium) {
+        flex-direction: column-reverse;
+        padding: @space-24 @space-8;
+        gap: @space-16;
+      }
+    }
+    .hero-banner__content {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      gap: @space-16;
+      max-width: 500px;
+    }
+    .hero-banner__title {
+      font-size: @font-size-40;
+      font-weight: @font-weight-bold;
+      color: @text-primary-color-darker;
+      margin: 0;
+      line-height: @line-height-large;
+    }
+    .hero-banner__subtitle {
+      font-size: @font-size-20;
+      color: @text-primary-color;
+      margin: 0;
+      line-height: @line-height-medium;
+    }
+    .hero-banner__cta {
+      display: inline-block;
+      background: @bg-secondary-color;
+      color: @bg-primary-color;
+      font-weight: @font-weight-bold;
+      font-size: @font-size-16;
+      padding: @space-8 @space-24;
+      border-radius: 4px;
+      text-decoration: none;
+      margin-top: @space-8;
+      transition: background @transition-normal, color @transition-normal;
+      &:hover, &:focus {
+        background: @bg-secondary-color-hover;
+        color: @bg-primary-color;
+        outline: none;
+      }
+    }
+    .hero-banner__image {
+      flex: 1 1 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 220px;
+      img {
+        max-width: 380px;
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px @grey-color-light;
+      }
+    }
+    @media (max-width: @breakpoint-medium) {
+      .hero-banner__image img {
+        max-width: 100%;
+      }
+      .hero-banner__content {
+        max-width: 100%;
+      }
+    }
+  }
+
+

@@ -1,0 +1,108 @@
+/// <mls shortName="organismUserProfile" project="102009" folder="travel" groupName="travel" enhancement="_100554_enhancementStyle" />
+
+ 
+  travel--organism-user-profile-102009 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: @space-40;
+    .profile-card {
+      background: @bg-primary-color;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px fade(@grey-color-dark, 10%);
+      padding: @space-32 @space-40;
+      display: flex;
+      gap: @space-32;
+      min-width: 320px;
+      max-width: 600px;
+      width: 100%;
+      @media (max-width: @breakpoint-medium) {
+        flex-direction: column;
+        align-items: center;
+        padding: @space-24;
+      }
+    }
+    .profile-avatar {
+      flex-shrink: 0;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: @grey-color-light;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+    .profile-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      h2 {
+        font-size: @font-size-24;
+        color: @text-primary-color-darker;
+        margin-bottom: @space-16;
+        font-weight: @font-weight-bold;
+      }
+      .profile-form {
+        display: flex;
+        flex-direction: column;
+        gap: @space-16;
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          label {
+            font-size: @font-size-16;
+            color: @text-primary-color;
+            margin-bottom: @space-8;
+            font-weight: @font-weight-normal;
+          }
+          input {
+            padding: @space-8 @space-16;
+            border: 1px solid @grey-color;
+            border-radius: 6px;
+            font-size: @font-size-16;
+            font-family: @font-family-primary;
+            background: @bg-primary-color-lighter;
+            color: @text-primary-color-darker;
+            transition: border-color @transition-slow;
+            &:focus {
+              border-color: @text-primary-color;
+              outline: none;
+            }
+          }
+        }
+        .form-actions {
+          display: flex;
+          justify-content: flex-end;
+          margin-top: @space-8;
+          .btn-primary {
+            background: @text-primary-color;
+            color: @bg-primary-color;
+            border: none;
+            border-radius: 6px;
+            padding: @space-8 @space-24;
+            font-size: @font-size-16;
+            font-weight: @font-weight-bold;
+            cursor: pointer;
+            transition: background @transition-slow;
+            &:hover, &:focus {
+              background: @text-primary-color-hover;
+            }
+            &:active {
+              background: @text-primary-color-focus;
+            }
+          }
+        }
+      }
+    }
+  }
+
+

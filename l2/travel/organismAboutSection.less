@@ -1,0 +1,71 @@
+/// <mls shortName="organismAboutSection" project="102009" folder="travel" groupName="travel" enhancement="_100554_enhancementStyle" />
+
+ 
+  travel--organism-about-section-102009 {
+    .about-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: @bg-primary-color;
+      padding: @space-40 @space-32;
+      gap: @space-32;
+      max-width: 1200px;
+      margin: @space-32 auto;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px @grey-color-light;
+      @media (max-width: @breakpoint-medium) {
+        flex-direction: column;
+        padding: @space-16 @space-8;
+        gap: @space-16;
+      }
+    }
+    .about-section__content {
+      flex: 2 1 0;
+      display: flex;
+      flex-direction: column;
+      gap: @space-16;
+    }
+    .about-section__title {
+      font-size: @font-size-24;
+      color: @text-primary-color-darker;
+      font-weight: @font-weight-bold;
+      margin: 0;
+    }
+    .about-section__text {
+      font-size: @font-size-16;
+      color: @text-primary-color;
+      margin: 0;
+      line-height: @line-height-medium;
+    }
+    .about-section__differentials {
+      list-style: disc inside;
+      color: @text-primary-color-lighter;
+      font-size: @font-size-16;
+      margin: 0;
+      padding-left: @space-16;
+      li {
+        margin-bottom: @space-8;
+      }
+    }
+    .about-section__image {
+      flex: 1 1 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 180px;
+      img {
+        max-width: 260px;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px @grey-color-light;
+      }
+    }
+    @media (max-width: @breakpoint-medium) {
+      .about-section__image img {
+        max-width: 100%;
+      }
+    }
+  }
+
+

@@ -1,0 +1,61 @@
+/// <mls shortName="organismReservationCta" project="102009" folder="travel" groupName="travel" enhancement="_100554_enhancementStyle" />
+
+ 
+  travel--organism-reservation-cta-102009 {
+    display: block;
+    background: @bg-secondary-color-lighter;
+    padding: @space-32 0;
+    .reservation-cta__container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 @space-16;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .reservation-cta__content {
+      display: flex;
+      align-items: center;
+      gap: @space-24;
+      background: @bg-primary-color;
+      border-radius: @space-16;
+      box-shadow: 0 1px 4px fade(@grey-color, 15%);
+      padding: @space-16 @space-24;
+    }
+    .reservation-cta__price {
+      font-size: @font-size-20;
+      color: @text-primary-color-darker;
+      font-weight: @font-weight-bold;
+    }
+    .reservation-cta__button {
+      background: @text-secondary-color;
+      color: @bg-primary-color;
+      font-size: @font-size-16;
+      font-weight: @font-weight-bold;
+      border: none;
+      border-radius: @space-8;
+      padding: @space-8 @space-24;
+      text-decoration: none;
+      transition: background @transition-slow;
+      box-shadow: 0 1px 4px fade(@grey-color, 10%);
+      &:hover, &:focus {
+        background: @text-secondary-color-hover;
+      }
+    }
+    @media (max-width: @breakpoint-medium) {
+      .reservation-cta__container {
+        justify-content: center;
+      }
+      .reservation-cta__content {
+        flex-direction: column;
+        gap: @space-16;
+        width: 100%;
+        align-items: stretch;
+      }
+      .reservation-cta__button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+
+

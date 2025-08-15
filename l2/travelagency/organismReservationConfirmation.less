@@ -1,0 +1,72 @@
+/// <mls shortName="organismReservationConfirmation" project="102009" folder="travelagency" groupName="travelagency" enhancement="_100554_enhancementStyle" />
+
+ 
+  travelagency--organism-reservation-confirmation-102009 {
+    display: block;
+    .reservation-confirmation__container {
+      background: @bg-primary-color;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px fade(@grey-color-darker, 10%);
+      max-width: 480px;
+      margin: @space-24 auto @space-32 auto;
+      padding: @space-32 @space-24;
+      text-align: center;
+    }
+    .reservation-confirmation__icon {
+      margin-bottom: @space-16;
+      img {
+        width: 56px;
+        height: 56px;
+      }
+    }
+    .reservation-confirmation__title {
+      font-family: @font-family-primary;
+      font-size: @font-size-24;
+      color: @success-color;
+      font-weight: @font-weight-bold;
+      margin-bottom: @space-8;
+    }
+    .reservation-confirmation__message {
+      font-size: @font-size-16;
+      color: @text-primary-color-lighter;
+      margin-bottom: @space-16;
+    }
+    .reservation-confirmation__details {
+      background: @bg-secondary-color-lighter;
+      border-radius: 4px;
+      padding: @space-16;
+      margin-bottom: @space-16;
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+          font-size: @font-size-16;
+          color: @text-primary-color;
+          margin-bottom: @space-8;
+          strong {
+            color: @text-secondary-color;
+          }
+        }
+      }
+    }
+    .reservation-confirmation__back {
+      display: inline-block;
+      margin-top: @space-8;
+      color: @link-color;
+      font-weight: @font-weight-bold;
+      text-decoration: none;
+      transition: color @transition-slow;
+      &:hover {
+        color: @link-color-hover;
+        text-decoration: underline;
+      }
+    }
+    @media (max-width: @breakpoint-small) {
+      .reservation-confirmation__container {
+        padding: @space-16 @space-8;
+      }
+    }
+  }
+
+
