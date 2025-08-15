@@ -1,0 +1,66 @@
+/// <mls shortName="organismPromoSteps" project="102009" folder="traveldreams" groupName="traveldreams" enhancement="_100554_enhancementStyle" />
+
+ 
+  // organism: organism-promo-steps
+  traveldreams--organism-promo-steps-102009 {
+    background: @bg-primary-color;
+    font-family: @font-family-primary;
+    .steps-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: @space-48 @space-24;
+      text-align: center;
+    }
+    h2 {
+      font-size: @font-size-24;
+      color: @text-primary-color;
+      font-weight: @font-weight-bold;
+      margin-bottom: @space-32;
+    }
+    .steps-list {
+      display: flex;
+      justify-content: center;
+      gap: @space-40;
+      @media (max-width: @breakpoint-medium) {
+        flex-direction: column;
+        gap: @space-24;
+        align-items: center;
+      }
+    }
+    .step {
+      background: @bg-primary-color-lighter;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(28,145,205,0.06);
+      padding: @space-32 @space-24;
+      max-width: 320px;
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .step-icon {
+        font-size: @font-size-40;
+        color: @text-secondary-color;
+        margin-bottom: @space-16;
+        background: @bg-secondary-color-lighter;
+        border-radius: 50%;
+        width: 64px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .step-title {
+        font-size: @font-size-20;
+        font-weight: @font-weight-bold;
+        color: @text-primary-color;
+        margin-bottom: @space-8;
+      }
+      .step-desc {
+        font-size: @font-size-16;
+        color: @text-primary-color-lighter;
+        line-height: @line-height-medium;
+      }
+    }
+  }
+
+

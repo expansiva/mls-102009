@@ -1,0 +1,85 @@
+/// <mls shortName="organismReviewForm" project="102009" folder="travel" groupName="travel" enhancement="_100554_enhancementStyle" />
+
+ 
+  travel--organism-review-form-102009 {
+    display: block;
+    background: @bg-primary-color;
+    padding: @space-32 0;
+    .review-form__container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 @space-16;
+    }
+    .review-form__form {
+      background: @bg-primary-color-lighter;
+      border-radius: @space-16;
+      box-shadow: 0 1px 4px fade(@grey-color, 15%);
+      padding: @space-24;
+      margin-bottom: @space-16;
+    }
+    .review-form__fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: @space-16;
+    }
+    .review-form__legend {
+      font-size: @font-size-20;
+      color: @text-primary-color-darker;
+      font-weight: @font-weight-bold;
+      margin-bottom: @space-8;
+    }
+    .review-form__label {
+      font-size: @font-size-16;
+      color: @text-primary-color;
+      margin-bottom: @space-8;
+      display: block;
+    }
+    .review-form__select, .review-form__textarea {
+      width: 100%;
+      font-size: @font-size-16;
+      padding: @space-8;
+      border-radius: @space-8;
+      border: 1px solid @grey-color;
+      background: @bg-primary-color;
+      color: @text-primary-color-lighter;
+      transition: border-color @transition-slow;
+      &:focus {
+        border-color: @text-primary-color;
+        outline: none;
+      }
+    }
+    .review-form__submit {
+      background: @text-secondary-color;
+      color: @bg-primary-color;
+      font-size: @font-size-16;
+      font-weight: @font-weight-bold;
+      border: none;
+      border-radius: @space-8;
+      padding: @space-8 @space-24;
+      cursor: pointer;
+      transition: background @transition-slow;
+      &:hover, &:focus {
+        background: @text-secondary-color-hover;
+      }
+    }
+    .review-form__login-message {
+      background: @bg-secondary-color-lighter;
+      color: @text-primary-color-darker;
+      border-radius: @space-8;
+      padding: @space-16;
+      text-align: center;
+      font-size: @font-size-16;
+      a.review-form__login-link {
+        color: @link-color;
+        text-decoration: underline;
+        &:hover, &:focus {
+          color: @link-color-hover;
+        }
+      }
+    }
+  }
+
+

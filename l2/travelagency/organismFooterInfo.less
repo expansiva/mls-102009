@@ -1,0 +1,62 @@
+/// <mls shortName="organismFooterInfo" project="102009" folder="travelagency" groupName="travelagency" enhancement="_100554_enhancementStyle" />
+
+ 
+  travelagency--organism-footer-info-102009 {
+    .footer-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      background: @bg-secondary-color; 
+      padding: @space-32;
+      border-top: 1px solid @grey-color;
+      flex-wrap: wrap;
+      gap: @space-32;
+      @media (max-width: @breakpoint-medium) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: @space-16;
+        padding: @space-16;
+      }
+    }
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: @space-8;
+      .footer-logo {
+        height: 32px;
+        width: auto;
+      }
+      .footer-description {
+        font-size: @font-size-16;
+        color: @text-primary-color-lighter;
+        margin: 0;
+      }
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: @space-8;
+      .footer-link {
+        color: @link-color;
+        text-decoration: none;
+        font-size: @font-size-16;
+        &:hover, &:focus {
+          color: @link-color-hover;
+        }
+      }
+    }
+    .footer-contact {
+      font-size: @font-size-16;
+      color: @text-primary-color-lighter;
+      a {
+        color: @link-color;
+        text-decoration: none;
+        &:hover, &:focus {
+          color: @link-color-hover;
+        }
+      }
+    }
+  }
+
+

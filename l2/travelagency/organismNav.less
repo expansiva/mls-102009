@@ -1,0 +1,211 @@
+/// <mls shortName="organismNav" project="102009" folder="travelagency" groupName="travelagency" enhancement="_100554_enhancementStyle" />
+travelagency--organism-nav-102009 {
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: @bg-primary-color;
+    padding: @space-16 @space-32;
+    border-bottom: 1px solid @grey-color;
+    position: relative;
+
+    @media (max-width: @breakpoint-medium) {
+      flex-direction: row;
+      aligns-items: center;
+      padding: @space-16;
+    }
+  }
+
+  .nav-logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: @space-24;
+
+    @media (max-width: @breakpoint-medium) {
+      display: none;
+    }
+  }
+
+  .nav-link {
+    color: @text-primary-color;
+    font-size: @font-size-16;
+    text-decoration: none;
+    font-weight: @font-weight-normal;
+    transition: color @transition-normal;
+
+    &:hover,
+    &:focus {
+      color: @link-color-hover;
+    }
+
+    &.nav-link-active {
+      color: @link-color;
+      font-weight: @font-weight-bold;
+    }
+  }
+
+  .nav-actions {
+    display: flex;
+    gap: @space-16;
+
+    @media (max-width: @breakpoint-medium) {
+      display: none;
+    }
+  }
+
+  .nav-btn {
+    padding: @space-8 @space-24;
+    border-radius: 4px;
+    font-size: @font-size-16;
+    font-family: @font-family-primary;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background @transition-normal, color @transition-normal;
+
+    &.nav-btn-login {
+      background: @bg-secondary-color;
+      color: @text-primary-color;
+
+      &:hover,
+      &:focus {
+        background: @bg-secondary-color-hover;
+      }
+    }
+
+    &.nav-btn-signup {
+      background: @link-color;
+      color: #fff;
+      font-weight: @font-weight-bold;
+
+      &:hover,
+      &:focus {
+        background: @link-color-hover;
+      }
+    }
+  }
+
+  // Hamburger button styles
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    padding: 0;
+    margin-left: @space-16;
+
+    @media (max-width: @breakpoint-medium) {
+      display: flex;
+    }
+
+    .hamburger-bar {
+      width: 28px;
+      height: 3px;
+      background: @text-primary-color;
+      margin: 3px 0;
+      border-radius: 2px;
+      transition: background @transition-normal;
+    }
+  }
+
+  // Mobile menu overlay
+  .mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.35);
+
+    @media (max-width: @breakpoint-medium) {
+      &.open {
+        display: block;
+      }
+    }
+  }
+
+  .mobile-menu-content {
+    background: @bg-primary-color;
+    width: 80vw;
+    max-width: 320px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    padding: @space-32 @space-24;
+    animation: slideInMenu 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @media (min-width: (@breakpoint-medium + 1)) {
+      display: none;
+    }
+  }
+
+  .mobile-menu-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: @text-primary-color;
+    align-self: flex-end;
+    cursor: pointer;
+    margin-bottom: @space-24;
+  }
+
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: @space-24;
+    margin-bottom: @space-32;
+
+    .nav-link {
+      font-size: @font-size-20;
+      color: @text-primary-color;
+      font-weight: @font-weight-normal;
+
+      &.nav-link-active {
+        color: @link-color;
+        font-weight: @font-weight-bold;
+      }
+    }
+  }
+
+  .mobile-nav-actions {
+    display: flex;
+    flex-direction: column;
+    gap: @space-16;
+
+    .nav-btn {
+      width: 100%;
+      text-align: center;
+      font-size: @font-size-16;
+    }
+  }
+
+  @keyframes slideInMenu {
+    from {
+      right: -100vw;
+      opacity: 0;
+    }
+
+    to {
+      right: 0;
+      opacity: 1;
+    }
+  }
+}
+
+

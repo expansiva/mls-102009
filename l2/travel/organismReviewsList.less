@@ -1,0 +1,53 @@
+/// <mls shortName="organismReviewsList" project="102009" folder="travel" groupName="travel" enhancement="_100554_enhancementStyle" />
+
+ 
+  travel--organism-reviews-list-102009 {
+    display: block;
+    background: @bg-primary-color-lighter;
+    padding: @space-32 0;
+    .reviews-list__container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 @space-16;
+    }
+    .reviews-list__title {
+      font-size: @font-size-20;
+      color: @text-primary-color-darker;
+      font-weight: @font-weight-bold;
+      margin-bottom: @space-16;
+    }
+    .reviews-list__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      .reviews-list__item {
+        background: @bg-primary-color;
+        border-radius: @space-16;
+        box-shadow: 0 1px 4px fade(@grey-color, 20%);
+        padding: @space-16;
+        margin-bottom: @space-16;
+        .reviews-list__header {
+          display: flex;
+          align-items: center;
+          gap: @space-16;
+          margin-bottom: @space-8;
+          .reviews-list__author {
+            font-weight: @font-weight-bold;
+            color: @text-primary-color;
+          }
+          .reviews-list__rating {
+            color: @warning-color;
+            font-size: @font-size-16;
+            letter-spacing: 1px;
+          }
+        }
+        .reviews-list__comment {
+          color: @text-primary-color-lighter;
+          font-size: @font-size-16;
+          line-height: @line-height-large;
+        }
+      }
+    }
+  }
+
+

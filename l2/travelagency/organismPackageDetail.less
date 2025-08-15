@@ -1,0 +1,68 @@
+/// <mls shortName="organismPackageDetail" project="102009" folder="travelagency" groupName="travelagency" enhancement="_100554_enhancementStyle" />
+
+ 
+travelagency--organism-package-detail-102009 {
+  .package-detail__container {
+    background: @bg-primary-color;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px @grey-color-dark;
+    padding: @space-32;
+    margin-bottom: @space-40;
+    font-family: @font-family-primary;
+  }
+  .package-detail__header {
+    display: flex;
+    flex-direction: column;
+    gap: @space-8;
+    margin-bottom: @space-16;
+  }
+  .package-detail__title {
+    font-size: @font-size-24;
+    font-weight: @font-weight-bold;
+    color: @text-primary-color;
+    margin: 0;
+  }
+  .package-detail__destination {
+    font-size: @font-size-16;
+    color: @text-secondary-color;
+  }
+  .package-detail__info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: @space-24;
+    margin-bottom: @space-16;
+  }
+  .package-detail__dates, .package-detail__price {
+    display: flex;
+    align-items: center;
+    gap: @space-8;
+    font-size: @font-size-16;
+    color: @text-primary-color-lighter;
+  }
+  .package-detail__price-value {
+    font-weight: @font-weight-bold;
+    color: @success-color;
+    font-size: @font-size-20;
+  }
+  .package-detail__description {
+    margin-top: @space-16;
+  }
+  .package-detail__subtitle {
+    font-size: @font-size-20;
+    font-weight: @font-weight-bold;
+    color: @text-primary-color;
+    margin-bottom: @space-8;
+  }
+  .package-detail__text {
+    font-size: @font-size-16;
+    color: @text-primary-color-lighter;
+    line-height: @line-height-large;
+  }
+}
+@media (max-width: @breakpoint-medium) {
+  organism-package-detail .package-detail__container {
+    padding: @space-16;
+  }
+}
+
+

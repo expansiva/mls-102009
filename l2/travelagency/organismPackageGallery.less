@@ -1,0 +1,69 @@
+/// <mls shortName="organismPackageGallery" project="102009" folder="travelagency" groupName="travelagency" enhancement="_100554_enhancementStyle" />
+
+ 
+travelagency--organism-package-gallery-102009 {
+  .package-gallery__container {
+    background: @bg-secondary-color-lighter;
+    border-radius: 8px;
+    padding: @space-24;
+    margin-bottom: @space-40;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 1px 4px @grey-color-dark;
+  }
+  .package-gallery__main-image {
+    width: 100%;
+    max-width: 520px;
+    height: 320px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: @space-16;
+    background: @grey-color-light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  }
+  .package-gallery__thumbnails {
+    display: flex;
+    gap: @space-16;
+    justify-content: center;
+  }
+  .package-gallery__thumb-btn {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: box-shadow @transition-slow;
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 0 2px @active-color;
+    }
+    img {
+      width: 72px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 4px;
+      background: @grey-color-light;
+    }
+  }
+}
+@media (max-width: @breakpoint-medium) {
+  organism-package-gallery .package-gallery__main-image {
+    max-width: 100%;
+    height: 180px;
+  }
+  organism-package-gallery .package-gallery__thumbnails img {
+    width: 48px;
+    height: 32px;
+  }
+}
+
+

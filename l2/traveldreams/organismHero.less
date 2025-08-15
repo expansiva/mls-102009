@@ -1,0 +1,73 @@
+/// <mls shortName="organismHero" project="102009" folder="traveldreams" groupName="traveldreams" enhancement="_100554_enhancementStyle" />
+
+ 
+  // organism: organism-hero
+  traveldreams--organism-hero-102009 {
+    background: @bg-primary-color-lighter;
+    font-family: @font-family-primary;
+    .hero-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: @space-48 @space-24;
+      min-height: 480px;
+      @media (max-width: @breakpoint-medium) {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: @space-24 @space-8;
+      }
+    }
+    .hero-text {
+      flex: 1 1 0;
+      max-width: 540px;
+      h1 {
+        font-size: @font-size-48;
+        font-weight: @font-weight-bolder;
+        color: @text-primary-color;
+        line-height: @line-height-large;
+        margin-bottom: @space-24;
+      }
+      p {
+        font-size: @font-size-20;
+        color: @text-primary-color-lighter;
+        margin-bottom: @space-32;
+      }
+      .hero-cta {
+        display: inline-block;
+        background: @bg-secondary-color;
+        color: #fff;
+        font-size: @font-size-20;
+        font-weight: @font-weight-bold;
+        padding: @space-16 @space-32;
+        border-radius: 32px;
+        text-decoration: none;
+        transition: background @transition-normal;
+        &:hover, &:focus {
+          background: @bg-secondary-color-hover;
+          color: #fff;
+          outline: none;
+        }
+      }
+    }
+    .hero-image {
+      flex: 1 1 0;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      img {
+        max-width: 380px;
+        width: 100%;
+        height: auto;
+        border-radius: 24px;
+        box-shadow: 0 8px 32px rgba(28,145,205,0.10);
+      }
+      @media (max-width: @breakpoint-medium) {
+        justify-content: center;
+        margin-bottom: @space-24;
+      }
+    }
+  }
+
+

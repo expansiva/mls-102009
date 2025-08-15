@@ -1,0 +1,116 @@
+/// <mls shortName="organismPackageReviews" project="102009" folder="travelagency" groupName="travelagency" enhancement="_100554_enhancementStyle" />
+
+ 
+travelagency--organism-package-reviews-102009 {
+  .package-reviews__container {
+    background: @bg-primary-color;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px @grey-color-dark;
+    padding: @space-32;
+    margin-bottom: @space-40;
+    font-family: @font-family-primary;
+  }
+  .package-reviews__title {
+    font-size: @font-size-20;
+    font-weight: @font-weight-bold;
+    color: @text-primary-color;
+    margin-bottom: @space-16;
+  }
+  .package-reviews__list {
+    display: flex;
+    flex-direction: column;
+    gap: @space-24;
+    margin-bottom: @space-32;
+  }
+  .package-reviews__item {
+    background: @bg-secondary-color-lighter;
+    border-radius: 6px;
+    padding: @space-16;
+    box-shadow: 0 1px 2px @grey-color-darker;
+    display: flex;
+    flex-direction: column;
+    gap: @space-8;
+  }
+  .package-reviews__rating {
+    display: flex;
+    align-items: center;
+    gap: @space-8;
+    font-size: @font-size-16;
+    color: @warning-color;
+    font-weight: @font-weight-bold;
+  }
+  .package-reviews__stars {
+    font-size: @font-size-16;
+    letter-spacing: 1px;
+  }
+  .package-reviews__score {
+    color: @text-primary-color-lighter;
+    font-size: @font-size-16;
+    margin-left: @space-8;
+  }
+  .package-reviews__comment {
+    color: @text-primary-color-lighter;
+    font-size: @font-size-16;
+  }
+  .package-reviews__author {
+    font-weight: @font-weight-bold;
+    color: @text-secondary-color;
+    margin-right: @space-8;
+  }
+  .package-reviews__form-block {
+    background: @bg-secondary-color-lighter;
+    border-radius: 6px;
+    padding: @space-16;
+    box-shadow: 0 1px 2px @grey-color-darker;
+  }
+  .package-reviews__form-title {
+    font-size: @font-size-16;
+    font-weight: @font-weight-bold;
+    color: @text-primary-color;
+    margin-bottom: @space-8;
+  }
+  .package-reviews__form {
+    display: flex;
+    flex-direction: column;
+    gap: @space-8;
+  }
+  .package-reviews__form-label {
+    font-size: @font-size-16;
+    color: @text-primary-color-lighter;
+    margin-bottom: 2px;
+  }
+  .package-reviews__form-select,
+  .package-reviews__form-textarea {
+    font-size: @font-size-16;
+    padding: @space-8;
+    border-radius: 4px;
+    border: 1px solid @grey-color-dark;
+    background: @bg-primary-color-lighter;
+    color: @text-primary-color;
+    font-family: @font-family-primary;
+    resize: vertical;
+  }
+  .package-reviews__form-btn {
+    background: @active-color;
+    color: @bg-primary-color;
+    font-size: @font-size-16;
+    font-weight: @font-weight-bold;
+    border: none;
+    border-radius: 4px;
+    padding: @space-8 @space-24;
+    cursor: pointer;
+    margin-top: @space-8;
+    transition: background @transition-slow;
+    &:hover,
+    &:focus {
+      background: @active-color-hover;
+    }
+  }
+}
+@media (max-width: @breakpoint-medium) {
+  organism-package-reviews .package-reviews__container {
+    padding: @space-16;
+  }
+}
+
+

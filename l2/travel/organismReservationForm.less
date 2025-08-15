@@ -1,0 +1,108 @@
+/// <mls shortName="organismReservationForm" project="102009" folder="travel" groupName="travel" enhancement="_100554_enhancementStyle" />
+
+ 
+  travel--organism-reservation-form-102009 {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    background: @bg-primary-color;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px fade(@grey-color-dark, 10%);
+    padding: @space-32 @space-24;
+    margin-bottom: @space-32;
+    .reservation-form-section {
+      width: 100%;
+    }
+    .form-title {
+      font-family: @font-family-primary;
+      font-size: @font-size-24;
+      font-weight: @font-weight-bold;
+      color: @text-primary-color-darker;
+      margin-bottom: @space-24;
+      line-height: @line-height-large;
+    }
+    form.reservation-form {
+      display: flex;
+      flex-direction: column;
+      gap: @space-24;
+    }
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 0 0 @space-16 0;
+    }
+    .section-legend {
+      font-size: @font-size-16;
+      font-weight: @font-weight-bold;
+      color: @text-primary-color;
+      margin-bottom: @space-8;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: @space-16;
+      label {
+        font-size: @font-size-16;
+        color: @text-primary-color-darker;
+        margin-bottom: @space-8;
+      }
+      input,
+      select {
+        font-family: @font-family-primary;
+        font-size: @font-size-16;
+        padding: @space-8 @space-16;
+        border: 1px solid @grey-color-dark;
+        border-radius: 4px;
+        background: @bg-primary-color-lighter;
+        color: @text-primary-color-darker;
+        transition: border-color @transition-slow;
+        &:focus {
+          border-color: @text-primary-color;
+          outline: none;
+        }
+      }
+    }
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: @space-16;
+      .pay-btn {
+        display: flex;
+        align-items: center;
+        gap: @space-8;
+        background: @bg-secondary-color;
+        color: @bg-primary-color;
+        font-size: @font-size-16;
+        font-weight: @font-weight-bold;
+        border: none;
+        border-radius: 4px;
+        padding: @space-8 @space-24;
+        cursor: pointer;
+        transition: background @transition-slow;
+        .mp-logo {
+          height: 24px;
+          width: 24px;
+        }
+        &:hover,
+        &:focus {
+          background: @bg-secondary-color-hover;
+        }
+        &:active {
+          background: @bg-secondary-color-focus;
+        }
+        &:disabled {
+          background: @bg-secondary-color-disabled;
+          cursor: not-allowed;
+        }
+      }
+    }
+    @media (max-width: @breakpoint-small) {
+      padding: @space-16 @space-8;
+      .form-title {
+        font-size: @font-size-20;
+      }
+    }
+  }
+
+

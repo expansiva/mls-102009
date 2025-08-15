@@ -1,0 +1,32 @@
+/// <mls shortName="register" project="102009" folder="travelagency" groupName="travelagency" enhancement="_100554_enhancementStyle" />
+
+ 
+  travelagency--register-102009 {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: @bg-primary-color;
+    > header {
+      width: 100%;
+      background: @bg-primary-color;
+      box-shadow: 0 2px 8px 0 fade(@grey-color-darker, 8%);
+      z-index: 10;
+    }
+    > main {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: @bg-primary-color;
+      padding: @space-32 0;
+    }
+    > footer {
+      width: 100%;
+      background: @bg-secondary-color-lighter;
+      flex-shrink: 0;
+      box-shadow: 0 -2px 8px 0 fade(@grey-color-darker, 6%);
+    }
+  }
+
+

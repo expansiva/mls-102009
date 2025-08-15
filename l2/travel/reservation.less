@@ -1,0 +1,36 @@
+/// <mls shortName="reservation" project="102009" folder="travel" groupName="travel" enhancement="_100554_enhancementStyle" />
+
+ 
+  travel--reservation-102009 {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: @bg-primary-color-lighter;
+    header {
+      width: 100%;
+      background: @bg-primary-color;
+      box-shadow: 0 1px 4px fade(@grey-color-dark, 8%);
+    }
+    .reservation-main {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: @space-32 0 @space-32 0;
+      background: @bg-primary-color-lighter;
+      min-height: 60vh;
+    }
+    footer {
+      width: 100%;
+      background: @grey-color-light;
+      margin-top: auto;
+    }
+    @media (max-width: @breakpoint-small) {
+      .reservation-main {
+        padding: @space-16 0 @space-16 0;
+      }
+    }
+  }
+
+
