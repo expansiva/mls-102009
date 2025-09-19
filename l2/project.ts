@@ -9,5 +9,8 @@ export const modules = [
   },
   {
     name: 'travelagency'
+  },
+  {
+    name: 'crm'
   }
 ];
