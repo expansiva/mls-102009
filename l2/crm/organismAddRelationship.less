@@ -1,0 +1,107 @@
+/// <mls shortName="organismAddRelationship" project="102009" enhancement="enhancementStyle" folder="crm" />
+
+crm--organism-add-relationship-102009 {
+  .organism-add-relationship {
+    background-color: @bg-primary-color;
+    padding: @space-24;
+    font-family: @font-family-primary;
+    color: @text-primary-color;
+    &__header {
+      margin-bottom: @space-24;
+      .organism-add-relationship__title {
+        font-size: @font-size-24;
+        font-weight: @font-weight-bold;
+        color: @text-primary-color;
+      }
+    }
+    &__options {
+      margin-bottom: @space-24;
+      .organism-add-relationship__option {
+        margin-bottom: @space-16;
+        display: flex;
+        align-items: flex-start;
+        input[type="radio"] {
+          margin-right: @space-8;
+        }
+        label {
+          font-weight: @font-weight-normal;
+          color: @text-primary-color;
+        }
+        .organism-add-relationship__description {
+          margin-left: @space-24;
+          font-size: @font-size-12;
+          color: @text-primary-color-lighter;
+        }
+      }
+    }
+    &__confirmation {
+      margin-bottom: @space-24;
+      .organism-add-relationship__confirm-text {
+        font-size: @font-size-16;
+        color: @text-primary-color;
+      }
+    }
+    &__visual {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: @space-24;
+      .organism-add-relationship__entity {
+        display: flex;
+        align-items: center;
+        width: 45%;
+        &--left {
+          justify-content: flex-start;
+        }
+        &--right {
+          justify-content: flex-end;
+        }
+        .organism-add-relationship__icon {
+          width: @space-32;
+          height: @space-32;
+          margin-right: @space-8;
+          fill: @text-secondary-color;
+        }
+        .organism-add-relationship__entity-info {
+          .organism-add-relationship__entity-name {
+            font-size: @font-size-16;
+            font-weight: @font-weight-bold;
+            color: @text-primary-color;
+          }
+          .organism-add-relationship__entity-type {
+            font-size: @font-size-12;
+            color: @text-primary-color-lighter;
+          }
+        }
+      }
+    }
+    &__actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: @space-16;
+      .organism-add-relationship__button {
+        padding: @space-8 @space-16;
+        font-size: @font-size-16;
+        border: none;
+        border-radius: @space-8;
+        cursor: pointer;
+        transition: background-color @transition-normal;
+        &--save {
+          background-color: @success-color;
+          color: @bg-primary-color;
+          &:hover {
+            background-color: @success-color-hover;
+          }
+        }
+        &--cancel {
+          background-color: @error-color;
+          color: @bg-primary-color;
+          &:hover {
+            background-color: @error-color-hover;
+          }
+        }
+      }
+    }
+  }
+}
+
+
