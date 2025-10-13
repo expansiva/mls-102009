@@ -1,11 +1,94 @@
 /// <mls shortName="project" project="102009" enhancement="enhancementStyle" folder="" />
-
 project-102009 {
-    * {
-        margin: 0;
-        padding: 0;
-        font-family: @font-family-primary;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  font-family: @font-family-primary;
+  box-sizing: border-box;
+}
+h2 {
+  font-size: @font-size-24;
+  font-weight: @font-weight-bold;
+  color: @text-primary-color;
+  margin-bottom: @space-24;
+  text-align: center;
+}
+.form-group {
+  margin-bottom: @space-16;
+}
+label {
+  display: block;
+  font-size: @font-size-16;
+  font-weight: @font-weight-normal;
+  color: @text-primary-color;
+  margin-bottom: @space-8;
+}
+input,
+textarea,
+select {
+  width: 100%;
+  padding: @space-8;
+  font-size: @font-size-16;
+  border: 1px solid @grey-color;
+  border-radius: 4px;
+  background-color: @bg-primary-color-lighter;
+  color: @text-primary-color;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid @active-color;
+  outline-offset: 2px;
+}
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+button {
+  width: 100%;
+  padding: @space-16;
+  font-size: @font-size-16;
+  font-weight: @font-weight-bold;
+  color: @bg-primary-color-lighter;
+  background-color: @active-color;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color @transition-normal;
+}
+button:hover {
+  background-color: @active-color-hover;
+}
+button:focus {
+  outline: 2px solid @active-color;
+  outline-offset: 2px;
+}
+.form-container {
+  padding: @space-24;
+  background-color: @bg-primary-color;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.message {
+  margin-top: @space-16;
+  padding: @space-8;
+  background-color: @bg-secondary-color;
+  color: @text-primary-color;
+  border-radius: 4px;
+  text-align: center;
+}
+@media (max-width: @breakpoint-medium) {
+  .form-container {
+    padding: @space-16;
+  }
+  h2 {
+    font-size: @font-size-20;
+    margin-bottom: @space-16;
+  }
+  button {
+    padding: @space-16;
+  }
+}
 }
 
 
