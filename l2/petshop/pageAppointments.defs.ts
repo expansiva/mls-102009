@@ -1,12 +1,10 @@
-/// <mls shortName="agendamento" project="102009" folder="petshop" groupName="petshop" enhancement="_blank" />
-
-// Do not change – automatically generated code.
+/// <mls shortName="pageAppointments" project="102009" enhancement="_blank" folder="petshop" />
 
 export const defs: mls.l4.BaseDefs = {
   "meta": {
     "projectId": 102009,
     "folder": "petshop",
-    "shortName": "agendamento",
+    "shortName": "pageAppointments",
     "type": "page",
     "devFidelity": "scaffold",
     "group": "petshop",
@@ -74,23 +72,3 @@ export const defs: mls.l4.BaseDefs = {
     "constraints": []
   }
 }
-
-
-/*
-
-Task Id: 20250805162346.1001
-
-Step Trace: provider: openai user:'Guilherme' model:gpt-4.1 inputTokens:4422 outputTokens:2761 inputCost:2.00/1M outputCost:8.00/1M total:$0.0309 llmTime: 28838ms
-finished at 2025-08-05T16:29:12.573Z
-Organism used in page: [
-  "organism-nav",
-  "organism-booking-form",
-  "organism-booking-info",
-  "organism-footer-info"
-] 
-
-Images:
- []
- 
-
-*/

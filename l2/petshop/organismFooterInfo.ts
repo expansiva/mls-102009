@@ -17,10 +17,10 @@ export class organismFooterInfo extends IcaOrganismBase {
           <div class="footer-section" id="petshop--footer-info-102009-9">
             <h4 id="petshop--footer-info-102009-10">Links úteis</h4>
             <ul id="petshop--footer-info-102009-11">
-              <li id="petshop--footer-info-102009-12"><a href="/" id="petshop--footer-info-102009-13">Home</a></li>
-              <li id="petshop--footer-info-102009-14"><a href="/agendamento" id="petshop--footer-info-102009-15">Agendamento</a></li>
-              <li id="petshop--footer-info-102009-16"><a href="/produtos" id="petshop--footer-info-102009-17">Produtos</a></li>
-              <li id="petshop--footer-info-102009-18"><a href="/contato" id="petshop--footer-info-102009-19">Contato</a></li>
+              <li id="petshop--footer-info-102009-12"><a href="/pageHome" id="petshop--footer-info-102009-13">Home</a></li>
+              <li id="petshop--footer-info-102009-14"><a href="/pageAppointments" id="petshop--footer-info-102009-15">Agendamento</a></li>
+              <li id="petshop--footer-info-102009-16"><a href="/pageProduct" id="petshop--footer-info-102009-17">Produtos</a></li>
+              <li id="petshop--footer-info-102009-18"><a href="/pageContact" id="petshop--footer-info-102009-19">Contato</a></li>
             </ul>
           </div>
           <div class="footer-section" id="petshop--footer-info-102009-20">

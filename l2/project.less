@@ -77,6 +77,34 @@ button:focus {
   border-radius: 4px;
   text-align: center;
 }
+.field-value {
+  display: block;
+  font-size: @font-size-16;
+  color: @text-primary-color;
+  padding: @space-8;
+  background-color: @bg-primary-color-lighter;
+  border: 1px solid @grey-color;
+  border-radius: 4px;
+}
+.section-card {
+  padding: @space-24;
+  background-color: @bg-primary-color;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: @space-8;
+  border: 1px solid @grey-color;
+  text-align: left;
+}
+th {
+  background-color: @bg-secondary-color;
+  font-weight: @font-weight-bold;
+}
 @media (max-width: @breakpoint-medium) {
   .form-container {
     padding: @space-16;
@@ -88,7 +116,9 @@ button:focus {
   button {
     padding: @space-16;
   }
+  .section-card {
+    padding: @space-16;
+  }
 }
 }
-
 
