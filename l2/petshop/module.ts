@@ -2,7 +2,7 @@
 
 export const moduleConfig = {
   theme: "petshop",
-  initialPage:"home"
+  initialPage:"pageLogin"
 }
 
 export const payload3 = {
