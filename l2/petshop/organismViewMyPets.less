@@ -1,0 +1,46 @@
+/// <mls shortName="organismViewMyPets" project="102009" enhancement="enhancementStyle" folder="petshop" />
+petshop--organism-view-my-pets-102009 {
+    width: 100%;
+    height: 100%;
+
+    .organism-view-my-pets {
+        display: flex;
+        flex-direction: column;
+        gap: @space-24;
+        height: calc(100% - 1px);
+    }
+
+    .section-card{
+        height: 100%;
+    }
+
+    .filters {
+        display: flex;
+        gap: @space-16;
+        margin-bottom: @space-16;
+    }
+
+    .add-pet-btn {
+        margin-bottom: @space-16;
+    }
+
+    .pets-table {
+        // Table styles moved to global
+    }
+
+    .pets-table button {
+        width: auto;
+    }
+
+    .pet-form-section {
+        // Styles removed to avoid duplication with .form-container
+    }
+
+    @media (max-width: @breakpoint-medium) {
+        .filters {
+            flex-direction: column;
+        }
+    }
+}
+
+
