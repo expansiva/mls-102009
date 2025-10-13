@@ -13,7 +13,7 @@ export class organismSimulateLogin extends IcaOrganismBase {
         const selectedProfile = profileRadios.length > 0 ? profileRadios[0].value : null;
         const hiddenLink = this.querySelector('#hidden-link') as HTMLAnchorElement;
         if (selectedProfile === 'client') {
-            hiddenLink.href = '/home';
+            hiddenLink.href = '/pageHome';
             hiddenLink.click();
         } else if (selectedProfile === 'admin') {
             hiddenLink.href = '/adminPanel';
