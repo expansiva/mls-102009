@@ -8,9 +8,6 @@ export const modules = [
     name: 'travel'
   },
   {
-    name: 'travelagency'
-  },
-  {
     name: 'crm'
   }
 ];
