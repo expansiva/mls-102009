@@ -3,11 +3,5 @@
 export const modules = [
   {
     name: 'petshop'
-  },
-  {
-    name: 'travel'
-  },
-  {
-    name: 'crm'
   }
 ];
