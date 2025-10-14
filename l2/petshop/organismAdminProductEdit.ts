@@ -56,7 +56,7 @@ return html`<div class="form-container" id="petshop--organism-admin-product-edit
 <textarea id="productDetails" id="petshop--organism-admin-product-edit-102009-29">Detalhes adicionais do produto.</textarea>
 </div>
 <div class="form-actions" id="petshop--organism-admin-product-edit-102009-30">
-<button class="btn btn-back" id="petshop--organism-admin-product-edit-102009-31">Voltar</button>
+<button class="btn btn-back" id="petshop--organism-admin-product-edit-102009-31"><a href="/pageAdminProduct">Voltar</a></button>
 <button class="btn btn-save" id="petshop--organism-admin-product-edit-102009-32">Salvar</button>
 </div>
 </div>`
