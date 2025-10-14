@@ -8,10 +8,13 @@ petshop--organism-view-my-pets-102009 {
         flex-direction: column;
         gap: @space-24;
         height: calc(100% - 1px);
+        overflow-y: auto;
     }
 
-    .section-card{
-        height: 100%;
+
+    td span{
+        cursor: pointer;
+        color: @active-color;
     }
 
     .filters {
@@ -24,17 +27,13 @@ petshop--organism-view-my-pets-102009 {
         margin-bottom: @space-16;
     }
 
-    .pets-table {
-        // Table styles moved to global
-    }
+
 
     .pets-table button {
         width: auto;
     }
 
-    .pet-form-section {
-        // Styles removed to avoid duplication with .form-container
-    }
+
 
     @media (max-width: @breakpoint-medium) {
         .filters {

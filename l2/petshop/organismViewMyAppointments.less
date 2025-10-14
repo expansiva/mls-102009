@@ -6,9 +6,33 @@ petshop--organism-view-my-appointments-102009 {
     margin-bottom: @space-24;
   }
 
+
   .form-container{
     height: 100%;
+    overflow-y: auto;
   }
+
+  .status {
+		padding: 4px 8px;
+		border-radius: 8px;
+		font-size: 12px;
+		font-weight: bold;
+		color: #fff;
+	}
+
+  td span.det{
+        cursor: pointer;
+        color: @active-color;
+    }
+  .status--pending {
+		background: @warning-color;
+	}
+	.status--approved {
+		background: @success-color;
+	}
+	.status--cancelled {
+		background: @error-color;
+	}
 
 }
 

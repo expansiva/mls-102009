@@ -5,100 +5,108 @@ import { IcaOrganismBase } from './_100554_icaOrganismBase';
 @customElement('petshop--organism-view-my-pets-102009')
 export class organismViewMyPets extends IcaOrganismBase {
 
-    @state() scenary = 'list';
+  @state() scenary = 'list';
 
-    render() {
+  render() {
 
-        if (this.scenary === 'list') return this.renderList();
-        return this.renderEdit();
-    }
+    if (this.scenary === 'list') return this.renderList();
+    return this.renderEdit();
+  }
 
-    renderList() {
-        return html`<div class="organism-view-my-pets"> 
-      <section class="pets-list-section section-card">
-        <h2>Meus Pets</h2>
-        <div class="filters">
-          <div class="form-group">
-            <label for="filter-type">Tipo de Pet</label>
-            <select id="filter-type">
-              <option value="">Todos</option>
-              <option value="cachorro">Cachorro</option>
-              <option value="gato">Gato</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="filter-name">Nome</label>
-            <input type="text" id="filter-name" placeholder="Buscar por nome">
-          </div>
-        </div>
-        <button class="add-pet-btn">Adicionar Novo Pet</button>
-        <table class="pets-table">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Tipo</th>
-              <th>Dono</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Rex</td>
-              <td>Cachorro</td>
-              <td>João Silva</td>
-              <td><button  @click=${() => this.changeScneray('add')}>Editar</button></td>
-            </tr>
-            <tr>
-              <td>Whiskers</td>
-              <td>Gato</td>
-              <td>Maria Oliveira</td>
-              <td><button  @click=${() => this.changeScneray('add')}>Editar</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-    </div>`;
-    }
-
-    renderEdit() {
-        return html`<div class="organism-view-my-pets"> 
-      <section class="pet-form-section">
-        <div class="form-container">
-          <h2>Cadastrar/Editar Pet</h2>
-          <form>
+  renderList() {
+    return html`
+      <div class="organism-view-my-pets section-card"> 
+        <section class="pets-list-section">
+          <h2>Meus Pets</h2>
+          <div class="filters">
             <div class="form-group">
-              <label for="pet-name">Nome</label>
-              <input type="text" id="pet-name" value="Rex">
-            </div>
-            <div class="form-group">
-              <label for="pet-type">Tipo</label>
-              <select id="pet-type">
-                <option value="cachorro" selected>Cachorro</option>
+              <label for="filter-type">Tipo de Pet</label>
+              <select id="filter-type">
+                <option value="">Todos</option>
+                <option value="cachorro">Cachorro</option>
                 <option value="gato">Gato</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="pet-breed">Raça</label>
-              <input type="text" id="pet-breed" value="Labrador">
+              <label for="filter-name">Nome</label>
+              <input type="text" id="filter-name" placeholder="Buscar por nome">
             </div>
             <div class="form-group">
-              <label for="pet-age">Idade</label>
-              <input type="number" id="pet-age" value="3">
+              <button style="margin-top:30px" class="add-pet-btn">Adicionar Novo Pet</button>
             </div>
-            <div class="form-group">
-              <label for="pet-notes">Observações</label>
-              <textarea id="pet-notes">Pet saudável e ativo.</textarea>
-            </div>
-            <button type="submit">Salvar</button>
-            <button type="button" @click=${() => this.changeScneray('list')}>Cancelar</button>
-            <button type="button">Excluir</button>
-          </form>
-        </div>
-      </section>
-    </div>`;
-    }
+          </div>
+          
+          <table class="pets-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Dono</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Rex</td>
+                <td>Cachorro</td>
+                <td>João Silva</td>
+                <td><span  @click=${() => this.changeScneray('add')}>Editar</span></td>
+              </tr>
+              <tr>
+                <td>Whiskers</td>
+                <td>Gato</td>
+                <td>Maria Oliveira</td>
+                <td><span  @click=${() => this.changeScneray('add')}>Editar</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>`;
+  }
 
-    private changeScneray(scenary: string) {
-        this.scenary = scenary;
-    }
+  renderEdit() {
+    return html`
+        <div class="organism-view-my-pets section-card"> 
+          <section class="pet-form-section">
+            <div>
+              <h2>Cadastrar/Editar Pet</h2>
+              <form>
+                <div class="form-group">
+                  <label for="pet-name">Nome</label>
+                  <input type="text" id="pet-name" value="Rex">
+                </div>
+                <div class="form-group">
+                  <label for="pet-type">Tipo</label>
+                  <select id="pet-type">
+                    <option value="cachorro" selected>Cachorro</option>
+                    <option value="gato">Gato</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="pet-breed">Raça</label>
+                  <input type="text" id="pet-breed" value="Labrador">
+                </div>
+                <div class="form-group">
+                  <label for="pet-age">Idade</label>
+                  <input type="number" id="pet-age" value="3">
+                </div>
+                <div class="form-group">
+                  <label for="pet-notes">Observações</label>
+                  <textarea id="pet-notes">Pet saudável e ativo.</textarea>
+                </div>
+                <div class="form-actions" >
+                <button class="btn btn-delete" >Deletar</button>
+                <button class="btn btn-back" @click=${() => this.changeScneray('list')}>Cancelar</button>
+                <button class="btn btn-save" >Salvar</button>
+                </div>
+                
+              </form>
+            </div>
+          </section>
+        </div>`;
+  }
+
+  private changeScneray(scenary: string) {
+    this.scenary = scenary;
+  }
 }
