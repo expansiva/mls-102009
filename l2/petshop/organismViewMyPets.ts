@@ -31,8 +31,8 @@ export class organismViewMyPets extends IcaOrganismBase {
               <label for="filter-name">Nome</label>
               <input type="text" id="filter-name" placeholder="Buscar por nome">
             </div>
-            <div class="form-group">
-              <button style="margin-top:30px" class="add-pet-btn">Adicionar Novo Pet</button>
+            <div class="form-group" style="width:70%">
+              <button style="margin-top:30px; margin-left:auto" class="btn btn-save">Adicionar Novo Pet</button>
             </div>
           </div>
           
