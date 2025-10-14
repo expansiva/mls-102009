@@ -3,7 +3,9 @@ import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { getState } from '_100554_/l2/collabState';
-import { MdmData, RegistrationDataProduct } from "./_102019_layer4Mdm";
+import { MdmData, RegistrationDataProduct, RequestMDMGetLitstByType, MdmType } from "./_102019_layer4Mdm";
+import { exec } from "./_102019_layer1Exec";
+
 @customElement('petshop--organism-admin-product-list-102009')
 export class organismAdminProductList extends IcaOrganismBase {
 
@@ -16,6 +18,23 @@ export class organismAdminProductList extends IcaOrganismBase {
 
     async firstUpdated() {
         // Load products from state or API
+
+        const req: RequestMDMGetLitstByType = {
+            action: 'MDMGetLitstByType',
+            inDeveloped: true,
+            version: '1',
+            params: { type: MdmType.Produto },
+        };
+
+        const response = await exec(req);
+        if (response.ok) {
+            this.products = response.data.map((item: MdmData) => {
+                const item2: RegistrationDataProduct = item.data.registrationData as RegistrationDataProduct;
+                return item2;
+            });
+        }
+
+        /*
         this.products = [{ name: 'Ração Premium Cães Adultos', descriptionShort: 'Ração completa e balanceada para cães adultos.' },
         { name: 'Areia Sanitária Biodegradável', descriptionShort: 'Areia higiênica natural e sem perfume para gatos.' },
         { name: 'Coleira Antipulgas MaxProtect', descriptionShort: 'Proteção contra pulgas e carrapatos por até 8 meses.' },
@@ -39,7 +58,7 @@ export class organismAdminProductList extends IcaOrganismBase {
         { name: 'Ração Light Cães Adultos', descriptionShort: 'Ajuda no controle de peso com baixo teor de gordura.' },
         { name: 'Brinquedo Corda Trançada', descriptionShort: 'Excelente para brincar de cabo de guerra.' },
         { name: 'Fonte Automática para Gatos', descriptionShort: 'Mantém a água sempre fresca e filtrada.' }
-        ]
+        ]*/
     }
     // Filter products based on filterText
     get filteredProducts() {

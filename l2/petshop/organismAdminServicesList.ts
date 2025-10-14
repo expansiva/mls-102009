@@ -3,7 +3,8 @@ import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { getState } from '_100554_/l2/collabState';
-import { MdmData, RegistrationDataService} from './_102019_layer4Mdm';
+import { MdmData, RegistrationDataService, RequestMDMGetLitstByType, MdmType } from "./_102019_layer4Mdm";
+import { exec } from "./_102019_layer1Exec";
 
 @customElement('petshop--organism-admin-services-list-102009')
 export class organismAdminServicesList extends IcaOrganismBase {
@@ -16,7 +17,24 @@ export class organismAdminServicesList extends IcaOrganismBase {
 	@state() itemsPerPage: number = 5;
 
 	async firstUpdated() {
-		// Mock services list
+
+
+		const req: RequestMDMGetLitstByType = {
+			action: 'MDMGetLitstByType',
+			inDeveloped: true,
+			version: '1',
+			params: { type: MdmType.Servico },
+		};
+
+		const response = await exec(req);
+		if (response.ok) {
+			this.services = response.data.map((item: MdmData) => {
+				const item2: RegistrationDataService = item.data.registrationData as RegistrationDataService;
+				return item2;
+			});
+		}
+
+		/*
 		this.services = [
 			{ name: 'Banho e Tosa', descriptionShort: 'Serviço completo de banho e tosa para cães e gatos.', serviceCode: 'SRV001' },
 			{ name: 'Consulta Veterinária', descriptionShort: 'Consulta geral com veterinário para check-up.', serviceCode: 'SRV002' },
@@ -28,7 +46,7 @@ export class organismAdminServicesList extends IcaOrganismBase {
 			{ name: 'Corte de Unhas', descriptionShort: 'Corte seguro e higiênico das unhas do pet.', serviceCode: 'SRV008' },
 			{ name: 'Higienização Dental', descriptionShort: 'Limpeza dos dentes para prevenção de tártaro.', serviceCode: 'SRV009' },
 			{ name: 'Tosa Higiênica', descriptionShort: 'Tosa leve para higiene e conforto do pet.', serviceCode: 'SRV010' }
-		];
+		];*/
 	}
 
 	get filteredServices() {
@@ -44,8 +62,8 @@ export class organismAdminServicesList extends IcaOrganismBase {
 		const sorted = [...this.filteredServices];
 		sorted.sort((a, b) => {
 			let aVal = a[this.sortColumn as keyof RegistrationDataService];
-      let bVal = b[this.sortColumn as keyof RegistrationDataService];
-      if (!bVal || !aVal) return 0;
+			let bVal = b[this.sortColumn as keyof RegistrationDataService];
+			if (!bVal || !aVal) return 0;
 			if (typeof aVal === 'string') aVal = aVal.toLowerCase();
 			if (typeof bVal === 'string') bVal = bVal.toLowerCase();
 			if (aVal < bVal) return this.sortDirection === 'asc' ? -1 : 1;

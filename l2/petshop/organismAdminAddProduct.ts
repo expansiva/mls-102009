@@ -25,19 +25,19 @@ export class organismAddProduct extends IcaOrganismBase {
     connectedCallback() {
         super.connectedCallback();
         subscribe([
-            'ui.petshop.organismAdminAddProduct.action',
+            'ui.petshop.admin.organismAdminAddProduct.action',
         ], this);
     }
 
     disconnectedCallback() {
         super.disconnectedCallback();
         unsubscribe([
-            'ui.petshop.organismAdminAddProduct.action',
+            'ui.petshop.admin.organismAdminAddProduct.action',
         ], this);
     }
 
     handleIcaStateChange(_key: string, _value: any) {
-        if (_key === 'ui.petshop.organismAdminAddProduct.action' && _value === 'save') this.handleClickSave();
+        if (_key === 'ui.petshop.admin.organismAdminAddProduct.action' && _value === 'save') this.handleClickSave();
     }
 
 
@@ -72,6 +72,8 @@ export class organismAddProduct extends IcaOrganismBase {
                 </button>
                 <a id="link-back" style="display:none" href="/pageAdminProduct"></a>
             </div>
+            ${this.labelError ? html`<span class="error-message">${this.labelError}</span>` : ''}
+
 </div>`
     }
 
