@@ -73,7 +73,7 @@ return html`<div class="form-container" id="petshop--organism-admin-service-edit
 </div>
 </section>
 <div class="form-actions" id="petshop--organism-admin-service-edit-102009-49">
-<button class="btn btn-back" id="petshop--organism-admin-service-edit-102009-50">Voltar</button>
+<button class="btn btn-back" id="petshop--organism-admin-service-edit-102009-50"><a href="/pageAdminService">Voltar</a></button>
 <button class="btn btn-save" id="petshop--organism-admin-service-edit-102009-51">Salvar</button>
 </div>
 `

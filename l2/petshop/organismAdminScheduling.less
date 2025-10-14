@@ -1,0 +1,32 @@
+/// <mls shortName="organismAdminScheduling" project="102009" enhancement="enhancementStyle" folder="petshop" />
+petshop--organism-admin-scheduling-102009 {
+  .scheduling-container {
+    padding: @space-24;
+    background-color: @bg-primary-color;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .user-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: @space-16;
+  }
+  .user-item {
+    padding: @space-8;
+    background-color: @bg-secondary-color;
+    border: 1px solid @grey-color;
+    border-radius: 4px;
+    margin-bottom: @space-8;
+    cursor: pointer;
+    transition: background-color @transition-normal;
+    &:hover {
+      background-color: @bg-secondary-color-hover;
+    }
+    &:focus {
+      outline: 2px solid @active-color;
+      outline-offset: 2px;
+    }
+  }
+}
+
+

@@ -1,7 +1,93 @@
 /// <mls shortName="organismAdminServicesList" project="102009" enhancement="enhancementStyle" folder="petshop" />
 petshop--organism-admin-services-list-102009 {
+
   .filters {
     margin-bottom: @space-24;
+    display: inline-flex;
+    gap: 1rem;
+    width: 100%;
+
+    a {
+      color: #ffffff;
+    }
+
+    .form-group-add {
+      margin-left: auto;
+      margin-bottom: @space-16;
+      margin-top: auto;
+    }
+  }
+
+  .filter-controls {
+    display: flex;
+    gap: @space-8;
+    align-items: center;
+    justify-content: space-between;
+
+    input {
+      width: 300px;
+    }
+
+    a {
+      color: #ffffff;
+    }
+  }
+
+  th {
+    cursor: pointer;
+
+    &:hover {
+      background-color: @bg-secondary-color-hover;
+    }
+  }
+
+  .pagination {
+    button {
+      margin: 0 @space-8;
+
+      &.active {
+        background-color: @active-color;
+        color: @bg-primary-color-lighter;
+      }
+
+      &:disabled {
+        background-color: @bg-primary-color-disabled;
+        color: @text-primary-color-disabled;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  @media (max-width: @breakpoint-medium) {
+    .organism-admin-product-list {
+      padding: @space-16;
+    }
+
+    .filter-controls {
+      flex-direction: column;
+      align-items: stretch;
+
+      input {
+        width: 100%;
+      }
+    }
+
+    .pagination {
+      flex-wrap: wrap;
+
+      button {
+        margin: @space-8;
+      }
+    }
+
+    table {
+      font-size: @font-size-12;
+
+      th,
+      td {
+        padding: @space-8;
+      }
+    }
   }
 
 }

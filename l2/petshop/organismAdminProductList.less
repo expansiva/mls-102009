@@ -1,4 +1,4 @@
-/// <mls shortName="organismAdminProductList" project="102009" enhancement="enhancementStyle" folder="petshop" />
+/// <mls shortName="organismAdminProductList" project="102009" enhancement="_blank" groupName="petshop" />
 petshop--organism-admin-product-list-102009 {
 	.organism-admin-product-list {
 		padding: @space-24;
@@ -6,20 +6,77 @@ petshop--organism-admin-product-list-102009 {
 		border-radius: 8px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	}
+
 	.filter-controls {
 		display: flex;
 		gap: @space-8;
 		align-items: center;
-    justify-content: space-between;
-    input {
-      width: 300px;
-    }
+		justify-content: space-between;
+
+		input {
+			width: 300px;
+		}
+
+		a {
+			color: #ffffff;
+		}
 	}
+
+	th {
+		cursor: pointer;
+
+		&:hover {
+			background-color: @bg-secondary-color-hover;
+		}
+	}
+
+	.pagination {
+		button {
+			margin: 0 @space-8;
+
+			&.active {
+				background-color: @active-color;
+				color: @bg-primary-color-lighter;
+			}
+
+			&:disabled {
+				background-color: @bg-primary-color-disabled;
+				color: @text-primary-color-disabled;
+				cursor: not-allowed;
+			}
+		}
+	}
+
 	@media (max-width: @breakpoint-medium) {
 		.organism-admin-product-list {
 			padding: @space-16;
 		}
+
+		.filter-controls {
+			flex-direction: column;
+			align-items: stretch;
+
+			input {
+				width: 100%;
+			}
+		}
+
+		.pagination {
+			flex-wrap: wrap;
+
+			button {
+				margin: @space-8;
+			}
+		}
+
+		table {
+			font-size: @font-size-12;
+
+			th,
+			td {
+				padding: @space-8;
+			}
+		}
 	}
 }
-
 

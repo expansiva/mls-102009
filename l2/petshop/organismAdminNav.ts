@@ -13,7 +13,7 @@ export class organismAdminNav extends IcaOrganismBase {
         </div>
         <ul class="admin-nav__menu" id="petshop--admin-nav-102009-4">
           <li id="petshop--admin-nav-102009-5"><a href="/pageAdminDashboard" class="admin-nav__link admin-nav__link--active" id="petshop--admin-nav-102009-6">Dashboard</a></li>
-          <li id="petshop--admin-nav-102009-7"><a href="#bookings" class="admin-nav__link" id="petshop--admin-nav-102009-8">Agendamentos</a></li>
+          <li id="petshop--admin-nav-102009-7"><a href="/pageAdminScheduling" class="admin-nav__link" id="petshop--admin-nav-102009-8">Agendamentos</a></li>
           <li id="petshop--admin-nav-102009-9"><a href="/pageAdminProduct" class="admin-nav__link" id="petshop--admin-nav-102009-10">Produtos</a></li>
     
             <li id="petshop--admin-nav-102009-17">
