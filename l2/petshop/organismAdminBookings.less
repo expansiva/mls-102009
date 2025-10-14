@@ -1,110 +1,98 @@
 /// <mls shortName="organismAdminBookings" project="102009" folder="petshop" groupName="petshop" enhancement="_100554_enhancementStyle" />
-
-
 petshop--organism-admin-bookings-102009 {
-  .admin-bookings {
-    background: @bg-primary-color;
-    padding: @space-32;
-    font-family: @font-family-primary;
-
-    .admin-bookings__title {
-      font-size: @font-size-20;
-      color: @text-primary-color-darker;
-      margin-bottom: @space-24;
-      font-weight: @font-weight-bold;
-    }
-
-    .admin-bookings__table {
-      width: 100%;
-      border-collapse: collapse;
-      background: @bg-secondary-color-lighter;
-      border-radius: 8px;
-      overflow: hidden;
-
-      th,
-      td {
-        padding: @space-16;
-        text-align: left;
-        font-size: @font-size-16;
-      }
-
-      th {
-        background: @bg-primary-color-darker;
-        color: @text-primary-color-lighter;
-        font-weight: @font-weight-bold;
-      }
-
-      tr {
-        border-bottom: 1px solid @grey-color-light;
-      }
-
-      tr:last-child {
-        border-bottom: none;
-      }
-    }
-
-    .admin-bookings__status {
-      padding: 0 @space-8;
-      border-radius: 12px;
-      font-size: @font-size-12;
-      font-weight: @font-weight-bold;
-
-      &--pending {
-        background: @warning-color;
-        color: #fff;
-      }
-
-      &--approved {
-        background: @success-color;
-        color: #fff;
-      }
-    }
-
-    .admin-bookings__action {
-      background: @bg-primary-color-darker;
-      color: @text-primary-color-lighter;
-      border: none;
-      border-radius: 4px;
-      padding: @space-8 @space-16;
-      margin-right: @space-8;
-      font-size: @font-size-12;
-      cursor: pointer;
-      transition: background @transition-slow;
-
-      &:hover,
-      &:focus {
-        background: @active-color-hover;
-      }
-
-      &--approve {
-        background: @success-color;
-
-        &:hover,
-        &:focus {
-          background: @success-color-hover;
-        }
-      }
-
-      &--cancel {
-        background: @error-color;
-
-        &:hover,
-        &:focus {
-          background: @error-color-hover;
-        }
-      }
-    }
-  }
-
-  @media (max-width: @breakpoint-medium) {
-
-    .admin-bookings__table,
-    .admin-bookings__table th,
-    .admin-bookings__table td {
-      font-size: @font-size-12;
-      padding: @space-8;
-    }
-  }
+	.admin-bookings {
+		background: var(--bg-primary-color, #fff);
+		padding: 32px;
+		font-family: var(--font-family-primary, sans-serif);
+	}
+	.admin-bookings__title {
+		font-size: 20px;
+		margin-bottom: 24px;
+		font-weight: bold;
+	}
+	.admin-bookings__filters {
+		display: flex;
+		gap: 12px;
+		margin-bottom: 16px;
+		flex-wrap: wrap;
+	}
+	.admin-bookings__filters input,
+	.admin-bookings__filters select {
+		padding: 8px;
+		font-size: 14px;
+		width: auto;
+	}
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		background: #f9f9f9;
+		border-radius: 8px;
+		overflow: hidden;
+	}
+	th,
+	td {
+		padding: 12px;
+		text-align: left;
+		border-bottom: 1px solid #eee;
+	}
+	th {
+		background: #f0f0f0;
+		font-weight: bold;
+	}
+	.admin-bookings__status {
+		padding: 4px 8px;
+		border-radius: 8px;
+		font-size: 12px;
+		font-weight: bold;
+		color: #fff;
+	}
+	.admin-bookings__status--pending {
+		background: @warning-color;
+	}
+	.admin-bookings__status--approved {
+		background: @success-color;
+	}
+	.admin-bookings__status--cancelled {
+		background: @error-color;
+	}
+	.admin-bookings__action_td {
+		display: flex;
+	}
+	.admin-bookings__action {
+		border: none;
+		padding: 0;
+		margin-right: 6px;
+		border-radius: 4px;
+		cursor: pointer;
+		font-size: @font-size-16;
+		width: 30px;
+		height: 30px;
+	}
+	.admin-bookings__action--approve {
+		background: @success-color;
+		color: #fff;
+		svg {
+			fill: currentColor;
+		}
+	}
+	.admin-bookings__action--cancel {
+		background: @error-color;
+		color: #fff;
+		svg {
+			fill: currentColor;
+		}
+	}
+	.admin-bookings__pagination {
+		margin-top: 16px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 12px;
+		button {
+			width: auto;
+			padding: @space-8;
+		}
+	}
 }
 
 
