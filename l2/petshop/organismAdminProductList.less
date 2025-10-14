@@ -30,22 +30,6 @@ petshop--organism-admin-product-list-102009 {
 		}
 	}
 
-	.pagination {
-		button {
-			margin: 0 @space-8;
-
-			&.active {
-				background-color: @active-color;
-				color: @bg-primary-color-lighter;
-			}
-
-			&:disabled {
-				background-color: @bg-primary-color-disabled;
-				color: @text-primary-color-disabled;
-				cursor: not-allowed;
-			}
-		}
-	}
 
 	@media (max-width: @breakpoint-medium) {
 		.organism-admin-product-list {
@@ -61,22 +45,6 @@ petshop--organism-admin-product-list-102009 {
 			}
 		}
 
-		.pagination {
-			flex-wrap: wrap;
-
-			button {
-				margin: @space-8;
-			}
-		}
-
-		table {
-			font-size: @font-size-12;
-
-			th,
-			td {
-				padding: @space-8;
-			}
-		}
 	}
 }
 

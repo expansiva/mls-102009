@@ -192,11 +192,42 @@ project-102009 {
     justify-content: center;
     align-items: center;
     gap: @space-16;
+
+    button {
+      margin: 0 @space-8;
+
+      &.active {
+        background-color: @active-color;
+        color: @bg-primary-color-lighter;
+      }
+
+      &:disabled {
+        background-color: @bg-primary-color-disabled;
+        color: @text-primary-color-disabled;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  // Global styles for error message used form inputs
+  .error-message {
+    color: @error-color;
+    font-size: @font-size-12;
+    margin-bottom: @space-16;
+    display: block;
   }
 
   @media (max-width: @breakpoint-medium) {
     .form-container {
       padding: @space-16;
+    }
+
+    .pagination {
+      flex-wrap: wrap;
+
+      button {
+        margin: @space-8;
+      }
     }
 
     h2 {
@@ -210,6 +241,10 @@ project-102009 {
 
     .section-card {
       padding: @space-16;
+    }
+
+    table {
+      font-size: @font-size-12;
     }
 
     th,
