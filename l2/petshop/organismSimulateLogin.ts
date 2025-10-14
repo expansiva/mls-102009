@@ -1,42 +1,35 @@
 /// <mls shortName="organismSimulateLogin" project="102009" folder="petshop" enhancement="_100554_enhancementLit" groupName="petshop" />
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
+import { setState } from '_100554_/l2/collabState';
+import { exec } from "./_102019_layer1Exec";
+import { MdmData, RequestMDMGetLitstByType, MdmType } from "./_102019_layer4Mdm";
+
 @customElement('petshop--organism-simulate-login-102009')
 export class organismSimulateLogin extends IcaOrganismBase {
 
-    // Handle simulate button click for navigation based on selections
-    private handleSimulateClick() {
-        const userSelect = this.querySelector('#user-select') as HTMLSelectElement;
-        const companySelect = this.querySelector('#company-select') as HTMLSelectElement;
-        const profileRadios = this.querySelectorAll('input[name="profile"]:checked') as NodeListOf<HTMLInputElement>;
-        const selectedProfile = profileRadios.length > 0 ? profileRadios[0].value : null;
-        const hiddenLink = this.querySelector('#hidden-link') as HTMLAnchorElement;
-        if (selectedProfile === 'client') {
-            hiddenLink.href = '/pageHome';
-            hiddenLink.click();
-        } else if (selectedProfile === 'admin') {
-            hiddenLink.href = '/pageAdminDashboard';
-            hiddenLink.click();
-        }
+    @state() users: MdmData[] = [];
+    @state() enterprise: MdmData[] = [];
+
+    firstUpdated() {
+        this.init(); 
     }
+
     render() {
-        return html`<div class="form-container" id="petshop--organism-simulate-login-102009-1">
+        return html`
+<div class="form-container" id="petshop--organism-simulate-login-102009-1">
 <h2 id="petshop--organism-simulate-login-102009-2">Simular Login</h2>
 <div class="form-group" id="petshop--organism-simulate-login-102009-3">
 <label for="user-select" id="petshop--organism-simulate-login-102009-4">Selecionar Usuário</label>
 <select id="user-select" id="petshop--organism-simulate-login-102009-5">
-<option value="user1" id="petshop--organism-simulate-login-102009-6">João Silva</option>
-<option value="user2" id="petshop--organism-simulate-login-102009-7">Maria Oliveira</option>
-<option value="user3" id="petshop--organism-simulate-login-102009-8">Carlos Santos</option>
+${this.users.map((user, index) => html`<option value="${index}">${(user.data.registrationData as any).name}</option>`)}
 </select>
 </div>
 <div class="form-group" id="petshop--organism-simulate-login-102009-9">
 <label for="company-select" id="petshop--organism-simulate-login-102009-10">Selecionar Empresa</label>
 <select id="company-select" id="petshop--organism-simulate-login-102009-11">
-<option value="company1" id="petshop--organism-simulate-login-102009-12">Petshop Central</option>
-<option value="company2" id="petshop--organism-simulate-login-102009-13">Petshop Norte</option>
-<option value="company3" id="petshop--organism-simulate-login-102009-14">Petshop Sul</option>
+${this.enterprise.map((ent, index) => html`<option value="${index}" id="petshop--organism-simulate-login-102009-enterprise-${index}">${(ent.data.registrationData as any).corporateName}</option>`)}
 </select>
 </div>
 <div class="form-group radio" id="petshop--organism-simulate-login-102009-15">
@@ -52,5 +45,40 @@ export class organismSimulateLogin extends IcaOrganismBase {
 <a id="hidden-link" style="display: none;"></a>
 </div>
 `
+    }
+    private async init() {
+        const req: RequestMDMGetLitstByType = {
+            action: 'MDMGetLitstByType',
+            inDeveloped: true,
+            version: '1',
+            params: { type: MdmType.PessoaFisica },
+        };
+        const responseUser = await exec(req);
+        req.params.type = MdmType.PessoaJuridica;
+        const responseEnterprise = await exec(req);
+        if (responseUser.ok) this.users = responseUser.data;
+        if (responseEnterprise.ok) this.enterprise = responseEnterprise.data;
+    }
+
+    private handleSimulateClick() {
+        const userSelect = this.querySelector('#user-select') as HTMLSelectElement;
+        const companySelect = this.querySelector('#company-select') as HTMLSelectElement;
+        const profileRadios = this.querySelectorAll('input[name="profile"]:checked') as NodeListOf<HTMLInputElement>;
+        const selectedProfile = profileRadios.length > 0 ? profileRadios[0].value : null;
+        const hiddenLink = this.querySelector('#hidden-link') as HTMLAnchorElement;
+
+        if (this.users[+userSelect.value]) setState('ui.petshop.login', this.users[+userSelect.value]);
+
+        if (this.enterprise[+companySelect.value]) setState('ui.petshop.enterprise', this.enterprise[+companySelect.value]);
+
+
+        if (selectedProfile === 'client') {
+            hiddenLink.href = '/pageHome';
+            hiddenLink.click();
+        } else if (selectedProfile === 'admin') {
+            hiddenLink.href = '/pageAdminDashboard';
+            hiddenLink.click();
+        }
+
     }
 }
