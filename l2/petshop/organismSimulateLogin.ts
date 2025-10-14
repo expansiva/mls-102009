@@ -16,7 +16,7 @@ export class organismSimulateLogin extends IcaOrganismBase {
             hiddenLink.href = '/pageHome';
             hiddenLink.click();
         } else if (selectedProfile === 'admin') {
-            hiddenLink.href = '/adminPanel';
+            hiddenLink.href = '/pageAdminDashboard';
             hiddenLink.click();
         }
     }
