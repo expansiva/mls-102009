@@ -8,6 +8,7 @@ import { globalState, initState, setState } from '_100554_/l2/collabState';
 export class PageAdminAddProduct102009 extends CollabPageElement {
     
     initPage() {
+        
         setState('ui.petshop.admin.menu.selected', 'product');
     }
 }

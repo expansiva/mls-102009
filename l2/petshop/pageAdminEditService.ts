@@ -9,11 +9,11 @@ import { setState, getState, initState } from '_100554_/l2/collabState';
 export class PageAdminEditService102009 extends CollabPageElement {
 
     initPage() {
+        
         setState('ui.petshop.admin.menu.selected', 'service');
         const data: MdmData = getState('ui.petshop.admin.service.selected');
         const serviceData: RegistrationDataService = data?.data?.registrationData as RegistrationDataService;
         const serviceDataMore = data?.data?.serviceData;
-
         initState('ui.petshop.admin.organismAdminServiceEdit', {
             name: serviceData?.name,
             descriptionShort: serviceData?.descriptionShort,
