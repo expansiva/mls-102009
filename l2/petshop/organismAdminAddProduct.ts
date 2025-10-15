@@ -42,7 +42,7 @@ export class organismAddProduct extends IcaOrganismBase {
 
 
     render() {
-        return html`<div class="form-container">
+        return html`<div>
             <h2>Adicionar Novo Produto</h2>
             <div class="form-group">
                 <label for="product-name">Nome do Produto</label>

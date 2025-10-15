@@ -1,85 +1,113 @@
 /// <mls shortName="organismAdminNav" project="102009" folder="petshop" groupName="petshop" enhancement="_100554_enhancementStyle" />
 
 petshop--organism-admin-nav-102009 {
-  .admin-nav {
-    
+  display: block;
+  .admin-sidebar {
+    height: 100vh;
+    width: 220px;
+    background: @bg-secondary-color-lighter;
+    border-right: 1px solid @grey-color;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background: @bg-primary-color-lighter;
-    padding: @space-16 @space-32;
-    border-bottom: 1px solid @grey-color;
+    padding: @space-32 @space-16;
     font-family: @font-family-primary;
+  }
 
-    .admin-nav__logo img {
-      height: 40px;
+  .sidebar__profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: @space-8;
+    text-align: center;
+    padding-bottom: @space-24;
+    border-bottom: 1px solid @grey-color;
+    width: 100%;
+
+    .sidebar__avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid @grey-color;
     }
 
-    .admin-nav__menu {
-      display: flex;
-      gap: @space-24;
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    .sidebar__username {
+      color: @text-primary-color-darker;
+      font-size: @font-size-16;
+      font-weight: @font-weight-bold;
+    }
+  }
 
-      .admin-nav__link {
-        color: @text-primary-color;
-        font-size: @font-size-16;
-        text-decoration: none;
-        padding: @space-8 @space-16;
-        border-radius: 4px;
-        transition: background @transition-slow;
+  .sidebar__menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    list-style: none;
+    margin: @space-24 0;
+    padding: 0;
+    gap: @space-8;
 
-        &:hover,
-        &:focus {
-          background: @bg-secondary-color-lighter;
-          color: @text-primary-color-darker;
-        }
+    .sidebar__link {
+      display: block;
+      padding: @space-8 @space-16;
+      color: @text-primary-color;
+      text-decoration: none;
+      font-size: @font-size-16;
+      border-radius: 4px;
+      transition: background @transition-normal;
 
-        &--active {
-          background: @bg-secondary-color-lighter;
-          color: @text-secondary-color-darker;
-          font-weight: @font-weight-bold;
-        }
+      &:hover,
+      &:focus {
+        background: @bg-primary-color-hover;
+        color: @text-secondary-color-darker;
+      }
+
+      &--active {
+        background: @bg-primary-color-focus;
+        color: @text-secondary-color-darker;
+        font-weight: @font-weight-bold;
       }
     }
+  }
 
-    .admin-nav__user {
-      display: flex;
-      align-items: center;
-      gap: @space-16;
+  .sidebar__footer {
+    border-top: 1px solid @grey-color;
+    width: 100%;
+    padding-top: @space-16;
+    text-align: center;
 
-      .admin-nav__user-name {
-        color: @text-primary-color-darker;
-        font-size: @font-size-16;
-      }
+    .sidebar__logout {
+      color: @error-color;
+      text-decoration: none;
+      font-weight: @font-weight-bold;
+      transition: color @transition-normal;
 
-      .admin-nav__logout {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: @space-8;
-        border-radius: 50%;
-        transition: background @transition-slow;
-
-        &:hover,
-        &:focus {
-          background: @bg-secondary-color-lighter;
-        }
-
-        img {
-          width: 24px;
-          height: 24px;
-        }
+      &:hover {
+        color: @error-color-hover;
       }
     }
   }
 
   @media (max-width: @breakpoint-medium) {
-    .admin-nav {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: @space-16;
+    .admin-sidebar {
+      position: relative;
+      width: 100%;
+      height: auto;
+      flex-direction: row;
+      justify-content: space-around;
+      padding: @space-16;
+    }
+
+    .sidebar__menu {
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    .sidebar__footer {
+      display: none;
     }
   }
 }
