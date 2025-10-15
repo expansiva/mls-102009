@@ -12,7 +12,6 @@ import { MdmData, RequestMDMAdd, MdmType, RegistrationDataProduct } from "./_102
 export class organismAddProduct extends IcaOrganismBase {
 
     @state() loading: boolean = false;
-
     @propertyDataSource() nameProduct?: string;
     @propertyDataSource() descriptionShort?: string;
 

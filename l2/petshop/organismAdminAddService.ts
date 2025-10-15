@@ -12,7 +12,6 @@ import { MdmData, RequestMDMAdd, MdmType, RegistrationDataService } from "./_102
 export class organismAddService extends IcaOrganismBase {
 
     @state() loading: boolean = false;
-
     @propertyDataSource() nameService?: string;
     @propertyDataSource() descriptionShort?: string;
     @propertyDataSource() serviceCode?: string;
