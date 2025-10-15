@@ -17,6 +17,7 @@ export class OrganismAdminNav extends IcaOrganismBase {
   }
 
   render() {
+    
     return html`
       <nav class="admin-sidebar" id="petshop--admin-nav-102009">
         <div class="sidebar__profile">
