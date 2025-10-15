@@ -1,9 +1,9 @@
 /// <mls shortName="layer4Scheduling" project="102009" enhancement="_blank" />
 
 export interface SchedulingData{
-    id: string,
+    id?: string,
     data: SchedulingRecord,
-    version:string,
+    version?:string,
 }
 
 export enum SchedulingStatus {

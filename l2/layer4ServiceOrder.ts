@@ -1,9 +1,9 @@
 /// <mls shortName="layer4ServiceOrder" project="102009" enhancement="_blank" />
 
 export interface ServiceOrderData{
-    id: string,
+    id?: string,
     data: ServiceOrderRecord,
-    version:string,
+    version?:string,
 }
 
 export enum ServiceOrderStatus {
