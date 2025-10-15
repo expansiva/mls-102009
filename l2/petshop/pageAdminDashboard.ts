@@ -6,9 +6,10 @@ import { globalState, initState, setState } from '_100554_/l2/collabState';
 
 @customElement('petshop--page-admin-dashboard-102009')
 export class PageAdminDashboard102009 extends CollabPageElement {
+    
     initPage() {
-            setState('ui.petshop.admin.menu.selected', 'dashboard');
-        
+        setState('ui.petshop.admin.menu.selected', 'dashboard');
     }
+    
 }
 
