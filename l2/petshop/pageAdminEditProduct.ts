@@ -7,9 +7,9 @@ import { setState, getState, initState } from '_100554_/l2/collabState';
 
 @customElement('petshop--page-admin-edit-product-102009')
 export class PageAdminEditProduct102009 extends CollabPageElement {
+    
     initPage() {
-            setState('ui.petshop.admin.menu.selected', 'product');
-
+        setState('ui.petshop.admin.menu.selected', 'product');
         const data: MdmData = getState('ui.petshop.admin.product.selected');
         const productData: RegistrationDataProduct = data?.data?.registrationData as RegistrationDataProduct;
         const productDataMore = data?.data?.productData;
@@ -28,7 +28,6 @@ export class PageAdminEditProduct102009 extends CollabPageElement {
             labelOk: '',
             action: ''
         });
-
     }
 }
 

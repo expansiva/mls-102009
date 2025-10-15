@@ -9,5 +9,11 @@ petshop--page-admin-product-102009 {
         overflow: auto;
         width: 100%;
     }
+    @media (max-width: @breakpoint-medium) {
+        flex-direction: column;
+        main{
+            height: calc(100vh - 110px);
+        }
+    }
 }
 

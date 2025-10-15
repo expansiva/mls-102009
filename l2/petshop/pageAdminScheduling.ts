@@ -9,5 +9,6 @@ export class PageAdminScheduling102009 extends CollabPageElement {
     initPage() {
         setState('ui.petshop.admin.menu.selected', 'scheduling');
     }
+    
 }
 
