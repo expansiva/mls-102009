@@ -1,20 +1,22 @@
 /// <mls shortName="organismAdminProductList" project="102009" folder="petshop" enhancement="_100554_enhancementLit" groupName="petshop" />
 import { html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, state, query } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { getState } from '_100554_/l2/collabState';
+import { setState } from '_100554_/l2/collabState';
 import { MdmData, RegistrationDataProduct, RequestMDMGetLitstByType, MdmType } from "./_102019_layer4Mdm";
 import { exec } from "./_102019_layer1Exec";
 
 @customElement('petshop--organism-admin-product-list-102009')
 export class organismAdminProductList extends IcaOrganismBase {
 
-    @state() products?: RegistrationDataProduct[];
+    @state() mdmProducts?: MdmData[];
     @state() filterText: string = '';
     @state() sortColumn: string = 'name';
     @state() sortDirection: 'asc' | 'desc' = 'asc';
     @state() currentPage: number = 1;
     @state() itemsPerPage: number = 5;
+
+    @query('#link-to-edit') linkToEdit?: HTMLAnchorElement;
 
     async firstUpdated() {
 
@@ -27,8 +29,8 @@ export class organismAdminProductList extends IcaOrganismBase {
 
         const response = await exec(req);
         if (response.ok) {
-            this.products = response.data.map((item: MdmData) => {
-                const item2: RegistrationDataProduct = item.data.registrationData as RegistrationDataProduct;
+            this.mdmProducts = response.data.map((item: MdmData) => {
+                const item2: MdmData = item;
                 return item2;
             });
         }
@@ -62,18 +64,18 @@ export class organismAdminProductList extends IcaOrganismBase {
     }
     // Filter products based on filterText
     get filteredProducts() {
-        if (!this.products) return [];
-        return this.products.filter(product =>
-            product.name.toLowerCase().includes(this.filterText.toLowerCase()) ||
-            product.descriptionShort.toLowerCase().includes(this.filterText.toLowerCase())
+        if (!this.mdmProducts) return [];
+        return this.mdmProducts.filter(mdmProducts =>
+            (mdmProducts.data.registrationData as RegistrationDataProduct)?.name.toLowerCase().includes(this.filterText.toLowerCase()) ||
+            (mdmProducts.data.registrationData as RegistrationDataProduct).descriptionShort.toLowerCase().includes(this.filterText.toLowerCase())
         );
     }
     // Sort filtered products
     get sortedProducts() {
         const sorted = [...this.filteredProducts];
         sorted.sort((a, b) => {
-            let aVal = a[this.sortColumn as keyof RegistrationDataProduct];
-            let bVal = b[this.sortColumn as keyof RegistrationDataProduct];
+            let aVal = (a.data?.registrationData as RegistrationDataProduct)[this.sortColumn as keyof RegistrationDataProduct];
+            let bVal = (b.data?.registrationData as RegistrationDataProduct)[this.sortColumn as keyof RegistrationDataProduct];
             if (typeof aVal === 'string') aVal = aVal.toLowerCase();
             if (typeof bVal === 'string') bVal = bVal.toLowerCase();
             if (aVal < bVal) return this.sortDirection === 'asc' ? -1 : 1;
@@ -111,12 +113,14 @@ export class organismAdminProductList extends IcaOrganismBase {
             this.sortDirection = 'asc';
         }
     }
+
     // Handle edit action
-    handleEdit(e: MouseEvent, product: RegistrationDataProduct) {
+    handleEdit(e: MouseEvent, product: MdmData) {
         e.preventDefault();
-        // Navigate to edit page with product ID
-        // window.location.href = `/pageAdminEditProduct?id=${product.id}`;
+        setState('ui.petshop.admin.product.selected', product);
+        if (this.linkToEdit) this.linkToEdit.click();
     }
+
     // Handle previous page
     handlePrevPage() {
         if (this.currentPage > 1) {
@@ -154,8 +158,9 @@ export class organismAdminProductList extends IcaOrganismBase {
 <tbody id="petshop--organism-admin-product-list-102009-14">
 ${this.paginatedProducts.map(product => html`
 <tr>
-<td>${product.name}</td>
-<td>${product.descriptionShort}</td>
+<td>${(product.data.registrationData as RegistrationDataProduct)?.name}</td>
+<td>${(product.data.registrationData as RegistrationDataProduct)?.descriptionShort}</td>
+
 <td>
 <a href="#" @click="${(e: MouseEvent) => this.handleEdit(e, product)}">Editar</button>
 </td>
@@ -167,6 +172,8 @@ ${this.paginatedProducts.map(product => html`
 <button @click="${this.handlePrevPage}" ?disabled="${this.currentPage === 1}" id="petshop--organism-admin-product-list-102009-26">Anterior</button>
 ${this.visiblePages.map(page => html`<button @click="${() => this.handlePageClick(page)}" class="${page === this.currentPage ? 'active' : ''}">${page}</button>`)}
 <button @click="${this.handleNextPage}" ?disabled="${this.currentPage === this.totalPages}" id="petshop--organism-admin-product-list-102009-28">Próxima</button>
+    <a id="link-to-edit" style="display:none" href="/pageAdminEditProduct"></a>
+
 </div>
 </div>`;
     }
