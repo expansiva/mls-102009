@@ -9,8 +9,8 @@ export class organismAdminServiceEdit extends IcaOrganismBase {
 return html`<div class="form-container" id="petshop--organism-admin-service-edit-102009-1"
 >
 <h2 id="petshop--organism-admin-service-edit-102009-2">Editar Serviço</h2>
-<section class="section-card" id="petshop--organism-admin-service-edit-102009-3">
-<h3 id="petshop--organism-admin-service-edit-102009-4">Dados de Registro</h3>
+<section  id="petshop--organism-admin-service-edit-102009-3">
+
 <div class="form-group" id="petshop--organism-admin-service-edit-102009-5">
 <label for="name" id="petshop--organism-admin-service-edit-102009-6">Nome</label>
 <input type="text" id="name" name="name" required id="petshop--organism-admin-service-edit-102009-7">
@@ -24,8 +24,7 @@ return html`<div class="form-container" id="petshop--organism-admin-service-edit
 <input type="text" id="serviceCode" name="serviceCode" required id="petshop--organism-admin-service-edit-102009-13">
 </div>
 </section>
-<section class="section-card" id="petshop--organism-admin-service-edit-102009-14">
-<h3 id="petshop--organism-admin-service-edit-102009-15">Dados do Serviço</h3>
+<section  id="petshop--organism-admin-service-edit-102009-14">
 <div class="form-group" id="petshop--organism-admin-service-edit-102009-16">
 <label for="category" id="petshop--organism-admin-service-edit-102009-17">Categoria</label>
 <select id="category" name="category" id="petshop--organism-admin-service-edit-102009-18">

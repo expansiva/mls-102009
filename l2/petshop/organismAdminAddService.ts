@@ -42,7 +42,7 @@ export class organismAddService extends IcaOrganismBase {
     }
 
     render() {
-        return html`<div class="form-container" id="petshop--organism-add-service-102009-1">
+        return html`<div id="petshop--organism-add-service-102009-1">
             <h2 id="petshop--organism-add-service-102009-2">Adicionar Novo Serviço</h2>
             <div class="form-group" id="petshop--organism-add-service-102009-3">
                 <label for="nome-servico" id="petshop--organism-add-service-102009-4">Nome do Serviço</label>
