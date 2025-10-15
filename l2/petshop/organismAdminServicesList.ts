@@ -1,20 +1,22 @@
 /// <mls shortName="organismAdminServicesList" project="102009" folder="petshop" enhancement="_100554_enhancementLit" groupName="petshop" />
 import { html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, state, query } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { getState } from '_100554_/l2/collabState';
+import { setState } from '_100554_/l2/collabState';
 import { MdmData, RegistrationDataService, RequestMDMGetLitstByType, MdmType } from "./_102019_layer4Mdm";
 import { exec } from "./_102019_layer1Exec";
 
 @customElement('petshop--organism-admin-services-list-102009')
 export class organismAdminServicesList extends IcaOrganismBase {
 
-	@state() services?: RegistrationDataService[];
+	@state() mdmServices?: MdmData[];
+
 	@state() filterText: string = '';
 	@state() sortColumn: string = 'name';
 	@state() sortDirection: 'asc' | 'desc' = 'asc';
 	@state() currentPage: number = 1;
 	@state() itemsPerPage: number = 5;
+    @query('#link-to-edit') linkToEdit?: HTMLAnchorElement;
 
 	async firstUpdated() {
 
@@ -27,8 +29,8 @@ export class organismAdminServicesList extends IcaOrganismBase {
 
 		const response = await exec(req);
 		if (response.ok) {
-			this.services = response.data.map((item: MdmData) => {
-				const item2: RegistrationDataService = item.data.registrationData as RegistrationDataService;
+			this.mdmServices = response.data.map((item: MdmData) => {
+				const item2: MdmData = item;
 				return item2;
 			});
 		}
@@ -49,19 +51,19 @@ export class organismAdminServicesList extends IcaOrganismBase {
 	}
 
 	get filteredServices() {
-		if (!this.services) return [];
-		return this.services.filter(service =>
-			service.name.toLowerCase().includes(this.filterText.toLowerCase()) ||
-			service.descriptionShort.toLowerCase().includes(this.filterText.toLowerCase()) ||
-			service.serviceCode?.toLowerCase().includes(this.filterText.toLowerCase())
+		if (!this.mdmServices) return [];
+		return this.mdmServices.filter(mdmServices =>
+			(mdmServices.data.registrationData as RegistrationDataService)?.name.toLowerCase().includes(this.filterText.toLowerCase()) ||
+			(mdmServices.data.registrationData as RegistrationDataService)?.descriptionShort.toLowerCase().includes(this.filterText.toLowerCase()) ||
+			(mdmServices.data.registrationData as RegistrationDataService)?.serviceCode?.toLowerCase().includes(this.filterText.toLowerCase())
 		);
 	}
 
 	get sortedServices() {
 		const sorted = [...this.filteredServices];
 		sorted.sort((a, b) => {
-			let aVal = a[this.sortColumn as keyof RegistrationDataService];
-			let bVal = b[this.sortColumn as keyof RegistrationDataService];
+			let aVal = (a.data?.registrationData as RegistrationDataService)[this.sortColumn as keyof RegistrationDataService];
+			let bVal = (b.data?.registrationData as RegistrationDataService)[this.sortColumn as keyof RegistrationDataService];
 			if (!bVal || !aVal) return 0;
 			if (typeof aVal === 'string') aVal = aVal.toLowerCase();
 			if (typeof bVal === 'string') bVal = bVal.toLowerCase();
@@ -99,10 +101,13 @@ export class organismAdminServicesList extends IcaOrganismBase {
 		}
 	}
 
-	handleEdit(e: MouseEvent, service: RegistrationDataService) {
+
+	handleEdit(e: MouseEvent, service: MdmData) {
 		e.preventDefault();
-		// window.location.href = `/pageAdminEditService?code=${service.code}`;
+		setState('ui.petshop.admin.service.selected', service);
+		if (this.linkToEdit) this.linkToEdit.click();
 	}
+
 
 	handlePrevPage() {
 		if (this.currentPage > 1) this.currentPage--;
@@ -154,9 +159,10 @@ export class organismAdminServicesList extends IcaOrganismBase {
 				<tbody>
 					${this.paginatedServices.map(service => html`
 						<tr>
-							<td>${service.name}</td>
-							<td>${service.descriptionShort}</td>
-							<td>${service.serviceCode}</td>
+							<td>${(service.data.registrationData as RegistrationDataService)?.name}</td>
+							<td>${(service.data.registrationData as RegistrationDataService)?.descriptionShort}</td>
+							<td>${(service.data.registrationData as RegistrationDataService)?.serviceCode}</td>
+
 							<td>
 								<a href="#" @click="${(e: MouseEvent) => this.handleEdit(e, service)}">Editar</a>
 							</td>
@@ -173,6 +179,8 @@ export class organismAdminServicesList extends IcaOrganismBase {
 					</button>
 				`)}
 				<button @click="${this.handleNextPage}" ?disabled="${this.currentPage === this.totalPages}">Próxima</button>
+    		<a id="link-to-edit" style="display:none" href="/pageAdminEditService"></a>
+
 			</div>
 		</div>
 		`;
