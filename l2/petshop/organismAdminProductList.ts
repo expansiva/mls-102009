@@ -17,7 +17,6 @@ export class organismAdminProductList extends IcaOrganismBase {
     @state() itemsPerPage: number = 5;
 
     async firstUpdated() {
-        // Load products from state or API
 
         const req: RequestMDMGetLitstByType = {
             action: 'MDMGetLitstByType',
@@ -33,6 +32,7 @@ export class organismAdminProductList extends IcaOrganismBase {
                 return item2;
             });
         }
+
 
         /*
         this.products = [{ name: 'Ração Premium Cães Adultos', descriptionShort: 'Ração completa e balanceada para cães adultos.' },

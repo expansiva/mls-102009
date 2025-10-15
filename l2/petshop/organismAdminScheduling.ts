@@ -4,20 +4,21 @@ import { customElement } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 @customElement('petshop--organism-admin-scheduling-102009')
 export class organismAdminScheduling extends IcaOrganismBase {
-// Property to manage the current step in the scheduling process
-private currentStep: 'user-selection' | 'scheduling' = 'user-selection';
-// Handler for the continue button to switch to scheduling step
-private handleContinue() {
-this.currentStep = 'scheduling';
-this.requestUpdate();
-}
-// Handler for the back button to switch to user-selection step
-private handleBack() {
-this.currentStep = 'user-selection';
-this.requestUpdate();
-}
-render() {
-return html`<div class="scheduling-container" id="petshop--organism-admin-scheduling-102009-1">
+    // Property to manage the current step in the scheduling process
+    private currentStep: 'user-selection' | 'scheduling' = 'user-selection';
+    // Handler for the continue button to switch to scheduling step
+    private handleContinue() {
+        this.currentStep = 'scheduling';
+        this.requestUpdate();
+    }
+    // Handler for the back button to switch to user-selection step
+    private handleBack() {
+        this.currentStep = 'user-selection';
+        this.requestUpdate();
+    }
+
+    render() {
+        return html`<div class="scheduling-container" id="petshop--organism-admin-scheduling-102009-1">
 ${this.currentStep === 'user-selection' ? html`
 <section id="petshop--organism-admin-scheduling-102009-2">
 <h2 id="petshop--organism-admin-scheduling-102009-3">Pesquisar Usuário</h2>
@@ -71,5 +72,5 @@ ${this.currentStep === 'user-selection' ? html`
 </section>
 `}
 </div>`
-}
+    }
 }

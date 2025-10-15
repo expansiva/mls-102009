@@ -18,7 +18,6 @@ export class organismAdminServicesList extends IcaOrganismBase {
 
 	async firstUpdated() {
 
-
 		const req: RequestMDMGetLitstByType = {
 			action: 'MDMGetLitstByType',
 			inDeveloped: true,
