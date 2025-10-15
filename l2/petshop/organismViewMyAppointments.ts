@@ -41,6 +41,7 @@ export class organismViewMyAppointments extends IcaOrganismBase {
                 <table>
                     <thead>
                         <tr>
+                            <th>Pet</th>
                             <th>Data</th>
                             <th>Horário</th>
                             <th>Serviço</th>
@@ -76,6 +77,7 @@ export class organismViewMyAppointments extends IcaOrganismBase {
 
         return html`
         <tr>
+            <td>${sch.data.jsonBin.pet.name}</td>
             <td>${data.date}</td>
             <td>${data.time}</td>
             <td>${sch.data.jsonBin.service.name}</td>
