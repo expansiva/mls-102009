@@ -1,0 +1,10 @@
+/// <mls shortName="layer3UpdScheduling" project="102009" enhancement="_blank" />
+
+import { SchedulingData } from "./_102009_layer4Scheduling";
+import { Ctx } from "./_102009_layer1Context";
+
+export async function updScheduling(ctx:Ctx, data: SchedulingData): Promise<SchedulingData | null> {
+
+    return await ctx.io.scheduling.upd(data);
+
+}

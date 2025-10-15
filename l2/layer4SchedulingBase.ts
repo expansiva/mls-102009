@@ -1,0 +1,44 @@
+/// <mls shortName="layer4SchedulingBase" project="102009" enhancement="_blank" />
+
+import { SchedulingData } from "./_102009_layer4Scheduling";
+import { RequestBase } from "./_102009_layer4ResReqBase";
+
+export interface SchedulingBase { 
+    upd: (param: SchedulingData) => Promise<SchedulingData | null>;
+    add: (param: SchedulingData) => Promise<SchedulingData | null>;
+    del: (id: string) => Promise<boolean>;
+    list: () => Promise<SchedulingData[]>;
+    getById: (id: string) => Promise<SchedulingData | null>;
+    listByClient: (clientId: string) => Promise<SchedulingData[]>;
+}
+
+//----------REQUEST--------------
+
+export interface RequestSchedulingAdd extends RequestBase {
+  action: 'SchedulingAdd',
+  params: SchedulingData
+}
+ 
+export interface RequestSchedulingUpd extends RequestBase {
+  action: 'SchedulingUpd',
+  params: SchedulingData
+}
+
+export interface RequestSchedulingDel extends RequestBase {
+  action: 'SchedulingDel',
+  params: {id:string}
+}
+
+export interface RequestSchedulingList extends RequestBase {
+  action: 'SchedulingList',
+}
+
+export interface RequestSchedulingGetById extends RequestBase {
+  action: 'SchedulingGetById',
+  params: {id:string}
+}
+
+export interface RequestSchedulingGetByClient extends RequestBase {
+  action: 'SchedulingGetByClient',
+  params: {clientId:string}
+}
