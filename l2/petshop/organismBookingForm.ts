@@ -1,13 +1,34 @@
 /// <mls shortName="organismBookingForm" project="102009" folder="petshop" enhancement="_100554_enhancementLit" groupName="petshop" />
 
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
+import { propertyDataSource } from './_100554_collabDecorators';
+import { setState, getState } from '_100554_/l2/collabState';
+import { exec } from "./_102019_layer1Exec";
+import { petshopExec } from "./_102009_layer1Exec";
+import { ServiceOrderData} from './_102009_layer4ServiceOrder'
+import { RequestSchedulingAdd} from './_102009_layer4SchedulingBase'
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
+import { MdmData, RequestMDMGetLitstByIds, RequestMDMGetLitstByType, MdmType } from "./_102019_layer4Mdm";
+
 
 @customElement('petshop--organism-booking-form-102009')
 export class organismBookingForm extends IcaOrganismBase {
-    render(){
-        return html`<h2 id="petshop--booking-form-102009-1">Agende Banho &amp; Tosa</h2>
+
+  @state() mdmData: MdmData | undefined;
+  @state() myPets: MdmData[] = [];
+  @state() services: MdmData[] = [];
+  @state() error = '';
+  @state() loading: boolean = false;
+
+  //-------------------------------
+
+  firstUpdated() {
+    this.init();
+  }
+
+  render() {
+    return html`<h2 id="petshop--booking-form-102009-1">Agende Banho &amp; Tosa</h2>
       <form autocomplete="off" id="petshop--booking-form-102009-2">
         <div class="form-row" id="petshop--booking-form-102009-3">
           <div style="flex:1;" id="petshop--booking-form-102009-4">
@@ -91,5 +112,81 @@ export class organismBookingForm extends IcaOrganismBase {
         </div>
       </form>
     `
+  }
+
+  //---------------------------
+
+  private async init() {
+    this.mdmData = getState('ui.petshop.login');
+    this.myPets = getState('ui.petshop.client.myPets') || [];
+    this.services = getState('ui.petshop.client.services') || [];
+
+    this.loadInfos();
+  }
+
+  private async loadInfos() {
+    await this.getMyPets();
+    await this.getServices();
+  }
+
+
+  private async getMyPets() {
+
+    if (!this.mdmData) {
+      this.error = 'Falata parametros para pegar os pets';
+      return;
     }
+
+    const ids: string[] = [];
+
+    if (this.mdmData.data.relationships) {
+      this.mdmData.data.relationships.forEach((r) => {
+
+        if (r.type === 'R_PF_OWNER_OF_PET') ids.push(r.relatedMdmId);
+
+      })
+    }
+
+    const req: RequestMDMGetLitstByIds = {
+      action: 'MDMGetLitstByIds',
+      inDeveloped: true,
+      version: '1',
+      params: { ids }
+    };
+
+    const response = await exec(req);
+    if (!response.ok) {
+      this.error = response.error as string;
+      this.loading = false;
+      return;
+    }
+
+    this.myPets = response.data.filter((item: any) => item != null);
+
+    setState('ui.petshop.client.myPets', this.myPets);
+
+  }
+
+  private async getServices() {
+
+    const req: RequestMDMGetLitstByType = {
+      action: 'MDMGetLitstByType',
+      inDeveloped: true,
+      version: '1',
+      params: { type:MdmType.Servico }
+    };
+
+    const response = await exec(req);
+    if (!response.ok) {
+      this.error = response.error as string;
+      this.loading = false;
+      return;
+    }
+
+    this.services = response.data.filter((item: any) => item != null);
+
+    setState('ui.petshop.client.services', this.services);
+
+  }
+
 }
