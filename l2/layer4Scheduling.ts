@@ -16,14 +16,10 @@ export interface SchedulingRecord {
   clientMdmId: string;
   petMdmId: string;
   serviceMdmId: string;
-
   startDateTime: string; // ISO 8601 datetime (ex: "2025-10-10T16:30:00Z")
-  endDateTime: string;   // ISO 8601 datetime
-
-    status: SchedulingStatus,
-
+  endDateTime?: string;   // ISO 8601 datetime
+  status: SchedulingStatus,
   serviceOrderId: string | null; 
-
   jsonBin: {
     tutor: {
       name: string;
@@ -37,12 +33,12 @@ export interface SchedulingRecord {
     };
     service: {
       name: string;
-      serviceCode: string;
+      serviceCode?: string;
     };
-    employee: {
+    employee?: {
       name: string;
       description: string;
     };
-    notes: string;
+    notes?: string;
   };
 }
