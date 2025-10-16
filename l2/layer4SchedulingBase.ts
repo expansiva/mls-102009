@@ -6,10 +6,10 @@ import { RequestBase } from "./_102009_layer4ResReqBase";
 export interface SchedulingBase { 
     upd: (param: SchedulingData) => Promise<SchedulingData | null>;
     add: (param: SchedulingData) => Promise<SchedulingData | null>;
-    del: (id: string) => Promise<boolean>;
+    del: (id: number) => Promise<boolean>;
     list: () => Promise<SchedulingData[]>;
-    getById: (id: string) => Promise<SchedulingData | null>;
-    listByClient: (clientId: string) => Promise<SchedulingData[]>;
+    getById: (id: number) => Promise<SchedulingData | null>;
+    listByClient: (clientId: number) => Promise<SchedulingData[]>;
 }
 
 //----------REQUEST--------------
@@ -26,7 +26,7 @@ export interface RequestSchedulingUpd extends RequestBase {
 
 export interface RequestSchedulingDel extends RequestBase {
   action: 'SchedulingDel',
-  params: {id:string}
+  params: {id:number}
 }
 
 export interface RequestSchedulingList extends RequestBase {
@@ -35,10 +35,10 @@ export interface RequestSchedulingList extends RequestBase {
 
 export interface RequestSchedulingGetById extends RequestBase {
   action: 'SchedulingGetById',
-  params: {id:string}
+  params: {id:number}
 }
 
 export interface RequestSchedulingGetByClient extends RequestBase {
   action: 'SchedulingGetByClient',
-  params: {clientId:string}
+  params: {clientId:number}
 }

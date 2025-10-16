@@ -6,9 +6,9 @@ import { RequestBase } from "./_102009_layer4ResReqBase";
 export interface ServiceOrderBase { 
     upd: (param: ServiceOrderData) => Promise<ServiceOrderData | null>;
     add: (param: ServiceOrderData) => Promise<ServiceOrderData | null>;
-    del: (id: string) => Promise<boolean>;
+    del: (id: number) => Promise<boolean>;
     list: () => Promise<ServiceOrderData[]>;
-    getById: (id: string) => Promise<ServiceOrderData | null>;
+    getById: (id: number) => Promise<ServiceOrderData | null>;
 }
 
 //----------REQUEST--------------
@@ -25,7 +25,7 @@ export interface RequestServiceOrderUpd extends RequestBase {
 
 export interface RequestServiceOrderDel extends RequestBase {
   action: 'ServiceOrderDel',
-  params: {id:string}
+  params: {id:number}
 }
 
 export interface RequestServiceOrderList extends RequestBase {
@@ -34,5 +34,5 @@ export interface RequestServiceOrderList extends RequestBase {
 
 export interface RequestServiceOrderGetById extends RequestBase {
   action: 'ServiceOrderGetById',
-  params: {id:string}
+  params: {id:number}
 }

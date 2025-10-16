@@ -1,7 +1,7 @@
 /// <mls shortName="layer4ServiceOrder" project="102009" enhancement="_blank" />
 
 export interface ServiceOrderData{
-    id?: string,
+    id?: number,
     data: ServiceOrderRecord,
     version?:string,
 }
@@ -14,10 +14,10 @@ export enum ServiceOrderStatus {
 };
 
 interface ServiceOrderRecord {
-  schedulingId: string;     
-  clientMdmId: string;
-  petMdmId: string;
-  employeeMdmId: string;
+  schedulingId: number;     
+  clientMdmId: number;
+  petMdmId: number;
+  employeeMdmId: number;
 
   executionDateTime: string; 
   status: ServiceOrderStatus;
@@ -55,10 +55,10 @@ interface ServiceOrderHistoryEntry {
 
 
 interface ServiceProvided {
-  serviceMdmId: string;
+  serviceMdmId: number;
   name: string;
   priceCharged: number;
-  executionEmployeeMdmId: string; 
+  executionEmployeeMdmId: number; 
 }
 
 
