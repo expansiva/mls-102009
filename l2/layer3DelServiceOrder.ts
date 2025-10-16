@@ -2,7 +2,7 @@
 
 import { Ctx } from "./_102009_layer1Context";
 
-export async function delServiceOrder(ctx:Ctx, id: string): Promise<boolean> {
+export async function delServiceOrder(ctx:Ctx, id: number): Promise<boolean> {
     return await ctx.io.serviceOrder.del(id);
 
 }
