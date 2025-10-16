@@ -1,16 +1,11 @@
 /// <mls shortName="layer1SchedulingDB" project="102009" enhancement="_blank" />
 
 import { SchedulingBase } from "./_102009_layer4SchedulingBase";
-import { SchedulingData} from "./_102009_layer4Scheduling";
+import { SchedulingData } from "./_102009_layer4Scheduling";
+import {  STORE_NAME_SCHEDULING, openDB } from "./_102009_layer1IndexedDb";
 
 class Scheduling implements SchedulingBase {
 
-
-    //--------VARIABLES-------------
-
-    private DB_NAME = "PetshopDB";
-    private VERSION = 1;
-    private STORE_NAME = "scheduling_data";
 
     //-----------METHODS----------- 
 
@@ -45,29 +40,12 @@ class Scheduling implements SchedulingBase {
 
     //-----------IMPLEMENTS------------
 
-    private openDB(): Promise<IDBDatabase> {
-        return new Promise((resolve, reject) => {
-            const request = indexedDB.open(this.DB_NAME, this.VERSION);
-
-            request.onupgradeneeded = () => {
-                const db = request.result;
-
-                if (!db.objectStoreNames.contains(this.STORE_NAME)) {
-                    db.createObjectStore(this.STORE_NAME, { keyPath: "id" });
-                }
-
-            };
-
-            request.onsuccess = () => resolve(request.result);
-            request.onerror = () => reject(request.error);
-        });
-    }
 
     private async saveSchedulingData(data: SchedulingData): Promise<SchedulingData | null> {
-        const db = await this.openDB();
-        const tx = db.transaction(this.STORE_NAME, "readwrite");
+        const db = await openDB();
+        const tx = db.transaction(STORE_NAME_SCHEDULING, "readwrite");
         data.version = Date.now().toString();
-        tx.objectStore(this.STORE_NAME).put(data);
+        tx.objectStore(STORE_NAME_SCHEDULING).put(data);
 
         return new Promise((resolve, reject) => {
             tx.oncomplete = () => resolve(data);
@@ -76,9 +54,9 @@ class Scheduling implements SchedulingBase {
     }
 
     private async getRecordCount(): Promise<number> {
-        const db = await this.openDB();
-        const transaction = db.transaction(this.STORE_NAME, 'readonly');
-        const store = transaction.objectStore(this.STORE_NAME);
+        const db = await openDB();
+        const transaction = db.transaction(STORE_NAME_SCHEDULING, 'readonly');
+        const store = transaction.objectStore(STORE_NAME_SCHEDULING);
         const request = store.count();
 
         return new Promise((resolve, reject) => {
@@ -88,9 +66,9 @@ class Scheduling implements SchedulingBase {
     }
 
     private async getSchedulingData(id: string): Promise<SchedulingData | null> {
-        const db = await this.openDB();
-        const tx = db.transaction(this.STORE_NAME, "readonly");
-        const request = tx.objectStore(this.STORE_NAME).get(id);
+        const db = await openDB();
+        const tx = db.transaction(STORE_NAME_SCHEDULING, "readonly");
+        const request = tx.objectStore(STORE_NAME_SCHEDULING).get(id);
 
         return new Promise((resolve, reject) => {
             request.onsuccess = () => resolve(request.result || null);
@@ -99,9 +77,9 @@ class Scheduling implements SchedulingBase {
     }
 
     private async getAllSchedulingData(): Promise<SchedulingData[]> {
-        const db = await this.openDB();
-        const tx = db.transaction(this.STORE_NAME, "readonly");
-        const request = tx.objectStore(this.STORE_NAME).getAll();
+        const db = await openDB();
+        const tx = db.transaction(STORE_NAME_SCHEDULING, "readonly");
+        const request = tx.objectStore(STORE_NAME_SCHEDULING).getAll();
 
         return new Promise((resolve, reject) => {
             request.onsuccess = () => resolve(request.result as SchedulingData[]);
@@ -110,9 +88,9 @@ class Scheduling implements SchedulingBase {
     }
 
     private async deleteSchedulingData(id: string): Promise<boolean> {
-        const db = await this.openDB();
-        const tx = db.transaction(this.STORE_NAME, "readwrite");
-        tx.objectStore(this.STORE_NAME).delete(id);
+        const db = await openDB();
+        const tx = db.transaction(STORE_NAME_SCHEDULING, "readwrite");
+        tx.objectStore(STORE_NAME_SCHEDULING).delete(id);
 
         return new Promise((resolve, reject) => {
             tx.oncomplete = () => resolve(true);
@@ -121,29 +99,23 @@ class Scheduling implements SchedulingBase {
     }
 
     private async getRecordsByClient(clientId: string): Promise<SchedulingData[]> {
+
+        const db = await openDB();
+        const tx = db.transaction(STORE_NAME_SCHEDULING, "readonly");
+        const request = tx.objectStore(STORE_NAME_SCHEDULING).getAll();
+
         return new Promise((resolve, reject) => {
-            const openRequest = indexedDB.open(this.DB_NAME, this.VERSION);
+            request.onsuccess = () => {
 
-            openRequest.onerror = () => reject(openRequest.error);
-
-            openRequest.onsuccess = () => {
-                const db = openRequest.result;
-                const tx = db.transaction(this.STORE_NAME, "readonly");
-                const store = tx.objectStore(this.STORE_NAME);
-                const getAllRequest = store.getAll();
-
-                getAllRequest.onsuccess = () => {
-                    const allRecords = getAllRequest.result || [];
-                    const filtered = allRecords.filter(
-                        (item: SchedulingData) => item?.data.clientMdmId === clientId
-                    );
-                    resolve(filtered);
-                    db.close();
-                };
-
-                getAllRequest.onerror = () => reject(getAllRequest.error);
+                const allRecords = request.result || [];
+                const filtered = allRecords.filter(
+                    (item: SchedulingData) => item?.data.clientMdmId === clientId
+                );
+                resolve(filtered);
             };
+            request.onerror = () => reject(request.error);
         });
+    
     }
 
 }
