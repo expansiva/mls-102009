@@ -6,6 +6,7 @@ import { IcaOrganismBase } from './_100554_icaOrganismBase';
 
 @customElement('petshop--organism-footer-info-102009')
 export class organismFooterInfo extends IcaOrganismBase {
+  
     render(){
         return html`<div class="footer-container" id="petshop--footer-info-102009-1">
           <div class="footer-section" id="petshop--footer-info-102009-2">
