@@ -3,7 +3,7 @@
 import { SchedulingData } from "./_102009_layer4Scheduling";
 import { Ctx } from "./_102009_layer1Context";
 
-export async function getByIdScheduling(ctx:Ctx, id: string): Promise<SchedulingData | null> {
+export async function getByIdScheduling(ctx:Ctx, id: number): Promise<SchedulingData | null> {
 
     return await ctx.io.scheduling.getById(id);
 

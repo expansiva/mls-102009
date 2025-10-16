@@ -17,7 +17,7 @@ class ServiceOrder implements ServiceOrderBase {
         return await this.saveServiceOrderData(param);
     }
 
-    public async del(id: string): Promise<boolean> {
+    public async del(id: number): Promise<boolean> {
         return await this.deleteServiceOrderData(id);
     }
 
@@ -25,7 +25,7 @@ class ServiceOrder implements ServiceOrderBase {
         return await this.getAllServiceOrderData();
     }
 
-    public async getById(id: string): Promise<ServiceOrderData | null> {
+    public async getById(id: number): Promise<ServiceOrderData | null> {
         return await this.getServiceOrderData(id);
     }
 
@@ -44,7 +44,7 @@ class ServiceOrder implements ServiceOrderBase {
     }
 
 
-    private async getServiceOrderData(id: string): Promise<ServiceOrderData | null> {
+    private async getServiceOrderData(id: number): Promise<ServiceOrderData | null> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SERVICEORDER, "readonly");
         const request = tx.objectStore(STORE_NAME_SERVICEORDER).get(id);
@@ -66,7 +66,7 @@ class ServiceOrder implements ServiceOrderBase {
         });
     }
 
-    private async deleteServiceOrderData(id: string): Promise<boolean> {
+    private async deleteServiceOrderData(id: number): Promise<boolean> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SERVICEORDER, "readwrite");
         tx.objectStore(STORE_NAME_SERVICEORDER).delete(id);

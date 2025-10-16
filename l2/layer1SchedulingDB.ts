@@ -18,7 +18,7 @@ class Scheduling implements SchedulingBase {
         return await this.saveSchedulingData(param);
     }
 
-    public async del(id: string): Promise<boolean> {
+    public async del(id: number): Promise<boolean> {
         return await this.deleteSchedulingData(id);
     }
 
@@ -26,7 +26,7 @@ class Scheduling implements SchedulingBase {
         return await this.getAllSchedulingData();
     }
 
-    public async getById(id: string): Promise<SchedulingData | null> {
+    public async getById(id: number): Promise<SchedulingData | null> {
         return await this.getSchedulingData(id);
     }
 
@@ -34,7 +34,7 @@ class Scheduling implements SchedulingBase {
         return await this.getRecordCount();
     }
 
-    public async listByClient(clientId: string): Promise<SchedulingData[]> {
+    public async listByClient(clientId: number): Promise<SchedulingData[]> {
         return await this.getRecordsByClient(clientId);
     }
 
@@ -65,7 +65,7 @@ class Scheduling implements SchedulingBase {
         });
     }
 
-    private async getSchedulingData(id: string): Promise<SchedulingData | null> {
+    private async getSchedulingData(id: number): Promise<SchedulingData | null> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SCHEDULING, "readonly");
         const request = tx.objectStore(STORE_NAME_SCHEDULING).get(id);
@@ -87,7 +87,7 @@ class Scheduling implements SchedulingBase {
         });
     }
 
-    private async deleteSchedulingData(id: string): Promise<boolean> {
+    private async deleteSchedulingData(id: number): Promise<boolean> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SCHEDULING, "readwrite");
         tx.objectStore(STORE_NAME_SCHEDULING).delete(id);
@@ -98,7 +98,7 @@ class Scheduling implements SchedulingBase {
         });
     }
 
-    private async getRecordsByClient(clientId: string): Promise<SchedulingData[]> {
+    private async getRecordsByClient(clientId: number): Promise<SchedulingData[]> {
 
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SCHEDULING, "readonly");
