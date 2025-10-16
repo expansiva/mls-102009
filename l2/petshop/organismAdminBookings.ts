@@ -49,7 +49,6 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 
 	}
 
-	// ---- Filtros ----
 	private handleSearch(e: Event) {
 		this.search = (e.target as HTMLInputElement).value.toLowerCase();
 		this.applyFilters();
@@ -136,6 +135,10 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 				<option value="">Todos os serviços</option>
 				${this.getUniqueServices().map(service => html`<option value="${service}">${service}</option>`)}
 			</select>
+
+			<div class="form-actions"">
+            	<button class="btn btn-save"><a href="/pageAdminSchedulingAdd">Novo agendamento</a></button>
+        	</div>
 		</div>
 	` : ''
 			}
