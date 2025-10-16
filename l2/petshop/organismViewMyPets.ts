@@ -5,7 +5,8 @@ import { propertyDataSource } from './_100554_collabDecorators';
 import { setState, getState } from '_100554_/l2/collabState';
 import { exec } from "./_102019_layer1Exec";
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { MdmData, RequestMDMAdd, MdmType, RegistrationDataPet, RequestMDMAddRelationship, RequestMDMGetById, RequestMDMGetListByIds, RequestMDMUpd } from "./_102019_layer4Mdm";
+import { RequestMDMAdd, RequestMDMAddRelationship, RequestMDMGetById, RequestMDMGetListByIds, RequestMDMUpd  } from "./_102019_layer4ResReq";
+import { MdmData,  MdmType, RegistrationDataPet  } from "./_102019_layer4Mdm";
 
 @customElement('petshop--organism-view-my-pets-102009')
 export class organismViewMyPets extends IcaOrganismBase {
