@@ -5,7 +5,9 @@ import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState, getState } from '_100554_/l2/collabState';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { exec } from "./_102019_layer1Exec";
-import { MdmData, RequestMDMUpd, MdmType, RegistrationDataProduct } from "./_102019_layer4Mdm";
+import { MdmData, MdmType, RegistrationDataProduct, ProductData, ProductRecord } from "./_102019_layer4Mdm";
+import { RequestMDMUpd } from "./_102019_layer4ResReq";
+
 @customElement('petshop--organism-admin-product-edit-102009')
 export class organismAdminProductEdit extends IcaOrganismBase {
 
@@ -162,18 +164,6 @@ export class organismAdminProductEdit extends IcaOrganismBase {
         }
     }
 
-    private handleCancel() {
-        this.nameProduct = (this.mdmData?.data.registrationData as RegistrationDataProduct)?.name || '';
-        this.descriptionShort = (this.mdmData?.data.registrationData as RegistrationDataProduct)?.descriptionShort || '';
-        this.category = this.mdmData?.data.productData?.category || '';
-        this.barcode = this.mdmData?.data.productData?.barcode || '';
-        this.petSuitability = this.mdmData?.data.productData?.petSuitability || [];
-        this.productDetails = this.mdmData?.data.productData?.productDetails || '';
-        this.sku = this.mdmData?.data.productData?.sku || '';
-        this.unitOfMeasure = this.mdmData?.data.productData?.unitOfMeasure || '';
-        this.subcategory = this.mdmData?.data.productData?.subcategory || '';
-    }
-
     private clearErrors() {
         this.labelError = '';
         this.labelOk = '';
@@ -196,8 +186,8 @@ export class organismAdminProductEdit extends IcaOrganismBase {
             const rgData = dataToUpd.data?.registrationData as RegistrationDataProduct;
             rgData.name = this.nameProduct || '';
             rgData.descriptionShort = this.descriptionShort || '';
-            if (!dataToUpd.data.productData) {
-                dataToUpd.data.productData = {
+            if (!(dataToUpd.data as ProductRecord).productData) {
+                (dataToUpd.data as ProductRecord).productData = {
                     category: '',
                     barcode: '',
                     petSuitability: [],
@@ -207,13 +197,15 @@ export class organismAdminProductEdit extends IcaOrganismBase {
                     unitOfMeasure: '',
                 }
             }
-            dataToUpd.data.productData.category = this.category || '';
-            dataToUpd.data.productData.barcode = this.barcode || '';
-            dataToUpd.data.productData.petSuitability = this.petSuitability || [];
-            dataToUpd.data.productData.productDetails = this.productDetails || '';
-            dataToUpd.data.productData.sku = this.sku || '';
-            dataToUpd.data.productData.subcategory = this.subcategory || '';
-            dataToUpd.data.productData.unitOfMeasure = this.unitOfMeasure || '';
+
+            const productData: ProductData = (dataToUpd.data as ProductRecord).productData as ProductData;
+            productData.category = this.category || '';
+            productData.barcode = this.barcode || '';
+            productData.petSuitability = this.petSuitability || [];
+            productData.productDetails = this.productDetails || '';
+            productData.sku = this.sku || '';
+            productData.subcategory = this.subcategory || '';
+            productData.unitOfMeasure = this.unitOfMeasure || '';
             const params: MdmData = dataToUpd;
             const req: RequestMDMUpd = {
                 action: 'MDMUpd',

@@ -6,8 +6,8 @@ import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState, subscribe, unsubscribe } from '_100554_/l2/collabState';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { exec } from "./_102019_layer1Exec";
-import { MdmData, MdmType, RequestMDMGetList, RegistrationDataPF, RegistrationDataPet, RegistrationDataService, RequestMDMGetListByIds, RequestMDMGetListByType } from "./_102019_layer4Mdm";
-
+import { MdmData, MdmType, RegistrationDataPF, RegistrationDataPet, RegistrationDataService } from "./_102019_layer4Mdm";
+import { RequestMDMGetListByIds, RequestMDMGetList, RequestMDMGetListByType } from "./_102019_layer4ResReq";
 import { petshopExec } from "./_102009_layer1Exec";
 import { RequestSchedulingAdd } from './_102009_layer4SchedulingBase'
 import { SchedulingData, SchedulingStatus } from './_102009_layer4Scheduling'
@@ -68,7 +68,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
     private renderSelectUser() {
         return html`
         <section>
-        <h2>Pesquisar Usuário</h2>
+        <h2>Novo agendamento</h2>
         <div class="form-group">
             <label for="user-search">Buscar por nome, e-mail ou ID</label>
             <input type="text" id="user-search" placeholder="Digite para pesquisar" @input=${(e: KeyboardEvent) => this.searchText = (e.target as HTMLInputElement).value}>
@@ -90,7 +90,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
     private renderAddScheduling() {
         return html`
             <section>
-            <h2>Agendamento</h2>
+            <h2>>Novo agendamento</h2>
             <div class="form-group">
                 <label for="date-select">Cliente</label>
                 <input readonly type="text" value="${(this.userSelected?.data.registrationData as RegistrationDataPF).name}"}
@@ -104,7 +104,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
             </div>
             <div class="form-group">
                 <label for="date-select">Data</label>
-                <input type="datetime-local" id="date-select" value="2025-10-15" @input=${(e: MouseEvent) => { this.date = (e.target as HTMLInputElement).value}}
+                <input type="datetime-local" id="date-select" value="2025-10-15" @input=${(e: MouseEvent) => { this.date = (e.target as HTMLInputElement).value }}
             </div>
             <div class="form-group">
                 <label for="service-select">Serviço</label>

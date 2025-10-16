@@ -6,7 +6,8 @@ import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState, subscribe, unsubscribe } from '_100554_/l2/collabState';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { exec } from "./_102019_layer1Exec";
-import { MdmData, RequestMDMAdd, MdmType, RegistrationDataProduct } from "./_102019_layer4Mdm";
+import { MdmData, MdmType, RegistrationDataProduct, ProductRecord } from "./_102019_layer4Mdm";
+import { RequestMDMAdd } from "./_102019_layer4ResReq";
 
 @customElement('petshop--organism-admin-add-product-102009')
 export class organismAddProduct extends IcaOrganismBase {
@@ -116,9 +117,10 @@ export class organismAddProduct extends IcaOrganismBase {
                         descriptionShort: this.descriptionShort,
                     } as RegistrationDataProduct,
                     type: MdmType.Produto,
-                    status: 'A'
-                }
+                    status: 'A',
+                } as ProductRecord
             }
+            
             const req: RequestMDMAdd = {
                 action: 'MDMAdd',
                 inDeveloped: true,

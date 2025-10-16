@@ -5,7 +5,9 @@ import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState, getState } from '_100554_/l2/collabState';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { exec } from "./_102019_layer1Exec";
-import { MdmData, RequestMDMUpd, MdmType, RegistrationDataService } from "./_102019_layer4Mdm";
+import { MdmData, MdmType, RegistrationDataService, ServiceData, ServiceRecord } from "./_102019_layer4Mdm";
+import { RequestMDMUpd } from "./_102019_layer4ResReq";
+
 @customElement('petshop--organism-admin-service-edit-102009')
 export class organismAdminServiceEdit extends IcaOrganismBase {
 
@@ -222,8 +224,8 @@ export class organismAdminServiceEdit extends IcaOrganismBase {
             rgData.name = this.nameService || '';
             rgData.descriptionShort = this.descriptionShort || '';
             rgData.serviceCode = this.serviceCode || '';
-            if (!dataToUpd.data.serviceData) {
-                dataToUpd.data.serviceData = {
+            if (!(dataToUpd.data as ServiceRecord).serviceData) {
+                (dataToUpd.data as ServiceRecord).serviceData = {
                     category: '',
                     durationMinutes: 0,
                     priceRegular: 0,
@@ -234,14 +236,16 @@ export class organismAdminServiceEdit extends IcaOrganismBase {
                     speciesSuitability: []
                 }
             }
-            dataToUpd.data.serviceData.category = this.category || '';
-            dataToUpd.data.serviceData.durationMinutes = +(this.durationMinutes || 0);
-            dataToUpd.data.serviceData.priceRegular = +(this.priceRegular || 0)
-            dataToUpd.data.serviceData.employeeCommission = +(this.employeeCommission || 0)
-            dataToUpd.data.serviceData.priceSubscription = +(this.priceSubscription || 0)
-            dataToUpd.data.serviceData.requiredResources = this.requiredResources || [];
-            dataToUpd.data.serviceData.sizeSuitability = this.sizeSuitability || [];
-            dataToUpd.data.serviceData.speciesSuitability = this.speciesSuitability || [];
+            const serviceData: ServiceData = (dataToUpd.data as ServiceRecord).serviceData as ServiceData;
+
+            serviceData.category = this.category || '';
+            serviceData.durationMinutes = +(this.durationMinutes || 0);
+            serviceData.priceRegular = +(this.priceRegular || 0)
+            serviceData.employeeCommission = +(this.employeeCommission || 0)
+            serviceData.priceSubscription = +(this.priceSubscription || 0)
+            serviceData.requiredResources = this.requiredResources || [];
+            serviceData.sizeSuitability = this.sizeSuitability || [];
+            serviceData.speciesSuitability = this.speciesSuitability || [];
             const params: MdmData = dataToUpd;
             const req: RequestMDMUpd = {
                 action: 'MDMUpd',
