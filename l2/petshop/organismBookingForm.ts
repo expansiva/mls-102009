@@ -9,7 +9,8 @@ import { petshopExec } from "./_102009_layer1Exec";
 import { SchedulingData, SchedulingStatus } from './_102009_layer4Scheduling'
 import { RequestSchedulingAdd } from './_102009_layer4SchedulingBase'
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { MdmData, RegistrationDataService, RegistrationDataPF, RegistrationDataPet, RequestMDMGetListByIds, RequestMDMGetListByType, MdmType } from "./_102019_layer4Mdm";
+import { RequestMDMGetListByIds, RequestMDMGetListByType  } from "./_102019_layer4ResReq";
+import { MdmData, RegistrationDataService, RegistrationDataPF, RegistrationDataPet,  MdmType } from "./_102019_layer4Mdm";
 
 
 @customElement('petshop--organism-booking-form-102009')

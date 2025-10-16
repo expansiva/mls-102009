@@ -5,7 +5,8 @@ import { customElement, state } from 'lit/decorators.js';
 import { exec } from "./_102019_layer1Exec";
 import { setState, getState, subscribe, unsubscribe } from '_100554_/l2/collabState';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { MdmData, RegistrationDataService, RequestMDMGetListByType, MdmType } from "./_102019_layer4Mdm";
+import { RequestMDMGetListByType  } from "./_102019_layer4ResReq";
+import { MdmData, RegistrationDataService, MdmType } from "./_102019_layer4Mdm";
 
 @customElement('petshop--organism-featured-services-102009')
 export class organismFeaturedServices extends IcaOrganismBase {

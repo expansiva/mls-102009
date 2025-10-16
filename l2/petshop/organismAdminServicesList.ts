@@ -3,7 +3,8 @@ import { html } from 'lit';
 import { customElement, state, query } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState } from '_100554_/l2/collabState';
-import { MdmData, RegistrationDataService, RequestMDMGetListByType, MdmType } from "./_102019_layer4Mdm";
+import { RequestMDMGetListByType  } from "./_102019_layer4ResReq";
+import { MdmData, RegistrationDataService, MdmType } from "./_102019_layer4Mdm";
 import { exec } from "./_102019_layer1Exec";
 
 @customElement('petshop--organism-admin-services-list-102009')

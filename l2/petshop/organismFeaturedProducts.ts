@@ -3,9 +3,9 @@
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { exec } from "./_102019_layer1Exec";
-import { setState, getState, subscribe, unsubscribe } from '_100554_/l2/collabState';
+import { RequestMDMGetListByType  } from "./_102019_layer4ResReq";
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { MdmData, RegistrationDataProduct, RequestMDMGetListByType, MdmType } from "./_102019_layer4Mdm";
+import { MdmData, RegistrationDataProduct, MdmType } from "./_102019_layer4Mdm";
 
 @customElement('petshop--organism-featured-products-102009')
 export class organismFeaturedProducts extends IcaOrganismBase {
