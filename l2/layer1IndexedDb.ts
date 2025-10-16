@@ -1,9 +1,9 @@
 /// <mls shortName="layer1IndexedDb" project="102009" enhancement="_blank" />
 
 export const DB_NAME = "PetshopDB";
-export const VERSION = 2;
+export const VERSION = 3;
 export const STORE_NAME_SCHEDULING = "scheduling_data";
-export const STORE_NAME_SERVICEORDER = "scheduling_data";
+export const STORE_NAME_SERVICEORDER = "service_order_data";
 
 export async function openDB(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
