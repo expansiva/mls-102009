@@ -37,7 +37,7 @@ export class organismBookingForm extends IcaOrganismBase {
 
   render() {
     return html`
-      <h2>Agende Banho &amp; Tosa</h2>
+      <h2>Agende um serviço</h2>
       <div autocomplete="off">
         <div class="form-row">
           <div style="flex:1;">
@@ -84,8 +84,8 @@ export class organismBookingForm extends IcaOrganismBase {
         <div class="form-actions">
           <button type="submit" @click=${this.handleClickSave}>Agendar ${this.loading ? html`<span class="loading"></span>` : html``}</button>
         </div>
-        <div class="form-group" style="width:100%; display: flex; align-items: center; justify-content: center;">
-          <a href="/pagePerfilAppointments" id="meusagendamentos">meus agendamento</a>
+        <div class="form-group" style="width:100%; display: flex; align-items: center; justify-content: center; padding:1rem">
+          <a href="/pagePerfilAppointments" id="meusagendamentos" style="font-size:17px;text-decoration: underline;">Meus Agendamentos</a>
         </div>
         ${this.error ? html`<div style="text-align:center">${this.error}</div>` : ''}
       </div>
@@ -111,7 +111,7 @@ export class organismBookingForm extends IcaOrganismBase {
   private async getMyPets() {
 
     if (!this.mdmData) {
-      this.error = 'Falata parametros para pegar os pets';
+      this.error = 'Falta parametros para pegar os pets';
       return;
     }
 
