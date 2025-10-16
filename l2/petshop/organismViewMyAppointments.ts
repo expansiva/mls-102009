@@ -17,6 +17,8 @@ export class organismViewMyAppointments extends IcaOrganismBase {
     @state() error = '';
     @state() indexDetail = -1;
 
+    @state() filterData: string = ''; 
+
     //-------------------------------
 
     firstUpdated() {
@@ -33,9 +35,14 @@ export class organismViewMyAppointments extends IcaOrganismBase {
         return html`
         <div class="form-container">
             <h2>Meus Agendamentos</h2>
-            <div class="form-group">
-                <label for="date-filter">Filtrar por Data</label>
-                <input type="date" id="date-filter" name="date-filter">
+            <div style="display:flex">
+                <div class="form-group" style="width:70%">
+                    <label for="date-filter">Filtrar por Data</label>
+                    <input type="date" id="date-filter" name="date-filter" @change=${(e:any)=> this.filterData = e.target.value}>
+                </div>
+                <div class="form-group" style="width:30%; display: flex; align-items: end; justify-content: end;">
+                    <a href="/pageAppointments">novo agendamento</a>
+                </div>
             </div>
             <div class="section-card">
                 <table>
@@ -73,10 +80,15 @@ export class organismViewMyAppointments extends IcaOrganismBase {
             'CONFIRMED': 'Aprovado',
             'CANCELED': 'Cancelado',
             'COMPLETED': 'Completo',
+        } 
+
+        let display = '';
+        if (this.filterData !== '') {
+            display = this.filterData === data.vl ? '' : 'none';
         }
 
         return html`
-        <tr>
+        <tr style="display:${display}">
             <td>${sch.data.jsonBin.pet.name}</td>
             <td>${data.date}</td>
             <td>${data.time}</td>
@@ -188,7 +200,7 @@ export class organismViewMyAppointments extends IcaOrganismBase {
         this.scenary = scenary;
     }
 
-    private getDataHorario(data: string): { date: string, time: string } {
+    private getDataHorario(data: string): { date: string, time: string, vl:string } {
 
         const dateObj = new Date(data);
         const year = dateObj.getUTCFullYear();
@@ -196,10 +208,11 @@ export class organismViewMyAppointments extends IcaOrganismBase {
         const day = String(dateObj.getUTCDate()).padStart(2, "0");
         const hours = String(dateObj.getUTCHours()).padStart(2, "0");
         const minutes = String(dateObj.getUTCMinutes()).padStart(2, "0");
-        const date = `${year}-${month}-${day}`;
+        const date = `${day}/${month}/${year}`;
         const time = `${hours}:${minutes}`;
+        const vl = `${year}-${month}-${day}`;
 
-        return { date, time };
+        return { date, time, vl };
     }
 
     private async handleClickCancel() {
