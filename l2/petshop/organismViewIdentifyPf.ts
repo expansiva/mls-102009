@@ -6,7 +6,7 @@ import { setState, getState } from '_100554_/l2/collabState';
 import { exec } from "./_102019_layer1Exec";
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { RequestMDMUpd  } from "./_102019_layer4ResReq";
-import { MdmData, RegistrationDataPF, Address, MdmAddresType } from "./_102019_layer4Mdm";
+import { MdmData, RegistrationDataPF, Address, MdmAddresType, AttachmentType } from "./_102019_layer4Mdm";
 
 
 @customElement('petshop--organism-view-identify-pf-102009')
@@ -16,6 +16,7 @@ export class organismViewIdentifyPf extends IcaOrganismBase {
   @state() loading: boolean = false;
   @state() error?: string = '';
 
+  @propertyDataSource() img?: string ;
   @propertyDataSource() name?: string;
   @propertyDataSource() cpf?: string;
   @propertyDataSource() email?: string;
@@ -34,7 +35,7 @@ export class organismViewIdentifyPf extends IcaOrganismBase {
     return html`
     <div class="profile-container" >
       <div class="profile-photo">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDU4NjB8MHwxfHNlYXJjaHwxfHx1c2VyJTIwcHJvZmlsZSUyMHBob3RvfGVufDB8fHx8MTc1NDQxMTUzMXww&ixlib=rb-4.1.0&q=80&w=200" alt="Foto de Perfil">
+        <img src="${this.img}" alt="Foto de Perfil">
       </div>
       <div class="profile-info" >
         <div class="form-group">
@@ -108,6 +109,17 @@ export class organismViewIdentifyPf extends IcaOrganismBase {
       this.estado = this.mdm.data.addresses[0].stateProvince;
       this.numero = this.mdm.data.addresses[0].number;
     }
+
+    if (this.mdm.data.attachments && this.mdm.data.attachments.length > 0) {
+      this.mdm.data.attachments.forEach((i) => {
+        if (i.type === AttachmentType.MEDIA_PROFILE_PIC) {
+          this.img = i.url;
+        }
+
+      });
+    }
+
+    if (this.img === '') this.img = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDU4NjB8MHwxfHNlYXJjaHwxfHx1c2VyJTIwcHJvZmlsZSUyMHBob3RvfGVufDB8fHx8MTc1NDQxMTUzMXww&ixlib=rb-4.1.0&q=80&w=200';
 
   }
 
