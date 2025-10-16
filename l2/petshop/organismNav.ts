@@ -1,11 +1,23 @@
 /// <mls shortName="organismNav" project="102009" folder="petshop" enhancement="_100554_enhancementLit" groupName="petshop" />
 
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
+import { getState } from '_100554_/l2/collabState';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
+import { MdmData, RegistrationDataPF } from "./_102019_layer4Mdm";
 
 @customElement('petshop--organism-nav-102009')
 export class organismNav extends IcaOrganismBase {
+
+  @state() mdmData: MdmData | undefined;
+  @state() name: string = '';
+
+  //--------------------------------------
+
+  firstUpdated() {
+    this.init();
+  }
+
   render() {
     return html`<div class="nav-container" id="petshop--nav-102009-1">
           <a href="/" class="logo" aria-label="Página inicial" id="petshop--nav-102009-2">
@@ -33,7 +45,7 @@ export class organismNav extends IcaOrganismBase {
             
           </nav>
           <div class="social">
-            <span>Olá, Guilherme</span>
+            <span>Olá, ${this.name}</span>
             <a href="/pagePerfil" class="social-perfil">
                 <img src="https://images.unsplash.com/photo-1625670413987-0ae649494c61?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2NDU4NjB8MHwxfHNlYXJjaHwxfHxsb2dvdXQlMjBpY29ufGVufDB8fHx8MTc1NDQxMTUzMHww&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=200" alt="Sair" id="petshop--admin-nav-102009-16">
               </a>
@@ -41,4 +53,15 @@ export class organismNav extends IcaOrganismBase {
         </div>
       `
   }
+
+  //----------------
+
+  private init() {
+    this.mdmData = getState('ui.petshop.login');
+
+    if (this.mdmData) {
+      this.name = (this.mdmData.data.registrationData as RegistrationDataPF).name;
+    }
+  }
+
 }

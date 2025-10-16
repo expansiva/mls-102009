@@ -1,7 +1,7 @@
 /// <mls shortName="organismBookingForm" project="102009" folder="petshop" enhancement="_100554_enhancementLit" groupName="petshop" />
 
 import { html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, state, query } from 'lit/decorators.js';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { setState, getState } from '_100554_/l2/collabState';
 import { exec } from "./_102019_layer1Exec";
@@ -14,6 +14,8 @@ import { MdmData, RegistrationDataService, RegistrationDataPF, RegistrationDataP
 
 @customElement('petshop--organism-booking-form-102009')
 export class organismBookingForm extends IcaOrganismBase {
+
+  @query('#meusagendamentos') meusagendamentos: HTMLElement | undefined;
 
   @state() mdmData: MdmData | undefined;
   @state() myPets: MdmData[] = [];
@@ -33,7 +35,8 @@ export class organismBookingForm extends IcaOrganismBase {
   }
 
   render() {
-    return html`<h2>Agende Banho &amp; Tosa</h2>
+    return html`
+      <h2>Agende Banho &amp; Tosa</h2>
       <div autocomplete="off">
         <div class="form-row">
           <div style="flex:1;">
@@ -79,6 +82,9 @@ export class organismBookingForm extends IcaOrganismBase {
         
         <div class="form-actions">
           <button type="submit" @click=${this.handleClickSave}>Agendar ${this.loading ? html`<span class="loading"></span>` : html``}</button>
+        </div>
+        <div class="form-group" style="width:100%; display: flex; align-items: center; justify-content: center;">
+          <a href="/pagePerfilAppointments" id="meusagendamentos">meus agendamento</a>
         </div>
         ${this.error ? html`<div style="text-align:center">${this.error}</div>` : ''}
       </div>
@@ -255,6 +261,8 @@ export class organismBookingForm extends IcaOrganismBase {
     this.horario = '';
     this.data = '';
     this.error = 'Agendamento realizado com sucesso';
+
+    if (this.meusagendamentos) this.meusagendamentos.click();
 
   }
 
