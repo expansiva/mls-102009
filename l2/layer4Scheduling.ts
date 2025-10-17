@@ -19,7 +19,7 @@ export interface SchedulingRecord {
   startDateTime: string; // ISO 8601 datetime (ex: "2025-10-10T16:30:00Z")
   endDateTime?: string;   // ISO 8601 datetime
   status: SchedulingStatus,
-  serviceOrderId: string | null; 
+  serviceOrderId: number | null; 
   jsonBin: {
     tutor: {
       name: string;
