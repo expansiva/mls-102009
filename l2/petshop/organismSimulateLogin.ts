@@ -13,6 +13,7 @@ export class organismSimulateLogin extends IcaOrganismBase {
 
     @state() users: MdmData[] = [];
     @state() enterprise: MdmData[] = [];
+    @state() exists: boolean = false;
 
     firstUpdated() {
         this.init();
@@ -34,11 +35,7 @@ export class organismSimulateLogin extends IcaOrganismBase {
                 ${this.enterprise.map((ent, index) => html`<option value="${index}" id="petshop--organism-simulate-login-102009-enterprise-${index}">${(ent.data.registrationData as any).corporateName}</option>`)}
                 </select>
             </div>
-            <div class="form-group-check">
-                <input type="checkbox" id="db-check">
-                <label for="db-check">Gerar DB Mdm</label>
-
-            </div>
+    
             <div class="form-group radio">
                 <label>Tipo de Perfil</label>
                 <div>
@@ -48,12 +45,23 @@ export class organismSimulateLogin extends IcaOrganismBase {
                     <label for="client-radio">Cliente</label>
                 </div>
             </div>
-            <button id="petshop--organism-simulate-login-102009-22" @click="${this.handleSimulateClick}">Simular</button>
+            <div class="form-actions">
+                <button id="petshop--organism-simulate-login-102009-22" @click="${this.handleGenerateDatabase}">Gerar banco MDM</button>
+                ${this.exists ? html`<button class="btn btn-save"  @click="${this.handleSimulateClick}">Simular</button>` : ''}
+            </div>
             <a id="hidden-link" style="display: none;"></a>
         </div>
 `
     }
     private async init() {
+
+        const databases = await indexedDB.databases();
+        this.exists = databases.some(db => db.name === 'MdmDatabase');
+
+        if (!this.exists) {
+            return;
+        }
+
         const req: RequestMDMGetListByType = {
             action: 'MDMGetListByType',
             inDeveloped: true,
@@ -67,21 +75,20 @@ export class organismSimulateLogin extends IcaOrganismBase {
         if (responseEnterprise.ok) this.enterprise = responseEnterprise.data;
     }
 
+    private async handleGenerateDatabase() {
+        await this.importIndexedDB('MdmDatabase')
+        this.init();
+    }
+
     private async handleSimulateClick() {
         const userSelect = this.querySelector('#user-select') as HTMLSelectElement;
-        const dbGenerate = this.querySelector('#db-check') as HTMLInputElement;
         const companySelect = this.querySelector('#company-select') as HTMLSelectElement;
         const profileRadios = this.querySelectorAll('input[name="profile"]:checked') as NodeListOf<HTMLInputElement>;
         const selectedProfile = profileRadios.length > 0 ? profileRadios[0].value : null;
         const hiddenLink = this.querySelector('#hidden-link') as HTMLAnchorElement;
 
-        if (dbGenerate.checked) {
-            await this.importIndexedDB('MdmDatabase')
-        }
-
         if (this.users[+userSelect.value]) setState('ui.petshop.login', this.users[+userSelect.value]);
         if (this.enterprise[+companySelect.value]) setState('ui.petshop.enterprise', this.enterprise[+companySelect.value]);
-
 
         if (selectedProfile === 'client') {
             hiddenLink.href = '/pageHome';
@@ -144,6 +151,11 @@ export class organismSimulateLogin extends IcaOrganismBase {
 
             request.onsuccess = (event) => {
                 db = (event.target as IDBOpenDBRequest).result;
+
+                if (!db || !db.objectStoreNames?.length) {
+                    resolve();
+                    return;
+                }
 
                 // Limpa todas as object stores
                 const tx = db.transaction(db.objectStoreNames, 'readwrite');
