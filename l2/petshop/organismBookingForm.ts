@@ -85,7 +85,9 @@ export class organismBookingForm extends IcaOrganismBase {
           <button type="submit" @click=${this.handleClickSave}>Agendar ${this.loading ? html`<span class="loading"></span>` : html``}</button>
         </div>
         <div class="form-group" style="width:100%; display: flex; align-items: center; justify-content: center; padding:1rem">
-          <a href="/pagePerfilAppointments" id="meusagendamentos" style="font-size:17px;text-decoration: underline;">Meus Agendamentos</a>
+          <a href="/pagePerfilAppointments" id="meusagendamentos" style="font-size:17px;text-decoration: underline; dipslay:flex">Meus Agendamentos 
+            <svg xmlns="http://www.w3.org/2000/svg" style="width:15px; fill:var(--active-color)" viewBox="0 0 448 512"><!--!Font Awesome Free v6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M429.6 92.1c4.9-11.9 2.1-25.6-7-34.7s-22.8-11.9-34.7-7l-352 144c-14.2 5.8-22.2 20.8-19.3 35.8s16.1 25.8 31.4 25.8l176 0 0 176c0 15.3 10.8 28.4 25.8 31.4s30-5.1 35.8-19.3l144-352z"/></svg>
+          </a>
         </div>
         ${this.error ? html`<div style="text-align:center">${this.error}</div>` : ''}
       </div>
