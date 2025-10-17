@@ -80,7 +80,7 @@ export class organismNav extends IcaOrganismBase {
     }
 
     if (this.mdmCompany) {
-      this.nameCompany = (this.mdmCompany.data.registrationData as RegistrationDataPJ).corporateName;
+      this.nameCompany = (this.mdmCompany.data.registrationData as RegistrationDataPJ).fantasyName;
 
       if (this.mdmCompany.data.attachments && this.mdmCompany.data.attachments.length > 0) {
         this.mdmCompany.data.attachments.forEach((i) => {
