@@ -327,7 +327,7 @@ export class organismViewMyPets extends IcaOrganismBase {
       action: 'MDMGetById',
       inDeveloped: true,
       version: '1',
-      params: { id: this.mdmData.id || '' }
+      params: { id: this.mdmData.id || 0 }
     };
 
     const response = await exec(req);
@@ -352,7 +352,7 @@ export class organismViewMyPets extends IcaOrganismBase {
       return;
     }
 
-    const ids: string[] = [];
+    const ids: number[] = [];
 
     if (this.mdmData.data.relationships) {
       this.mdmData.data.relationships.forEach((r) => {

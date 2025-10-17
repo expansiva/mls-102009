@@ -180,7 +180,7 @@ export class organismViewMyAppointments extends IcaOrganismBase {
             action: 'SchedulingGetByClient',
             inDeveloped: true,
             version: '1',
-            params: { clientId: this.mdmData.id || '' }
+            params: { clientId: this.mdmData.id || 0 }
         };
 
         const response = await petshopExec(req);
