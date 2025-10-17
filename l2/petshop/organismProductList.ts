@@ -6,7 +6,7 @@ import { exec } from "./_102019_layer1Exec";
 import { setState, getState, subscribe, unsubscribe } from '_100554_/l2/collabState';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { RequestMDMGetListByType  } from "./_102019_layer4ResReq";
-import { MdmData, RegistrationDataProduct, MdmType } from "./_102019_layer4Mdm";
+import { MdmData, RegistrationDataProduct, MdmType, AttachmentType, ProductRecord } from "./_102019_layer4Mdm";
 
 
 @customElement('petshop--organism-product-list-102009')
@@ -55,9 +55,18 @@ export class organismProductList extends IcaOrganismBase {
   renderItem(prod: MdmData, index: number) {
 
     const reg = (prod.data.registrationData as RegistrationDataProduct);
+
+    let img = 'https://images.unsplash.com/photo-1583860332956-0cd934c28cec?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2NDU4NjB8MHwxfHNlYXJjaHwxfHxwZXQlMjBiZWQlMjBjb21mb3J0YWJsZSUyMGJsdWUlMjBncmVlbnxlbnwwfHx8fDE3NTQ0MTEzMTZ8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080';
+
+    if (prod.data.attachments && prod.data.attachments.length > 0) {
+      prod.data.attachments.forEach((i) => {
+        if (i.type === AttachmentType.MEDIA_PROFILE_PIC) img = i.url;
+      });
+    }
+
     return html`
     <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1544198841-10f34f31f8dd?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2NDU4NjB8MHwxfHNlYXJjaHwxfHxhdXRvbWF0aWMlMjBwZXQlMjB3YXRlciUyMGRpc3BlbnNlcnxlbnwwfHx8fDE3NTQ0MTE0MTZ8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" alt="Bebedouro Automático">
+      <img src="${img}" alt="Bebedouro Automático">
       <div class="product-name">${reg.name}</div>
       <div class="product-type">${reg.descriptionShort}</div>
       <div class="product-price">R$ 50,00</div>
