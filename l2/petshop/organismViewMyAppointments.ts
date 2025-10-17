@@ -41,7 +41,8 @@ export class organismViewMyAppointments extends IcaOrganismBase {
                     <input type="date" id="date-filter" name="date-filter" @change=${(e:any)=> this.filterData = e.target.value}>
                 </div>
                 <div class="form-group" style="width:30%; display: flex; align-items: end; justify-content: end;">
-                    <a href="/pageAppointments">novo agendamento</a>
+                    <a href="/pageAppointments" class="btn btn-save">Novo agendamento</a>
+                    
                 </div>
             </div>
             <div class="section-card">
