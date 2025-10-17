@@ -1,7 +1,7 @@
 /// <mls shortName="organismAdminOrderEdit" project="102009" folder="petshop" enhancement="_100554_enhancementLit" groupName="petshop" />
 
 import { html } from 'lit';
-import { customElement, state, query } from 'lit/decorators.js';
+import { customElement, state, property } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState, getState } from '_100554_/l2/collabState';
 import { propertyDataSource } from './_100554_collabDecorators';
@@ -83,7 +83,7 @@ export class organismAdminOrderEdit extends IcaOrganismBase {
                 >
             </div>
             <div class="form-actions">
-                <button class="btn btn-back">Voltar</button>
+                <a id="link-back" href="/pageAdminEditScheduling" class="btn btn-back" ?disabled=${this.loading}>Voltar</a>
                 <button class="btn btn-save" @click=${this.handleSave} ?disabled=${this.loading}>
                     Salvar
                     ${this.loading ? html`<span class="loading"></span>` : html``}
