@@ -31,7 +31,7 @@ export class organismFeaturedServices extends IcaOrganismBase {
 
   renderItem(serv: MdmData, index: number) {
 
-    if (index > 4) return html``;
+    if (index > 3) return html``;
     const reg = (serv.data.registrationData as RegistrationDataService);
     return html`
     <div class="service-card">
@@ -40,6 +40,9 @@ export class organismFeaturedServices extends IcaOrganismBase {
       </div>
       <div class="service-title">${reg.name}</div>
       <div class="service-desc">${reg.descriptionShort}</div>
+      <div class="product-action">
+          <a href="/pageAppointments">Agendar</a>
+        </div>
     </div>
 
     `;

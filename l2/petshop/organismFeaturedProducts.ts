@@ -30,7 +30,7 @@ export class organismFeaturedProducts extends IcaOrganismBase {
   }
 
   renderItem(prod: MdmData, index: number) {
-    if (index > 4) return html``;
+    if (index > 3) return html``;
     const reg = (prod.data.registrationData as RegistrationDataProduct);
     return html`
       <div class="product-card">
