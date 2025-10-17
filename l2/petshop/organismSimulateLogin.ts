@@ -594,8 +594,8 @@ let database = {
             "data": {
                 "registrationData": {
                     "cnpj": "31649763000191",
-                    "corporateName": "PetLove LTDA",
-                    "fantasyName": "PetLove Comércio de Produtos para Animais LTDA"
+                    "corporateName": "PetLove Comércio de Produtos para Animais LTDA",
+                    "fantasyName": "PetLove LTDA"
                 },
                 "type": 11,
                 "status": "A",
