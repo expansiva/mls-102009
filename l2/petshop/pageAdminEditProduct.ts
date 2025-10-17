@@ -15,7 +15,7 @@ export class PageAdminEditProduct102009 extends CollabPageElement {
         const productDataMore = (selected?.data as ProductRecord)?.productData;
 
         initState('ui.petshop.admin.organismAdminProductEdit', {
-            name: productData?.name,
+            nameProduct: productData?.name,
             descriptionShort: productData?.descriptionShort,
             sku: productDataMore?.sku,
             barcode: productDataMore?.barcode,

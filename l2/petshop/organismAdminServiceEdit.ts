@@ -138,6 +138,8 @@ export class organismAdminServiceEdit extends IcaOrganismBase {
             </button>
     </div>
     ${this.labelError ? html`<span class="error-message">${this.labelError}</span>` : ''}
+    ${this.labelOk ? html`<span class="ok-message">${this.labelOk}</span>` : ''}
+
 `
     }
     private handleInputChange(event: Event) {
@@ -262,9 +264,7 @@ export class organismAdminServiceEdit extends IcaOrganismBase {
             }
             this.loading = false;
             this.labelOk = 'Cadastro atualizado com sucesso';
-            if (this.link) {
-                this.link.click();
-            }
+
         }
     }
 }
