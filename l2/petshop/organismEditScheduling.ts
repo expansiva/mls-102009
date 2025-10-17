@@ -75,8 +75,8 @@ export class organismEditScheduling extends IcaOrganismBase {
         <div class="form-actions">
             ${this.schedulingData?.data.status === SchedulingStatus.PENDING ?
                 html`
-                    <button class="btn btn-cancel" @click=${this.handleClickCancel} ?disabled=${this.loadingCancel || this.loadingConfirm} ?hidden=${!isPending}>
-                        Cancelar
+                    <button class="btn btn-delete" @click=${this.handleClickCancel} ?disabled=${this.loadingCancel || this.loadingConfirm} ?hidden=${!isPending}>
+                        Recusar Serviço
                         ${this.loadingCancel ? html`<span class="loading"></span>` : html``}
                 </button>`: ''
 
@@ -84,7 +84,7 @@ export class organismEditScheduling extends IcaOrganismBase {
             }
             ${this.schedulingData?.data.status === SchedulingStatus.PENDING ?
                 html`<button class="btn btn-save" @click=${this.handleClickGenerateOS} ?disabled=${this.loadingConfirm || this.loadingCancel} ?hidden=${!isPending}>
-                    Gerar OS
+                    Aprovar Serviço
                     ${this.loadingConfirm ? html`<span class="loading"></span>` : html``}
                 </button>` : ''}
         </div>
@@ -99,6 +99,7 @@ export class organismEditScheduling extends IcaOrganismBase {
 
     private renderOrderService() {
         const status: Record<string, string> = {
+            WAITING: 'Aguardando serviço',
             IN_PROGRESS: 'Em andamento',
             BILLED: 'Faturado',
             CANCELED: 'Cancelado',
@@ -127,7 +128,7 @@ export class organismEditScheduling extends IcaOrganismBase {
                         </li>
 
                         <li>Status: <span>${statusText}</span></li>
-                        <li><a href="/pageAdminEditOrder" @click=${() => { setState('ui.petshop.admin.order.selected', this.orderData) }}>Ver detalhes</a></li>
+                        <li><a href="/pageAdminOrderEdit" @click=${() => { setState('ui.petshop.admin.order.selected', this.orderData) }}>Ver detalhes</a></li>
 
                     </ul>
                 </div>
@@ -267,7 +268,7 @@ export class organismEditScheduling extends IcaOrganismBase {
                 petMdmId: this.schedulingData.data.petMdmId,
                 serviceMdmId: this.service?.id || 0,
 
-                status: ServiceOrderStatus.IN_PROGRESS,
+                status: ServiceOrderStatus.WAITING,
                 totalAmount: (this.service?.data as ServiceRecord).serviceData?.priceRegular || 0,
 
                 executionDateTime: new Date(Date.now()).toISOString(),
@@ -297,8 +298,6 @@ export class organismEditScheduling extends IcaOrganismBase {
         };
 
         const response = await petshopExec(req);
-        debugger;
-
         if (!response.ok) {
             this.labelError = response.error as string;
             return;

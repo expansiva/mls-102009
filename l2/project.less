@@ -44,7 +44,8 @@ project-102009 {
         background-color: @bg-primary-color-lighter;
         color: @text-primary-color;
         line-height: @line-height-medium;
-        &[readonly]{
+
+        &[readonly] {
             background-color: @grey-color-lighter;
         }
     }
@@ -220,6 +221,13 @@ project-102009 {
         display: block;
     }
 
+    .ok-message {
+        color: @success-color;
+        font-size: @font-size-12;
+        margin-bottom: @space-16;
+        display: block;
+    }
+
     @media (max-width: @breakpoint-medium) {
         .form-container {
             padding: @space-16;
@@ -266,5 +274,4 @@ project-102009 {
         }
     }
 }
-
 

@@ -8,7 +8,7 @@ import { propertyDataSource } from './_100554_collabDecorators';
 import { petshopExec } from "./_102009_layer1Exec";
 import { exec } from "./_102019_layer1Exec";
 
-import { RequestServiceOrderAdd, RequestServiceOrderGetById } from './_102009_layer4ServiceOrderBase'
+import { RequestServiceOrderUpd } from './_102009_layer4ServiceOrderBase'
 import { ServiceOrderData, ServiceOrderStatus } from './_102009_layer4ServiceOrder'
 import { MdmData, RegistrationDataService, RegistrationDataPF, RegistrationDataPJ, MdmType, ServiceData, ServiceRecord } from "./_102019_layer4Mdm";
 import { RequestMDMGetListByIds, RequestMDMGetById } from "./_102019_layer4ResReq";
@@ -41,6 +41,7 @@ export class organismAdminOrderEdit extends IcaOrganismBase {
             <div class="form-group">
                 <label for="status">Status</label>
                 <select id="status" @change=${this.onChangeStatus}>
+                    <option value="WAITING">Aguardando serviço</option>
                     <option value="IN_PROGRESS">Em Andamento</option>
                     <option value="READY_FOR_COLLECTION">Pronto para Retirada</option>
                     <option value="BILLED">Faturado</option>
@@ -83,8 +84,14 @@ export class organismAdminOrderEdit extends IcaOrganismBase {
             </div>
             <div class="form-actions">
                 <button class="btn btn-back">Voltar</button>
-                <button class="btn btn-save">Salvar</button>
+                <button class="btn btn-save" @click=${this.handleSave} ?disabled=${this.loading}>
+                    Salvar
+                    ${this.loading ? html`<span class="loading"></span>` : html``}
+                </button>
             </div>
+            ${this.labelError ? html`<span class="error-message">${this.labelError}</span>` : ''}
+            ${this.labelOk ? html`<span class="ok-message">${this.labelOk}</span>` : ''}
+
         </div>`
     }
 
@@ -111,7 +118,7 @@ export class organismAdminOrderEdit extends IcaOrganismBase {
     }
 
     private async getService(id: number) {
-        
+
         const req: RequestMDMGetById = {
             action: 'MDMGetById',
             inDeveloped: true,
@@ -156,6 +163,33 @@ export class organismAdminOrderEdit extends IcaOrganismBase {
             return;
         }
         this.employees = response.data.filter((item: any) => item != null);
+
+    }
+
+    private async handleSave() {
+
+        if (!this.orderData) {
+            this.labelError = 'Não encontrado informações da ordem de serviço';
+            return;
+        }
+
+        this.labelError = '';
+        this.loading = true;
+        const req: RequestServiceOrderUpd = {
+            action: 'ServiceOrderUpd',
+            inDeveloped: true,
+            version: '1',
+            params: this.orderData
+        };
+        const response = await petshopExec(req);
+        this.loading = false;
+
+        if (!response.ok) {
+            this.labelError = response.error as string;
+            return;
+        }
+
+        this.labelOk = 'Ordem de serviço atualizada com sucesso';
 
     }
 }
