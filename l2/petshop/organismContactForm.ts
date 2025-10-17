@@ -2,7 +2,7 @@
 
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { IcaOrganismBase } from './_100554_icaOrganismBase';
+import { IcaOrganismBase } from './_100554_icaOrganismBase'; 
 
 @customElement('petshop--organism-contact-form-102009')
 export class organismContactForm extends IcaOrganismBase {
