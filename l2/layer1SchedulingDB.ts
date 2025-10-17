@@ -44,10 +44,26 @@ class Scheduling implements SchedulingBase {
     private async saveSchedulingData(data: SchedulingData): Promise<SchedulingData | null> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SCHEDULING, "readwrite");
+        const store = tx.objectStore(STORE_NAME_SCHEDULING);
+
         data.version = Date.now().toString();
-        tx.objectStore(STORE_NAME_SCHEDULING).put(data);
 
         return new Promise((resolve, reject) => {
+            let request: IDBRequest<IDBValidKey>;
+
+            if (!data.id) {
+                request = store.add(data);
+            } else {
+                request = store.put(data);
+            }
+
+            request.onsuccess = (event) => {
+                const newId = (event.target as IDBRequest<IDBValidKey>).result;
+                if (!data.id) {
+                    data.id = newId as any;
+                }
+            };
+
             tx.oncomplete = () => resolve(data);
             tx.onerror = () => reject(tx.error);
         });

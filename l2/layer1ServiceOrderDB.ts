@@ -34,10 +34,26 @@ class ServiceOrder implements ServiceOrderBase {
     private async saveServiceOrderData(data: ServiceOrderData): Promise<ServiceOrderData | null> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SERVICEORDER, "readwrite");
+        const store = tx.objectStore(STORE_NAME_SERVICEORDER);
+
         data.version = Date.now().toString();
-        tx.objectStore(STORE_NAME_SERVICEORDER).put(data);
 
         return new Promise((resolve, reject) => {
+            let request: IDBRequest<IDBValidKey>;
+
+            if (!data.id) {
+                request = store.add(data);
+            } else {
+                request = store.put(data);
+            }
+
+            request.onsuccess = (event) => {
+                const newId = (event.target as IDBRequest<IDBValidKey>).result;
+                if (!data.id) {
+                    data.id = newId as any;
+                }
+            };
+
             tx.oncomplete = () => resolve(data);
             tx.onerror = () => reject(tx.error);
         });
