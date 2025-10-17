@@ -4,13 +4,14 @@ import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { getState } from '_100554_/l2/collabState';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { MdmData, RegistrationDataPF } from "./_102019_layer4Mdm";
+import { MdmData, RegistrationDataPF, AttachmentType } from "./_102019_layer4Mdm";
 
 @customElement('petshop--organism-nav-102009')
 export class organismNav extends IcaOrganismBase {
 
   @state() mdmData: MdmData | undefined;
   @state() name: string = '';
+  @state() img?: string ; 
 
   //--------------------------------------
 
@@ -41,13 +42,13 @@ export class organismNav extends IcaOrganismBase {
               <li id="petshop--nav-102009-13">
                 <a href="/pageLogin" id="petshop--nav-102009-30">Sair</a>
               </li>
-            </ul>
+            </ul> 
             
           </nav>
           <div class="social">
             <span>Olá, ${this.name}</span>
             <a href="/pagePerfil" class="social-perfil">
-                <img src="https://images.unsplash.com/photo-1625670413987-0ae649494c61?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2NDU4NjB8MHwxfHNlYXJjaHwxfHxsb2dvdXQlMjBpY29ufGVufDB8fHx8MTc1NDQxMTUzMHww&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=200" alt="Sair" id="petshop--admin-nav-102009-16">
+                <img src="${this.img}" alt="Sair" id="petshop--admin-nav-102009-16">
               </a>
             </div>
         </div>
@@ -61,6 +62,17 @@ export class organismNav extends IcaOrganismBase {
 
     if (this.mdmData) {
       this.name = (this.mdmData.data.registrationData as RegistrationDataPF).name;
+
+      if (this.mdmData.data.attachments && this.mdmData.data.attachments.length > 0) {
+        this.mdmData.data.attachments.forEach((i) => {
+          if (i.type === AttachmentType.MEDIA_PROFILE_PIC) {
+            this.img = i.url;
+          }
+
+        });
+      }
+
+      if (this.img === '') this.img = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDU4NjB8MHwxfHNlYXJjaHwxfHx1c2VyJTIwcHJvZmlsZSUyMHBob3RvfGVufDB8fHx8MTc1NDQxMTUzMXww&ixlib=rb-4.1.0&q=80&w=200';
     }
   }
 
