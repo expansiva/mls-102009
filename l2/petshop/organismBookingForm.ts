@@ -115,7 +115,7 @@ export class organismBookingForm extends IcaOrganismBase {
       return;
     }
 
-    const ids: string[] = [];
+    const ids: number[] = [];
 
     if (this.mdmData.data.relationships) {
       this.mdmData.data.relationships.forEach((r) => {
@@ -218,9 +218,9 @@ export class organismBookingForm extends IcaOrganismBase {
 
     const params: SchedulingData = {
       data: {
-        clientMdmId: this.mdmData.id || '',
-        petMdmId: this.myPets[this.petIndex].id || '',
-        serviceMdmId: this.services[this.serviceIndex].id || '',
+        clientMdmId: this.mdmData.id || 0,
+        petMdmId: this.myPets[this.petIndex].id || 0,
+        serviceMdmId: this.services[this.serviceIndex].id || 0,
         startDateTime: utcString,
         status: SchedulingStatus.PENDING,
         serviceOrderId: null,
