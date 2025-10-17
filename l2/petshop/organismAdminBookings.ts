@@ -14,6 +14,8 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 	@property() mode: 'only-list' | 'with-filter' = 'with-filter';
 	@property() filterMode: 'today' | 'week' | '' = '';
 
+	@property() private titleHeader = '';
+
 	@property() private search = '';
 	@property() private statusFilter = '';
 	@property() private filterService = '';
@@ -98,13 +100,17 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 
 		if (this.filterMode) {
 			const now = new Date();
+
 			if (this.filterMode === 'today') {
 				startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
 				endDate = startDate;
 			} else if (this.filterMode === 'week') {
-				startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
-				endDate = new Date(startDate);
-				endDate.setUTCDate(endDate.getUTCDate() + 6);
+				// Calcula o domingo da semana atual
+				const dayOfWeek = now.getUTCDay(); // 0 = domingo, 6 = sábado
+				startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - dayOfWeek));
+
+				// Calcula o sábado da semana atual
+				endDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + (6 - dayOfWeek)));
 			}
 		}
 
@@ -155,7 +161,7 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 	render() {
 		return html`
 <section class="admin-bookings">
-<h2 class="admin-bookings__title">Gestão de Agendamentos</h2>
+<h2 class="admin-bookings__title">${this.titleHeader || 'Gestão de Agendamentos'}</h2>
 	${this.mode === 'with-filter' ? html`
 		<div class="admin-bookings__filters">
 			<input
