@@ -69,6 +69,27 @@ petshop--organism-featured-services-102009 {
       line-height: @line-height-medium;
     }
   }
+  .product-action {
+      margin-top: auto;
+
+      a {
+        display: inline-block;
+        background: @text-primary-color;
+        color: @bg-primary-color;
+        font-size: @font-size-12;
+        font-weight: @font-weight-bold;
+        padding: @space-8 @space-16;
+        border-radius: 24px;
+        text-decoration: none;
+        transition: background @transition-normal, color @transition-normal;
+
+        &:hover,
+        &:focus {
+          background: @text-primary-color-hover;
+          color: @bg-primary-color;
+        }
+      }
+    }
   @media (max-width: @breakpoint-medium) {
     .services-list {
       gap: @space-16;
