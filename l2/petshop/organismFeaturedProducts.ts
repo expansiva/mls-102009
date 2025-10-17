@@ -3,9 +3,9 @@
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { exec } from "./_102019_layer1Exec";
-import { RequestMDMGetListByType  } from "./_102019_layer4ResReq";
+import { RequestMDMGetListByType } from "./_102019_layer4ResReq";
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { MdmData, RegistrationDataProduct, MdmType } from "./_102019_layer4Mdm";
+import { MdmData, RegistrationDataProduct, MdmType, AttachmentType } from "./_102019_layer4Mdm";
 
 @customElement('petshop--organism-featured-products-102009')
 export class organismFeaturedProducts extends IcaOrganismBase {
@@ -32,10 +32,18 @@ export class organismFeaturedProducts extends IcaOrganismBase {
   renderItem(prod: MdmData, index: number) {
     if (index > 3) return html``;
     const reg = (prod.data.registrationData as RegistrationDataProduct);
+    let img = 'https://images.unsplash.com/photo-1583860332956-0cd934c28cec?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2NDU4NjB8MHwxfHNlYXJjaHwxfHxwZXQlMjBiZWQlMjBjb21mb3J0YWJsZSUyMGJsdWUlMjBncmVlbnxlbnwwfHx8fDE3NTQ0MTEzMTZ8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080';
+
+    if (prod.data.attachments && prod.data.attachments.length > 0) {
+      prod.data.attachments.forEach((i) => {
+        if (i.type === AttachmentType.MEDIA_PROFILE_PIC) img = i.url;
+      });
+    }
+
     return html`
       <div class="product-card">
         <div class="product-image">
-          <img src="https://images.unsplash.com/photo-1583860332956-0cd934c28cec?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2NDU4NjB8MHwxfHNlYXJjaHwxfHxwZXQlMjBiZWQlMjBjb21mb3J0YWJsZSUyMGJsdWUlMjBncmVlbnxlbnwwfHx8fDE3NTQ0MTEzMTZ8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" alt="Caminha confortável para pets">
+          <img src="${img}" alt="Caminha confortável para pets">
         </div>
         <div class="product-title">${reg.name}</div>
         <div class="product-price">R$ 50,00</div>

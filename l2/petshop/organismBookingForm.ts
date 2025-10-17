@@ -2,15 +2,15 @@
 
 import { html } from 'lit';
 import { customElement, state, query } from 'lit/decorators.js';
-import { propertyDataSource } from './_100554_collabDecorators'; 
-import { setState, getState } from '_100554_/l2/collabState'; 
+import { propertyDataSource } from './_100554_collabDecorators';
+import { setState, getState } from '_100554_/l2/collabState';
 import { exec } from "./_102019_layer1Exec";
-import { petshopExec } from "./_102009_layer1Exec"; 
+import { petshopExec } from "./_102009_layer1Exec";
 import { SchedulingData, SchedulingStatus } from './_102009_layer4Scheduling'
 import { RequestSchedulingAdd } from './_102009_layer4SchedulingBase'
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { RequestMDMGetListByIds, RequestMDMGetListByType  } from "./_102019_layer4ResReq";
-import { MdmData, RegistrationDataService, RegistrationDataPF, RegistrationDataPet,  MdmType } from "./_102019_layer4Mdm";
+import { RequestMDMGetListByIds, RequestMDMGetListByType } from "./_102019_layer4ResReq";
+import { MdmData, RegistrationDataService, RegistrationDataPF, RegistrationDataPet, MdmType } from "./_102019_layer4Mdm";
 
 
 @customElement('petshop--organism-booking-form-102009')
@@ -170,7 +170,7 @@ export class organismBookingForm extends IcaOrganismBase {
   }
 
   private async handleClickSave() {
-    
+
     if (!this.mdmData) {
       this.error = 'Nenhum cliente selecionado!';
       return
@@ -196,10 +196,20 @@ export class organismBookingForm extends IcaOrganismBase {
       return
     }
 
+  
+    const dataHoraInformada = new Date(`${this.data}T${this.horario}`);
+    const agora = new Date();
+
+
+    if (dataHoraInformada < agora) {
+      this.error = 'A data e horário não podem ser anteriores ao momento atual';
+      return;
+    }
+
     this.loading = true;
 
     const pet = this.myPets[this.petIndex];
-    const serv  = this.services[this.serviceIndex];
+    const serv = this.services[this.serviceIndex];
 
     const localDateTimeString = `${this.data}T${this.horario}:00`;
     const localDate = new Date(localDateTimeString);
@@ -229,7 +239,7 @@ export class organismBookingForm extends IcaOrganismBase {
         jsonBin: {
           tutor: {
             name: (this.mdmData.data.registrationData as RegistrationDataPF).name,
-            phone: phoneClient ,
+            phone: phoneClient,
           },
           pet: {
             name: (pet.data.registrationData as RegistrationDataPet).name,
