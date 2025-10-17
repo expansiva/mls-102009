@@ -106,11 +106,11 @@ export class organismViewMyPets extends IcaOrganismBase {
         <div class="organism-view-my-pets section-card"> 
           <section class="pet-form-section">
             <div>
-              <h2>Cadastrar/Editar Pet</h2>
+              <h2>Cadastrar/Editar Pet</h2> 
       
                 <div class="form-group">
                   <label for="pet-name">Nome</label>
-                  <input type="text" id="pet-name" .value=${this.namePet} @input=${(e: KeyboardEvent) => { this.namePet = (e.target as HTMLInputElement).value }}>
+                  <input type="text" id="pet-name" placeholder="Digite o nome do seu pet" .value=${this.namePet} @input=${(e: KeyboardEvent) => { this.namePet = (e.target as HTMLInputElement).value }}>
                 </div>
                 <div class="form-group">
                   <label for="pet-type">Espécie</label>

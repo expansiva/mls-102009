@@ -6,7 +6,7 @@ import { petshopExec } from "./_102009_layer1Exec";
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { SchedulingData, SchedulingStatus } from './_102009_layer4Scheduling'
 import { RequestSchedulingGetByClient, RequestSchedulingUpd } from './_102009_layer4SchedulingBase'
-import { MdmData } from "./_102019_layer4Mdm";
+import { MdmData } from "./_102019_layer4Mdm";  
 
 @customElement('petshop--organism-view-my-appointments-102009')
 export class organismViewMyAppointments extends IcaOrganismBase {
