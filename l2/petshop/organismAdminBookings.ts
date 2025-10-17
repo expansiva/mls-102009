@@ -1,23 +1,25 @@
 /// <mls shortName="organismAdminBookings" project="102009" folder="petshop" enhancement="_100554_enhancementLit" groupName="petshop" />
 import { html, css } from 'lit';
-import { customElement, state, property } from 'lit/decorators.js';
+import { customElement, state, property, query } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { collab_check, collab_xmark } from './_100554_collabIcons';
 import { propertyDataSource } from './_100554_collabDecorators';
-
+import { setState } from '_100554_/l2/collabState';
 import { petshopExec } from "./_102009_layer1Exec";
 import { SchedulingData } from './_102009_layer4Scheduling'
 import { RequestSchedulingList } from './_102009_layer4SchedulingBase'
-
 
 @customElement('petshop--organism-admin-bookings-102009')
 export class OrganismAdminBookings extends IcaOrganismBase {
 
 	@property() mode: 'only-list' | 'with-filter' = 'with-filter';
+	@property() filterMode: 'today' | 'week' | '' = '';
+
 	@property() private search = '';
 	@property() private statusFilter = '';
-	@property() private filterDate = ''
 	@property() private filterService = '';
+
+	@property() private filterDateStart = '';
+	@property() private filterDateEnd = '';
 
 	@state() private schedulings: SchedulingData[] = [];
 	@state() private filtered: SchedulingData[] = [];
@@ -25,6 +27,7 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 
 	@propertyDataSource() labelError?: string;
 	@propertyDataSource() labelOk?: string;
+	@query('#link-to-edit') linkToEdit?: HTMLAnchorElement;
 
 	private pageSize = 5;
 
@@ -49,6 +52,12 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 
 	}
 
+	private handleEdit(e: MouseEvent, scheduling: SchedulingData) {
+		e.preventDefault();
+		setState('ui.petshop.admin.scheduling.selected', scheduling);
+		if (this.linkToEdit) this.linkToEdit.click();
+	}
+
 	private handleSearch(e: Event) {
 		this.search = (e.target as HTMLInputElement).value.toLowerCase();
 		this.applyFilters();
@@ -57,10 +66,17 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 		this.statusFilter = (e.target as HTMLSelectElement).value;
 		this.applyFilters();
 	}
-	private handleDateFilter(e: Event) {
-		this.filterDate = (e.target as HTMLInputElement).value;
+
+	private handleDateStartFilter(e: Event) {
+		this.filterDateStart = (e.target as HTMLInputElement).value;
 		this.applyFilters();
 	}
+
+	private handleDateEndFilter(e: Event) {
+		this.filterDateEnd = (e.target as HTMLInputElement).value;
+		this.applyFilters();
+	}
+
 	private handleServiceFilter(e: Event) {
 		this.filterService = (e.target as HTMLSelectElement).value;
 		this.applyFilters();
@@ -76,14 +92,43 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 		if (this.statusFilter) {
 			list = list.filter(b => b.data.status === this.statusFilter);
 		}
-		if (this.filterDate) {
-			const ff = this.filterDate === 'today' ? new Date(Date.now()).toISOString() : new Date(this.filterDate).toISOString()
+
+		let startDate: Date | null = this.filterDateStart ? new Date(this.filterDateStart) : null;
+		let endDate: Date | null = this.filterDateEnd ? new Date(this.filterDateEnd) : null;
+
+		if (this.filterMode) {
+			const now = new Date();
+			if (this.filterMode === 'today') {
+				startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+				endDate = startDate;
+			} else if (this.filterMode === 'week') {
+				startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+				endDate = new Date(startDate);
+				endDate.setUTCDate(endDate.getUTCDate() + 6);
+			}
+		}
+
+		if (startDate || endDate) {
 			list = list.filter(b => {
-				const d1 = new Date(b.data.startDateTime).toISOString().slice(0, 10);
-				const d2 = ff.slice(0, 10);
-				return d1 === d2;
+				const date = new Date(b.data.startDateTime);
+				const d = new Date(date);
+				d.setUTCHours(0, 0, 0, 0);
+				if (startDate) startDate.setUTCHours(0, 0, 0, 0);
+				if (endDate) endDate.setUTCHours(0, 0, 0, 0);
+
+				if (startDate && endDate) {
+					return d >= startDate && d <= endDate;
+				} else if (startDate) {
+					const day = date.toISOString().slice(0, 10);
+					const target = startDate.toISOString().slice(0, 10);
+					return day === target;
+				} else if (endDate) {
+					return d <= endDate;
+				}
+				return true;
 			});
 		}
+
 		if (this.filterService) {
 			list = list.filter(b => b.data.jsonBin.service.name === this.filterService);
 		}
@@ -128,9 +173,15 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 			</select>
 			<input
 				type="date"
-				@change=${this.handleDateFilter}
-				value=${this.filterDate}
+				@change=${this.handleDateStartFilter}
+				value=${this.filterDateStart}
+				/>
+			<input
+					type="date"
+					@change=${this.handleDateEndFilter}
+					value=${this.filterDateEnd}
 			/>
+
 			<select @change=${this.handleServiceFilter}>
 				<option value="">Todos os serviços</option>
 				${this.getUniqueServices().map(service => html`<option value="${service}">${service}</option>`)}
@@ -167,7 +218,7 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 					</span>
 				</td>
 				<td class="admin-bookings__action_td">
-
+					<a href="#" @click="${(e: MouseEvent) => this.handleEdit(e, b)}">Detalhes</button>
 				</td>
 			</tr>
 			`)}
@@ -177,6 +228,7 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 		<button @click=${this.prevPage} ?disabled=${this.currentPage === 1}>← Anterior</button>
 		<span>Página ${this.currentPage} de ${Math.ceil(this.filtered.length / this.pageSize) || 1}</span>
 		<button @click=${this.nextPage} ?disabled=${this.currentPage * this.pageSize >= this.filtered.length}>Próxima →</button>
+    	<a id="link-to-edit" style="display:none" href="/pageAdminEditScheduling"></a>
 	</div>
 </section>
 `;

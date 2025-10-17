@@ -13,6 +13,7 @@ export class organismAdminServiceEdit extends IcaOrganismBase {
 
     @state() loading: boolean = false;
     @state() mdmData?: MdmData;
+
     @propertyDataSource() nameService?: string;
     @propertyDataSource() descriptionShort?: string;
     @propertyDataSource() serviceCode?: string;
@@ -132,7 +133,7 @@ export class organismAdminServiceEdit extends IcaOrganismBase {
     <div class="form-actions">
             <a id="link-back" href="/pageAdminService" class="btn btn-back" ?disabled=${this.loading}>Voltar</a>
             <button class="btn-save" @click=${this.handleClickSave} ?disabled=${this.loading}>
-            Salvar
+                Salvar
                 ${this.loading ? html`<span class="loading"></span>` : html``}
             </button>
     </div>

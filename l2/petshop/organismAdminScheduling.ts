@@ -68,7 +68,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
     private renderSelectUser() {
         return html`
         <section>
-        <h2>Novo agendamento</h2>
+        <h2>Novo Agendamento</h2>
         <div class="form-group">
             <label for="user-search">Buscar por nome, e-mail ou ID</label>
             <input type="text" id="user-search" placeholder="Digite para pesquisar" @input=${(e: KeyboardEvent) => this.searchText = (e.target as HTMLInputElement).value}>
@@ -90,7 +90,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
     private renderAddScheduling() {
         return html`
             <section>
-            <h2>>Novo agendamento</h2>
+            <h2>Novo Agendamento</h2>
             <div class="form-group">
                 <label for="date-select">Cliente</label>
                 <input readonly type="text" value="${(this.userSelected?.data.registrationData as RegistrationDataPF).name}"}
@@ -144,7 +144,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
             return;
         }
 
-        const ids: string[] = [];
+        const ids: number[] = [];
 
         if (user.data.relationships) {
             user.data.relationships.forEach((r) => {
@@ -212,6 +212,14 @@ export class organismAdminScheduling extends IcaOrganismBase {
             return
         }
 
+        const selectedDate = new Date(this.date);
+        const now = new Date();
+
+        if (selectedDate < now) {
+            this.labelError = 'A data e hora não podem ser anteriores à atual.';
+            return;
+        }
+
 
         this.loading = true;
 
@@ -222,9 +230,9 @@ export class organismAdminScheduling extends IcaOrganismBase {
 
         const params: SchedulingData = {
             data: {
-                clientMdmId: this.userSelected.id || '',
-                petMdmId: this.petSelected.id || '',
-                serviceMdmId: this.serviceSelected.id || '',
+                clientMdmId: this.userSelected.id || 0,
+                petMdmId: this.petSelected.id || 0,
+                serviceMdmId: this.serviceSelected.id || 0,
                 startDateTime: new Date(this.date || '').toISOString(),
                 status: SchedulingStatus.PENDING,
                 serviceOrderId: null,
