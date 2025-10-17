@@ -1,266 +1,270 @@
 /// <mls shortName="project" project="102009" enhancement="enhancementStyle" folder="" />
 project-102009 {
-  * {
-    margin: 0;
-    padding: 0;
-    font-family: @font-family-primary;
-    box-sizing: border-box;
-  }
-
-  h2 {
-    font-size: @font-size-24;
-    font-weight: @font-weight-bold;
-    color: @text-primary-color;
-    margin-bottom: @space-24;
-    text-align: center;
-  }
-
-  .form-group {
-    margin-bottom: @space-16;
-  }
-
-  .form-actions {
-    display: flex;
-    justify-content: end;
-    gap: 1rem;
-  }
-
-  label {
-    display: block;
-    font-size: @font-size-16;
-    font-weight: @font-weight-normal;
-    color: @text-primary-color;
-    margin-bottom: @space-8;
-  }
-
-  input,
-  textarea,
-  select {
-    width: 100%;
-    padding: @space-8;
-    font-size: @font-size-16;
-    border: 1px solid @grey-color;
-    border-radius: 4px;
-    background-color: @bg-primary-color-lighter;
-    color: @text-primary-color;
-    line-height: @line-height-medium;
-  }
-
-  input:focus,
-  textarea:focus,
-  select:focus {
-    outline: 2px solid @active-color;
-    outline-offset: 2px;
-  }
-
-  textarea {
-    resize: vertical;
-    min-height: 80px;
-  }
-
-  button,
-  .btn {
-    padding: @space-8 @space-16;
-    border: none;
-    border-radius: 4px;
-    font-size: @font-size-16;
-    cursor: pointer;
-    transition: background-color @transition-normal;
-    display: flex;
-    gap: .3rem;
-    align-items: center;
-
-    &:focus {
-      outline: 2px solid @active-color;
-      outline-offset: 2px;
-    }
-
-    span.loading {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      border: 2px solid #ccc;
-      border-top: 2px solid #333;
-      border-radius: 50%;
-      animation: spin 0.6s linear infinite;
-    }
-  }
-
-  .btn-save {
-    background-color: @success-color;
-    color: @bg-primary-color-lighter;
-
-    &:hover {
-      background-color: @success-color-hover;
-    }
-  }
-
-  .btn-cancel {
-    background-color: @warning-color;
-    color: @bg-primary-color-lighter;
-
-    &:hover {
-      background-color: @warning-color-hover;
-    }
-  }
-
-  .btn-delete {
-    background-color: @error-color;
-    color: @bg-primary-color-lighter;
-  }
-
-  .btn-back {
-    background-color: @bg-secondary-color;
-    color: @text-primary-color;
-
-    &:hover {
-      background-color: @bg-secondary-color-hover;
-    }
-  }
-
-  .form-container {
-    padding: @space-24;
-    background-color: @bg-primary-color;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .message {
-    margin-top: @space-16;
-    padding: @space-8;
-    background-color: @bg-secondary-color;
-    color: @text-primary-color;
-    border-radius: 4px;
-    text-align: center;
-  }
-
-  .field-value {
-    display: block;
-    font-size: @font-size-16;
-    color: @text-primary-color;
-    padding: @space-8;
-    background-color: @bg-primary-color-lighter;
-    border: 1px solid @grey-color;
-    border-radius: 4px;
-  }
-
-  .section-card {
-    padding: @space-24;
-    background-color: @bg-primary-color;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: @space-24;
-
-    h3 {
-      font-size: @font-size-20;
-      font-weight: @font-weight-bold;
-      color: @text-primary-color;
-      margin-bottom: @space-16;
-    }
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    overflow-x: auto;
-  }
-
-  th,
-  td {
-    padding: @space-8;
-    border: 1px solid @grey-color;
-    text-align: left;
-  }
-
-  th {
-    background-color: @bg-secondary-color;
-    font-weight: @font-weight-bold;
-  }
-
-  a {
-    color: @link-color;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: @link-color-hover;
-  }
-
-  .pagination {
-    margin-top: @space-16;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: @space-16;
-
-    button {
-      margin: 0 @space-8;
-
-      &.active {
-        background-color: @active-color;
-        color: @bg-primary-color-lighter;
-      }
-
-      &:disabled {
-        background-color: @bg-primary-color-disabled;
-        color: @text-primary-color-disabled;
-        cursor: not-allowed;
-      }
-    }
-  }
-
-  // Global styles for error message used form inputs
-  .error-message {
-    color: @error-color;
-    font-size: @font-size-12;
-    margin-bottom: @space-16;
-    display: block;
-  }
-
-  @media (max-width: @breakpoint-medium) {
-    .form-container {
-      padding: @space-16;
-    }
-
-    .pagination {
-      flex-wrap: wrap;
-
-      button {
-        margin: @space-8;
-      }
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: @font-family-primary;
+        box-sizing: border-box;
     }
 
     h2 {
-      font-size: @font-size-20;
-      margin-bottom: @space-16;
+        font-size: @font-size-24;
+        font-weight: @font-weight-bold;
+        color: @text-primary-color;
+        margin-bottom: @space-24;
+        text-align: center;
     }
 
-    button {
-      padding: @space-16;
+    .form-group {
+        margin-bottom: @space-16;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: end;
+        gap: 1rem;
+    }
+
+    label {
+        display: block;
+        font-size: @font-size-16;
+        font-weight: @font-weight-normal;
+        color: @text-primary-color;
+        margin-bottom: @space-8;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        padding: @space-8;
+        font-size: @font-size-16;
+        border: 1px solid @grey-color;
+        border-radius: 4px;
+        background-color: @bg-primary-color-lighter;
+        color: @text-primary-color;
+        line-height: @line-height-medium;
+        &[readonly]{
+            background-color: @grey-color-lighter;
+        }
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        outline: 2px solid @active-color;
+        outline-offset: 2px;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    button,
+    .btn {
+        padding: @space-8 @space-16;
+        border: none;
+        border-radius: 4px;
+        font-size: @font-size-16;
+        cursor: pointer;
+        transition: background-color @transition-normal;
+        display: flex;
+        gap: .3rem;
+        align-items: center;
+
+        &:focus {
+            outline: 2px solid @active-color;
+            outline-offset: 2px;
+        }
+
+        span.loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ccc;
+            border-top: 2px solid #333;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+    }
+
+    .btn-save {
+        background-color: @success-color;
+        color: @bg-primary-color-lighter;
+
+        &:hover {
+            background-color: @success-color-hover;
+        }
+    }
+
+    .btn-cancel {
+        background-color: @warning-color;
+        color: @bg-primary-color-lighter;
+
+        &:hover {
+            background-color: @warning-color-hover;
+        }
+    }
+
+    .btn-delete {
+        background-color: @error-color;
+        color: @bg-primary-color-lighter;
+    }
+
+    .btn-back {
+        background-color: @bg-secondary-color;
+        color: @text-primary-color;
+
+        &:hover {
+            background-color: @bg-secondary-color-hover;
+        }
+    }
+
+    .form-container {
+        padding: @space-24;
+        background-color: @bg-primary-color;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .message {
+        margin-top: @space-16;
+        padding: @space-8;
+        background-color: @bg-secondary-color;
+        color: @text-primary-color;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    .field-value {
+        display: block;
+        font-size: @font-size-16;
+        color: @text-primary-color;
+        padding: @space-8;
+        background-color: @bg-primary-color-lighter;
+        border: 1px solid @grey-color;
+        border-radius: 4px;
     }
 
     .section-card {
-      padding: @space-16;
+        padding: @space-24;
+        background-color: @bg-primary-color;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: @space-24;
+
+        h3 {
+            font-size: @font-size-20;
+            font-weight: @font-weight-bold;
+            color: @text-primary-color;
+            margin-bottom: @space-16;
+        }
     }
 
     table {
-      font-size: @font-size-12;
+        width: 100%;
+        border-collapse: collapse;
+        overflow-x: auto;
     }
 
     th,
     td {
-      padding: @space-8;
-    }
-  }
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
+        padding: @space-8;
+        border: 1px solid @grey-color;
+        text-align: left;
     }
 
-    100% {
-      transform: rotate(360deg);
+    th {
+        background-color: @bg-secondary-color;
+        font-weight: @font-weight-bold;
     }
-  }
+
+    a {
+        color: @link-color;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: @link-color-hover;
+    }
+
+    .pagination {
+        margin-top: @space-16;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: @space-16;
+
+        button {
+            margin: 0 @space-8;
+
+            &.active {
+                background-color: @active-color;
+                color: @bg-primary-color-lighter;
+            }
+
+            &:disabled {
+                background-color: @bg-primary-color-disabled;
+                color: @text-primary-color-disabled;
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    // Global styles for error message used form inputs
+    .error-message {
+        color: @error-color;
+        font-size: @font-size-12;
+        margin-bottom: @space-16;
+        display: block;
+    }
+
+    @media (max-width: @breakpoint-medium) {
+        .form-container {
+            padding: @space-16;
+        }
+
+        .pagination {
+            flex-wrap: wrap;
+
+            button {
+                margin: @space-8;
+            }
+        }
+
+        h2 {
+            font-size: @font-size-20;
+            margin-bottom: @space-16;
+        }
+
+        button {
+            padding: @space-16;
+        }
+
+        .section-card {
+            padding: @space-16;
+        }
+
+        table {
+            font-size: @font-size-12;
+        }
+
+        th,
+        td {
+            padding: @space-8;
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 }
+
 

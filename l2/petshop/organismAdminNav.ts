@@ -1,32 +1,46 @@
 /// <mls shortName="organismAdminNav" project="102009" folder="petshop" enhancement="_100554_enhancementLit" groupName="petshop" />
 
 import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState, getState } from './_100554_collabState';
+import { collab_user } from './_100554_collabIcons';
+import { MdmData, RegistrationDataPJ, AttachmentType, RegistrationDataPF, MdmType } from "./_102019_layer4Mdm";
 
 @customElement('petshop--organism-admin-nav-102009')
 export class OrganismAdminNav extends IcaOrganismBase {
 
   @property() selected: IMenuItens = 'dashboard';
+  @state() avatarUrl?: string;
+  @state() userName?: string;
 
   firstUpdated(_changedProperties: Map<PropertyKey, unknown>) {
     super.firstUpdated(_changedProperties);
     const mode: IMenuItens = getState('ui.petshop.admin.menu.selected');
     this.selected = mode || 'dashboard';
+    const logged: MdmData = getState('ui.petshop.login');
+    this.avatarUrl = logged.data.attachments?.find((item) => item.type === AttachmentType.MEDIA_PROFILE_PIC)?.url || '';
+    this.userName = logged.data.type === MdmType.PessoaFisica ? (logged.data.registrationData as RegistrationDataPF).name : (logged.data.registrationData as RegistrationDataPJ).fantasyName;
+
   }
 
   render() {
-    
+
     return html`
       <nav class="admin-sidebar" id="petshop--admin-nav-102009">
         <div class="sidebar__profile">
-          <img
-            src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?auto=format&fit=crop&w=200&q=80"
-            alt="Foto de perfil"
-            class="sidebar__avatar"
-          />
-          <span class="sidebar__username">Olá, Guilherme</span>
+          ${this.avatarUrl ? html`
+              <img
+                src="${this.avatarUrl}"
+                alt="Foto de perfil"
+                class="sidebar__avatar"
+              />
+
+          `: html`
+              ${collab_user}
+          `}
+        
+          <span class="sidebar__username">Olá, ${this.userName}</span>
         </div>
 
         <ul class="sidebar__menu">
