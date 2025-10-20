@@ -707,7 +707,7 @@ let database = {
             "data": {
                 "registrationData": {
                     "name": "Rex",
-                    "species": "Cão",
+                    "species": "dog",
                     "breed": "Labrador Retriever"
                 },
                 "type": 12,
@@ -736,7 +736,7 @@ let database = {
             "data": {
                 "registrationData": {
                     "name": "Mimi",
-                    "species": "Gato",
+                    "species": "cat",
                     "breed": "Persa"
                 },
                 "type": 12,
@@ -765,7 +765,7 @@ let database = {
             "data": {
                 "registrationData": {
                     "name": "Thor",
-                    "species": "Cão",
+                    "species": "dog",
                     "breed": "Husky Siberiano"
                 },
                 "type": 12,
@@ -794,7 +794,7 @@ let database = {
             "data": {
                 "registrationData": {
                     "name": "Luna",
-                    "species": "Gato",
+                    "species": "cat",
                     "breed": "Siamês"
                 },
                 "type": 12,
@@ -823,7 +823,7 @@ let database = {
             "data": {
                 "registrationData": {
                     "name": "Nina",
-                    "species": "Cão",
+                    "species": "dog",
                     "breed": "Shih Tzu"
                 },
                 "type": 12,
@@ -852,7 +852,7 @@ let database = {
             "data": {
                 "registrationData": {
                     "name": "Toby",
-                    "species": "Cão",
+                    "species": "dog",
                     "breed": "Golden Retriever"
                 },
                 "type": 12,
@@ -881,7 +881,7 @@ let database = {
             "data": {
                 "registrationData": {
                     "name": "Mel",
-                    "species": "Gato",
+                    "species": "cat",
                     "breed": "SRD"
                 },
                 "type": 12,
@@ -910,7 +910,7 @@ let database = {
             "data": {
                 "registrationData": {
                     "name": "Zeca",
-                    "species": "Ave",
+                    "species": "bird",
                     "breed": "Calopsita"
                 },
                 "type": 12,
@@ -939,7 +939,7 @@ let database = {
             "data": {
                 "registrationData": {
                     "name": "Bob",
-                    "species": "Cão",
+                    "species": "dog",
                     "breed": "Bulldog Francês"
                 },
                 "type": 12,
@@ -968,7 +968,7 @@ let database = {
             "data": {
                 "registrationData": {
                     "name": "Pipoca",
-                    "species": "Roedor",
+                    "species": "others",
                     "breed": "Hamster Sírio"
                 },
                 "type": 12,

@@ -71,7 +71,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
         <h2>Novo Agendamento</h2>
         <div class="form-group">
             <label for="user-search">Buscar por nome, e-mail ou ID</label>
-            <input type="text" id="user-search" placeholder="Digite para pesquisar" @input=${(e: KeyboardEvent) => this.searchText = (e.target as HTMLInputElement).value}>
+            <input type="text" id="user-search" placeholder="Digite para pesquisar" @input=${(e: KeyboardEvent) => { this.searchText = (e.target as HTMLInputElement).value}} @keydown=${(e: KeyboardEvent)=>{if (e.key === 'Enter') setState('ui.petshop.admin.organismAdminScheduling.action', 'search')}}>
         </div>
         <div class="form-actions"">
             <button class="btn btn-save"  @click="${this.handleSearch}">Pesquisar</button>
@@ -299,6 +299,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
         }
         this.users = (mdm.data as MdmData[]).filter((item) => item.data.type === MdmType.PessoaFisica);
         this.loading = false;
+        setState('ui.petshop.admin.organismAdminScheduling.action','')
 
     }
 }
