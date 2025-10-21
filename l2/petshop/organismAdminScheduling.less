@@ -11,21 +11,43 @@ petshop--organism-admin-scheduling-102009 {
     margin-top: @space-16;
 
   }
+  
+
   .user-item {
-    padding: @space-8;
-    background-color: @bg-secondary-color;
-    border: 1px solid @grey-color;
-    border-radius: 4px;
-    margin-bottom: @space-8;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 14px;
     cursor: pointer;
-    transition: background-color @transition-normal;
-    &:hover {
-      background-color: @bg-secondary-color-hover;
-    }
-    &:focus {
-      outline: 2px solid @active-color;
-      outline-offset: 2px;
-    }
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    margin-bottom: .5rem;
+  }
+
+  .user-item:hover {
+    background: #f9fafb;
+    transform: translateY(-1px);
+    border-color: #d1d5db;
+  }
+
+  .user-item:active {
+    background: #f3f4f6;
+    transform: scale(0.99);
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4em;
+    background: #f3f4f6;
+    color: #4b5563;
+    border-radius: 6px;
+    width: 36px;
+    height: 36px;
   }
 }
 
