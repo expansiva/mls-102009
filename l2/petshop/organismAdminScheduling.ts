@@ -77,14 +77,20 @@ export class organismAdminScheduling extends IcaOrganismBase {
             <button class="btn btn-save"  @click="${this.handleSearch}">Pesquisar</button>
         </div>
         <ul class="user-list">
-            ${this.users.map((user) => {
-            return html`<li class="user-item" @click=${() => this.handleContinue(user)}>${(user.data.registrationData as RegistrationDataPF).name}</li>`
-        })}
+            ${this.users.map((user) => this.renderItemList(user))}
         </ul>
         ${this.labelError ? html`<span class="error-message">${this.labelError}</span>` : ''}
 
         </section>
 `
+    }
+
+    renderItemList(user:MdmData) {
+        return html`
+        <li class="user-item" @click=${() => this.handleContinue(user)}>
+            <span class="icon">👤</span>
+            <span>${(user.data.registrationData as RegistrationDataPF).name}</span>
+        </li>`
     }
 
     private renderAddScheduling() {
