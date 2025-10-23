@@ -4,8 +4,8 @@ import { SchedulingData } from "./_102009_layer4Scheduling";
 import { RequestBase } from "./_102009_layer4ResReqBase";
 
 export interface SchedulingBase { 
-    upd: (param: SchedulingData) => Promise<SchedulingData | null>;
-    add: (param: SchedulingData) => Promise<SchedulingData | null>;
+    upd: (param: SchedulingData) => Promise<SchedulingData >;
+    add: (param: SchedulingData) => Promise<SchedulingData >;
     del: (id: number) => Promise<boolean>;
     list: () => Promise<SchedulingData[]>;
     getById: (id: number) => Promise<SchedulingData | null>;
