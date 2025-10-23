@@ -2,7 +2,7 @@
 
 import { SchedulingBase } from "./_102009_layer4SchedulingBase";
 import { SchedulingData } from "./_102009_layer4Scheduling";
-import {  STORE_NAME_SCHEDULING, openDB } from "./_102009_layer1IndexedDb";
+import { STORE_NAME_SCHEDULING, openDB } from "./_102009_layer1IndexedDb";
 
 class Scheduling implements SchedulingBase {
 
@@ -10,11 +10,11 @@ class Scheduling implements SchedulingBase {
     //-----------METHODS----------- 
 
 
-    public async upd(param: SchedulingData): Promise<SchedulingData | null> {
+    public async upd(param: SchedulingData): Promise<SchedulingData> {
         return await this.saveSchedulingData(param);
     }
 
-    public async add(param: SchedulingData): Promise<SchedulingData | null> {
+    public async add(param: SchedulingData): Promise<SchedulingData> {
         return await this.saveSchedulingData(param);
     }
 
@@ -41,7 +41,7 @@ class Scheduling implements SchedulingBase {
     //-----------IMPLEMENTS------------
 
 
-    private async saveSchedulingData(data: SchedulingData): Promise<SchedulingData | null> {
+    private async saveSchedulingData(data: SchedulingData): Promise<SchedulingData> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SCHEDULING, "readwrite");
         const store = tx.objectStore(STORE_NAME_SCHEDULING);
@@ -115,8 +115,17 @@ class Scheduling implements SchedulingBase {
     }
 
     private async getRecordsByClient(clientId: number): Promise<SchedulingData[]> {
-
         const db = await openDB();
+        const tx = db.transaction(STORE_NAME_SCHEDULING, "readonly");
+        const index = tx.objectStore(STORE_NAME_SCHEDULING).index("clientMdmId");
+        const request = index.getAll(clientId);
+
+        return new Promise((resolve, reject) => {
+            request.onsuccess = () => resolve(request.result || []);
+            request.onerror = () => reject(request.error);
+        });
+
+        /*const db = await openDB();
         const tx = db.transaction(STORE_NAME_SCHEDULING, "readonly");
         const request = tx.objectStore(STORE_NAME_SCHEDULING).getAll();
 
@@ -130,8 +139,8 @@ class Scheduling implements SchedulingBase {
                 resolve(filtered);
             };
             request.onerror = () => reject(request.error);
-        });
-    
+        });*/
+
     }
 
 }

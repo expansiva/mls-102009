@@ -9,11 +9,11 @@ class ServiceOrder implements ServiceOrderBase {
     //-----------METHODS----------- 
 
 
-    public async upd(param: ServiceOrderData): Promise<ServiceOrderData | null> {
+    public async upd(param: ServiceOrderData): Promise<ServiceOrderData> {
         return await this.saveServiceOrderData(param);
     }
 
-    public async add(param: ServiceOrderData): Promise<ServiceOrderData | null> {
+    public async add(param: ServiceOrderData): Promise<ServiceOrderData> {
         return await this.saveServiceOrderData(param);
     }
 
@@ -31,7 +31,7 @@ class ServiceOrder implements ServiceOrderBase {
 
     //-----------IMPLEMENTS------------
 
-    private async saveServiceOrderData(data: ServiceOrderData): Promise<ServiceOrderData | null> {
+    private async saveServiceOrderData(data: ServiceOrderData): Promise<ServiceOrderData> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SERVICEORDER, "readwrite");
         const store = tx.objectStore(STORE_NAME_SERVICEORDER);
@@ -60,7 +60,7 @@ class ServiceOrder implements ServiceOrderBase {
     }
 
 
-    private async getServiceOrderData(id: number): Promise<ServiceOrderData | null> {
+    private async getServiceOrderData(id: number): Promise<ServiceOrderData> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SERVICEORDER, "readonly");
         const request = tx.objectStore(STORE_NAME_SERVICEORDER).get(id);
