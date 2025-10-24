@@ -4,13 +4,13 @@ import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { getState } from '_100554_/l2/collabState';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { MdmData, RegistrationDataPF, AttachmentType, RegistrationDataPJ } from "./_102019_layer4Mdm";
+import { MdmRecord, RegistrationDataPF, AttachmentType, RegistrationDataPJ } from "./_102019_commonGlobal";
 
 @customElement('petshop--organism-nav-102009')
 export class organismNav extends IcaOrganismBase {
 
-  @state() mdmData: MdmData | undefined;
-  @state() mdmCompany: MdmData | undefined;
+  @state() mdmData: MdmRecord | undefined;
+  @state() mdmCompany: MdmRecord | undefined;
   @state() name: string = '';
   @state() img?: string; 
   @state() nameCompany: string = '';
@@ -65,10 +65,10 @@ export class organismNav extends IcaOrganismBase {
     this.mdmCompany = getState('ui.petshop.enterprise');
 
     if (this.mdmData) {
-      this.name = (this.mdmData.data.registrationData as RegistrationDataPF).name;
+      this.name = (this.mdmData.details.registrationData as RegistrationDataPF).name;
 
-      if (this.mdmData.data.attachments && this.mdmData.data.attachments.length > 0) {
-        this.mdmData.data.attachments.forEach((i) => {
+      if (this.mdmData.details.attachments && this.mdmData.details.attachments.length > 0) {
+        this.mdmData.details.attachments.forEach((i) => {
           if (i.type === AttachmentType.MEDIA_PROFILE_PIC) {
             this.img = i.url;
           }
@@ -80,10 +80,10 @@ export class organismNav extends IcaOrganismBase {
     }
 
     if (this.mdmCompany) {
-      this.nameCompany = (this.mdmCompany.data.registrationData as RegistrationDataPJ).fantasyName;
+      this.nameCompany = (this.mdmCompany.details.registrationData as RegistrationDataPJ).fantasyName;
 
-      if (this.mdmCompany.data.attachments && this.mdmCompany.data.attachments.length > 0) {
-        this.mdmCompany.data.attachments.forEach((i) => {
+      if (this.mdmCompany.details.attachments && this.mdmCompany.details.attachments.length > 0) {
+        this.mdmCompany.details.attachments.forEach((i) => {
           if (i.type === AttachmentType.MEDIA_PROFILE_PIC) {
             this.imgCompany = i.url;
           }

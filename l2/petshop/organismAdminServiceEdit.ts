@@ -5,14 +5,13 @@ import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState, getState } from '_100554_/l2/collabState';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { exec } from "./_102019_layer1Exec";
-import { MdmData, MdmType, RegistrationDataService, ServiceData, ServiceRecord } from "./_102019_layer4Mdm";
-import { RequestMDMUpd } from "./_102019_layer4ResReq";
+import { MdmRecord, MdmType, RegistrationDataService, ServiceData, ServiceRecord, RequestMDMUpd } from "./_102019_commonGlobal";
 
 @customElement('petshop--organism-admin-service-edit-102009')
 export class organismAdminServiceEdit extends IcaOrganismBase {
 
     @state() loading: boolean = false;
-    @state() mdmData?: MdmData;
+    @state() mdmData?: MdmRecord;
 
     @propertyDataSource() nameService?: string;
     @propertyDataSource() descriptionShort?: string;
@@ -32,7 +31,7 @@ export class organismAdminServiceEdit extends IcaOrganismBase {
 
     firstUpdated(_changedProperties: Map<PropertyKey, unknown>) {
         super.firstUpdated(_changedProperties);
-        const data: MdmData = getState('ui.petshop.admin.service.selected');
+        const data: MdmRecord = getState('ui.petshop.admin.service.selected');
         this.mdmData = data;
     }
 
@@ -222,13 +221,13 @@ export class organismAdminServiceEdit extends IcaOrganismBase {
         }
         if (!hasErrors) {
             this.loading = true;
-            const dataToUpd: MdmData | undefined = { ... this.mdmData } as MdmData;
-            const rgData = dataToUpd.data?.registrationData as RegistrationDataService;
+            const dataToUpd: MdmRecord | undefined = { ... this.mdmData } as MdmRecord;
+            const rgData = dataToUpd.details?.registrationData as RegistrationDataService;
             rgData.name = this.nameService || '';
             rgData.descriptionShort = this.descriptionShort || '';
             rgData.serviceCode = this.serviceCode || '';
-            if (!(dataToUpd.data as ServiceRecord).serviceData) {
-                (dataToUpd.data as ServiceRecord).serviceData = {
+            if (!(dataToUpd.details as ServiceRecord).serviceData) {
+                (dataToUpd.details as ServiceRecord).serviceData = {
                     category: '',
                     durationMinutes: 0,
                     priceRegular: 0,
@@ -239,7 +238,7 @@ export class organismAdminServiceEdit extends IcaOrganismBase {
                     speciesSuitability: []
                 }
             }
-            const serviceData: ServiceData = (dataToUpd.data as ServiceRecord).serviceData as ServiceData;
+            const serviceData: ServiceData = (dataToUpd.details as ServiceRecord).serviceData as ServiceData;
 
             serviceData.category = this.category || '';
             serviceData.durationMinutes = +(this.durationMinutes || 0);
@@ -249,7 +248,7 @@ export class organismAdminServiceEdit extends IcaOrganismBase {
             serviceData.requiredResources = this.requiredResources || [];
             serviceData.sizeSuitability = this.sizeSuitability || [];
             serviceData.speciesSuitability = this.speciesSuitability || [];
-            const params: MdmData = dataToUpd;
+            const params: MdmRecord = dataToUpd;
             const req: RequestMDMUpd = {
                 action: 'MDMUpd',
                 inDeveloped: true,

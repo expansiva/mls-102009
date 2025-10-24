@@ -6,8 +6,7 @@ import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState, subscribe, unsubscribe } from '_100554_/l2/collabState';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { exec } from "./_102019_layer1Exec";
-import { MdmData, MdmType, RegistrationDataService, ServiceRecord } from "./_102019_layer4Mdm";
-import { RequestMDMAdd } from "./_102019_layer4ResReq";
+import { MdmRecord, MdmType, RequestMDMAdd, RegistrationDataService, ServiceRecord } from "./_102019_commonGlobal";
 
 @customElement('petshop--organism-admin-add-service-102009')
 export class organismAddService extends IcaOrganismBase {
@@ -125,8 +124,8 @@ export class organismAddService extends IcaOrganismBase {
             this.loading = true;
 
             await this.delay(1000);
-            const params: MdmData = {
-                data: {
+            const params: MdmRecord = {
+                details: {
                     registrationData: {
                         name: this.nameService,
                         descriptionShort: this.descriptionShort,

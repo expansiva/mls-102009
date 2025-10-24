@@ -4,15 +4,15 @@ import { customElement, state, query } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState, getState } from '_100554_/l2/collabState';
 import { propertyDataSource } from './_100554_collabDecorators';
+
 import { exec } from "./_102019_layer1Exec";
-import { MdmData, MdmType, RegistrationDataProduct, ProductData, ProductRecord } from "./_102019_layer4Mdm";
-import { RequestMDMUpd } from "./_102019_layer4ResReq";
+import { MdmRecord, RegistrationDataProduct, ProductData, ProductRecord, RequestMDMUpd } from "./_102019_commonGlobal";
 
 @customElement('petshop--organism-admin-product-edit-102009')
 export class organismAdminProductEdit extends IcaOrganismBase {
 
     @state() loading: boolean = false;
-    @state() mdmData?: MdmData;
+    @state() mdmData?: MdmRecord;
     @propertyDataSource() nameProduct?: string;
     @propertyDataSource() descriptionShort?: string;
     @propertyDataSource() sku?: string;
@@ -29,7 +29,7 @@ export class organismAdminProductEdit extends IcaOrganismBase {
 
     firstUpdated(_changedProperties: Map<PropertyKey, unknown>) {
         super.firstUpdated(_changedProperties);
-        const data: MdmData = getState('ui.petshop.admin.product.selected');
+        const data: MdmRecord = getState('ui.petshop.admin.product.selected');
         this.mdmData = data;
     }
 
@@ -184,12 +184,13 @@ export class organismAdminProductEdit extends IcaOrganismBase {
         }
         if (!hasErrors) {
             this.loading = true;
-            const dataToUpd: MdmData | undefined = { ... this.mdmData } as MdmData;
-            const rgData = dataToUpd.data?.registrationData as RegistrationDataProduct;
+            if (!this.mdmData) return;
+            const dataToUpd: MdmRecord | undefined = { ... this.mdmData } as MdmRecord;
+            const rgData = dataToUpd.details?.registrationData as RegistrationDataProduct;
             rgData.name = this.nameProduct || '';
             rgData.descriptionShort = this.descriptionShort || '';
-            if (!(dataToUpd.data as ProductRecord).productData) {
-                (dataToUpd.data as ProductRecord).productData = {
+            if (!(dataToUpd.details as ProductRecord).productData) {
+                (dataToUpd.details as ProductRecord).productData = {
                     category: '',
                     barcode: '',
                     petSuitability: [],
@@ -200,7 +201,7 @@ export class organismAdminProductEdit extends IcaOrganismBase {
                 }
             }
 
-            const productData: ProductData = (dataToUpd.data as ProductRecord).productData as ProductData;
+            const productData: ProductData = (dataToUpd.details as ProductRecord).productData as ProductData;
             productData.category = this.category || '';
             productData.barcode = this.barcode || '';
             productData.petSuitability = this.petSuitability || [];
@@ -208,7 +209,7 @@ export class organismAdminProductEdit extends IcaOrganismBase {
             productData.sku = this.sku || '';
             productData.subcategory = this.subcategory || '';
             productData.unitOfMeasure = this.unitOfMeasure || '';
-            const params: MdmData = dataToUpd;
+            const params: MdmRecord = dataToUpd;
             const req: RequestMDMUpd = {
                 action: 'MDMUpd',
                 inDeveloped: true,

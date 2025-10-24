@@ -3,16 +3,15 @@ import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { setState, getState } from '_100554_/l2/collabState';
-import { exec as execMdm } from "./_102019_layer1Exec";
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { RequestMDMUpd  } from "./_102019_layer4ResReq";
-import { MdmData, RegistrationDataPF, Address, MdmAddresType, AttachmentType } from "./_102019_layer4Mdm";
 
+import { exec as execMdm } from "./_102019_layer1Exec";
+import { MdmRecord, MdmType, RegistrationDataPF, Address, MdmAddresType, AttachmentType, RequestMDMUpd } from "./_102019_commonGlobal";
 
 @customElement('petshop--organism-view-identify-pf-102009')
 export class organismViewIdentifyPf extends IcaOrganismBase {
 
-  @state() mdm: MdmData | undefined;
+  @state() mdm: MdmRecord | undefined;
   @state() loading: boolean = false;
   @state() error?: string = '';
 
@@ -97,21 +96,21 @@ export class organismViewIdentifyPf extends IcaOrganismBase {
   private setInitialValues() {
 
     if (!this.mdm) return;
-    this.name = (this.mdm.data.registrationData as RegistrationDataPF).name;
-    this.cpf = (this.mdm.data.registrationData as RegistrationDataPF).cpf;
-    this.email = this.mdm.data.contactData?.email || '';
-    this.telefone = this.mdm.data.contactData?.phone ? this.mdm.data.contactData?.phone[0].number : '';
+    this.name = (this.mdm.details.registrationData as RegistrationDataPF).name;
+    this.cpf = (this.mdm.details.registrationData as RegistrationDataPF).cpf;
+    this.email = this.mdm.details.contactData?.email || '';
+    this.telefone = this.mdm.details.contactData?.phone ? this.mdm.details.contactData?.phone[0].number : '';
 
-    if (this.mdm.data.addresses && this.mdm.data.addresses.length > 0) {
-      this.rua = this.mdm.data.addresses[0].street;
-      this.bairro = this.mdm.data.addresses[0].neighborhood;
-      this.cidade = this.mdm.data.addresses[0].city;
-      this.estado = this.mdm.data.addresses[0].stateProvince;
-      this.numero = this.mdm.data.addresses[0].number;
+    if (this.mdm.details.addresses && this.mdm.details.addresses.length > 0) {
+      this.rua = this.mdm.details.addresses[0].street;
+      this.bairro = this.mdm.details.addresses[0].neighborhood;
+      this.cidade = this.mdm.details.addresses[0].city;
+      this.estado = this.mdm.details.addresses[0].stateProvince;
+      this.numero = this.mdm.details.addresses[0].number;
     }
 
-    if (this.mdm.data.attachments && this.mdm.data.attachments.length > 0) {
-      this.mdm.data.attachments.forEach((i) => {
+    if (this.mdm.details.attachments && this.mdm.details.attachments.length > 0) {
+      this.mdm.details.attachments.forEach((i) => {
         if (i.type === AttachmentType.MEDIA_PROFILE_PIC) {
           this.img = i.url;
         }
@@ -137,20 +136,20 @@ export class organismViewIdentifyPf extends IcaOrganismBase {
 
     this.loading = true;
 
-    const dataToUpd: MdmData | undefined = { ... this.mdm } as MdmData;
-    const rgData = dataToUpd.data?.registrationData as RegistrationDataPF;
+    const dataToUpd: MdmRecord | undefined = { ... this.mdm } as MdmRecord;
+    const rgData = dataToUpd.details?.registrationData as RegistrationDataPF;
     rgData.cpf = this.cpf as string;
     rgData.name = this.name as string;
 
-    if (dataToUpd.data.addresses && dataToUpd.data.addresses.length > 0) {
-      dataToUpd.data.addresses[0].street = this.rua || '';
-      dataToUpd.data.addresses[0].neighborhood = this.bairro || '';
-      dataToUpd.data.addresses[0].city = this.cidade || '';
-      dataToUpd.data.addresses[0].stateProvince = this.estado || '';
-      dataToUpd.data.addresses[0].number = this.numero || '';
+    if (dataToUpd.details.addresses && dataToUpd.details.addresses.length > 0) {
+      dataToUpd.details.addresses[0].street = this.rua || '';
+      dataToUpd.details.addresses[0].neighborhood = this.bairro || '';
+      dataToUpd.details.addresses[0].city = this.cidade || '';
+      dataToUpd.details.addresses[0].stateProvince = this.estado || '';
+      dataToUpd.details.addresses[0].number = this.numero || '';
     } else {
 
-      dataToUpd.data.addresses = [
+      dataToUpd.details.addresses = [
         {
 
           type: MdmAddresType.Residencial,
@@ -170,20 +169,20 @@ export class organismViewIdentifyPf extends IcaOrganismBase {
       ]
     }
 
-    if (dataToUpd.data.contactData && dataToUpd.data.contactData.phone && dataToUpd.data.contactData.phone.length > 0) {
-      dataToUpd.data.contactData.phone[0].number = this.telefone || '';
-      dataToUpd.data.contactData.email = this.email;
+    if (dataToUpd.details.contactData && dataToUpd.details.contactData.phone && dataToUpd.details.contactData.phone.length > 0) {
+      dataToUpd.details.contactData.phone[0].number = this.telefone || '';
+      dataToUpd.details.contactData.email = this.email;
 
     } else {
 
-      if (!dataToUpd.data.contactData) dataToUpd.data.contactData = { phone: [] };
-      dataToUpd.data.contactData.phone = [
+      if (!dataToUpd.details.contactData) dataToUpd.details.contactData = { phone: [] };
+      dataToUpd.details.contactData.phone = [
         { type: 'Residencial', number: this.telefone || '' }
       ];
-      dataToUpd.data.contactData.email = this.email;
+      dataToUpd.details.contactData.email = this.email;
     }
 
-    const params: MdmData = dataToUpd;
+    const params: MdmRecord = dataToUpd;
     const req: RequestMDMUpd = {
       action: 'MDMUpd',
       inDeveloped: true,

@@ -5,11 +5,12 @@ import { customElement, state, query } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState, subscribe, unsubscribe } from '_100554_/l2/collabState';
 import { propertyDataSource } from './_100554_collabDecorators';
-import { exec } from "./_102019_layer1Exec";
-import { MdmData, MdmType, RegistrationDataPF, RegistrationDataPet, RegistrationDataService } from "./_102019_layer4Mdm";
-import { RequestMDMGetListByIds, RequestMDMGetList, RequestMDMGetListByType } from "./_102019_layer4ResReq";
+
 import { petshopExec } from "./_102009_layer1Exec";
 import { RequestSchedulingAdd, SchedulingRecord, SchedulingStatus } from './_102009_commonGlobal'
+import { exec } from "./_102019_layer1Exec";
+import { MdmRecord,  MdmType, RegistrationDataPF, RegistrationDataPet, RegistrationDataService, RequestMDMGetListByIds, RequestMDMGetList, RequestMDMGetListByType } from "./_102019_commonGlobal";
+
 
 @customElement('petshop--organism-admin-scheduling-102009')
 export class organismAdminScheduling extends IcaOrganismBase {
@@ -20,16 +21,16 @@ export class organismAdminScheduling extends IcaOrganismBase {
     @propertyDataSource() labelOk?: string;
 
     @propertyDataSource() searchText?: string;
-    @propertyDataSource() userSelected?: MdmData;
-    @propertyDataSource() petSelected?: MdmData;
-    @propertyDataSource() serviceSelected?: MdmData;
+    @propertyDataSource() userSelected?: MdmRecord;
+    @propertyDataSource() petSelected?: MdmRecord;
+    @propertyDataSource() serviceSelected?: MdmRecord;
     @propertyDataSource() date?: string;
 
     @propertyDataSource() action?: string;
 
-    @state() users: MdmData[] = [];
-    @state() pets: MdmData[] = [];
-    @state() services: MdmData[] = [];
+    @state() users: MdmRecord[] = [];
+    @state() pets: MdmRecord[] = [];
+    @state() services: MdmRecord[] = [];
 
     @state() currentStep: 'user-selection' | 'scheduling' = 'user-selection';
 
@@ -84,11 +85,11 @@ export class organismAdminScheduling extends IcaOrganismBase {
 `
     }
 
-    renderItemList(user: MdmData) {
+    renderItemList(user: MdmRecord) {
         return html`
         <li class="user-item" @click=${() => this.handleContinue(user)}>
             <span class="icon">👤</span>
-            <span>${(user.data.registrationData as RegistrationDataPF).name}</span>
+            <span>${(user.details.registrationData as RegistrationDataPF).name}</span>
         </li>`
     }
 
@@ -98,13 +99,13 @@ export class organismAdminScheduling extends IcaOrganismBase {
             <h2>Novo Agendamento</h2>
             <div class="form-group">
                 <label for="date-select">Cliente</label>
-                <input readonly type="text" value="${(this.userSelected?.data.registrationData as RegistrationDataPF).name}"}
+                <input readonly type="text" value="${(this.userSelected?.details.registrationData as RegistrationDataPF).name}"}
             </div>
             <div class="form-group">
                 <label for="pet-select">Selecionar Pet</label>
                 <select id="pet-select" @change=${(e: MouseEvent) => { this.petSelected = this.pets[+((e.target as HTMLInputElement).value)] }}>
                     <option value="">Escolha um pet</option>
-                    ${this.pets.map((pet, index) => html`<option value="${index}">${(pet.data.registrationData as RegistrationDataPet).name}</option>`)}
+                    ${this.pets.map((pet, index) => html`<option value="${index}">${(pet.details.registrationData as RegistrationDataPet).name}</option>`)}
                 </select>
             </div>
             <div class="form-group">
@@ -115,7 +116,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
                 <label for="service-select">Serviço</label>
                 <select id="service-select" @change=${(e: MouseEvent) => { this.serviceSelected = this.services[+((e.target as HTMLInputElement).value)] }}>
                     <option value="">Escolha um serviço</option>
-                    ${this.services.map((pet, index) => html`<option value="${index}">${(pet.data.registrationData as RegistrationDataService).name}</option>`)}
+                    ${this.services.map((pet, index) => html`<option value="${index}">${(pet.details.registrationData as RegistrationDataService).name}</option>`)}
                 </select>
             </div>
             <div class="form-actions">
@@ -132,7 +133,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
             </section>
 `}
 
-    private async handleContinue(user: MdmData) {
+    private async handleContinue(user: MdmRecord) {
         await this.getMyPets(user);
         this.userSelected = user;
         this.currentStep = 'scheduling';
@@ -142,7 +143,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
         this.currentStep = 'user-selection';
     }
 
-    private async getMyPets(user: MdmData) {
+    private async getMyPets(user: MdmRecord) {
 
         if (!user) {
             this.labelError = 'Falta parametros para pegar os pets';
@@ -151,8 +152,8 @@ export class organismAdminScheduling extends IcaOrganismBase {
 
         const ids: number[] = [];
 
-        if (user.data.relationships) {
-            user.data.relationships.forEach((r) => {
+        if (user.details.relationships) {
+            user.details.relationships.forEach((r) => {
                 if (r.type === 'R_PF_OWNER_OF_PET') ids.push(r.relatedMdmId);
             })
         }
@@ -229,8 +230,8 @@ export class organismAdminScheduling extends IcaOrganismBase {
         this.loading = true;
 
         let phoneClient = '';
-        if (this.userSelected.data.contactData && this.userSelected.data.contactData.phone) {
-            phoneClient = this.userSelected.data.contactData.phone[0].number;
+        if (this.userSelected.details.contactData && this.userSelected.details.contactData.phone) {
+            phoneClient = this.userSelected.details.contactData.phone[0].number;
         }
 
         const params: SchedulingRecord = {
@@ -242,20 +243,20 @@ export class organismAdminScheduling extends IcaOrganismBase {
 
                 tutor: {
                     clientMdmId: this.userSelected.id || 0,
-                    name: (this.userSelected.data.registrationData as RegistrationDataPF).name,
+                    name: (this.userSelected.details.registrationData as RegistrationDataPF).name,
                     phone: phoneClient,
                 },
                 pet: {
                     petMdmId: this.petSelected.id || 0,
-                    name: (this.petSelected.data.registrationData as RegistrationDataPet).name,
-                    species: (this.petSelected.data.registrationData as RegistrationDataPet).species,
-                    breed: (this.petSelected.data.registrationData as RegistrationDataPet).breed,
+                    name: (this.petSelected.details.registrationData as RegistrationDataPet).name,
+                    species: (this.petSelected.details.registrationData as RegistrationDataPet).species,
+                    breed: (this.petSelected.details.registrationData as RegistrationDataPet).breed,
                     allergies: [],
                 },
                 service: {
                     serviceMdmId: this.serviceSelected.id || 0,
-                    name: (this.serviceSelected.data.registrationData as RegistrationDataService).name,
-                    serviceCode: (this.serviceSelected.data.registrationData as RegistrationDataService).serviceCode,
+                    name: (this.serviceSelected.details.registrationData as RegistrationDataService).name,
+                    serviceCode: (this.serviceSelected.details.registrationData as RegistrationDataService).serviceCode,
                 },
 
             }
@@ -303,7 +304,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
             this.loading = false;
             return;
         }
-        this.users = (mdm.data as MdmData[]).filter((item) => item.data.type === MdmType.PessoaFisica);
+        this.users = (mdm.data as MdmRecord[]).filter((item) => item.details.type === MdmType.PessoaFisica);
         this.loading = false;
         setState('ui.petshop.admin.organismAdminScheduling.action', '')
 
