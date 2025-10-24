@@ -4,8 +4,7 @@ import { customElement, state } from 'lit/decorators.js';
 import { setState, getState } from '_100554_/l2/collabState';
 import { petshopExec } from "./_102009_layer1Exec";
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { SchedulingData, SchedulingStatus } from './_102009_layer4Scheduling'
-import { RequestSchedulingGetByClient, RequestSchedulingUpd } from './_102009_layer4SchedulingBase'
+import { SchedulingRecord, SchedulingStatus, RequestSchedulingGetByClient, RequestSchedulingUpd } from './_102009_commonGlobal';  
 import { MdmData } from "./_102019_layer4Mdm";  
 
 @customElement('petshop--organism-view-my-appointments-102009')
@@ -13,7 +12,7 @@ export class organismViewMyAppointments extends IcaOrganismBase {
 
     @state() scenary = 'list';
     @state() mdmData: MdmData | undefined;
-    @state() scheduling: SchedulingData[] = [];
+    @state() scheduling: SchedulingRecord[] = [];
     @state() error = '';
     @state() indexDetail = -1;
 
@@ -65,9 +64,9 @@ export class organismViewMyAppointments extends IcaOrganismBase {
         </div>`
     }
 
-    renderItem(sch: SchedulingData, index: number) {
+    renderItem(sch: SchedulingRecord, index: number) {
 
-        const data = this.getDataHorario(sch.data.startDateTime);
+        const data = this.getDataHorario(sch.details.startDateTime);
 
         const stateCLS = {
             'PENDING': 'status--pending',
@@ -90,11 +89,11 @@ export class organismViewMyAppointments extends IcaOrganismBase {
 
         return html`
         <tr style="display:${display}">
-            <td>${sch.data.jsonBin.pet.name}</td>
+            <td>${sch.details.pet.name}</td>
             <td>${data.date}</td>
             <td>${data.time}</td>
-            <td>${sch.data.jsonBin.service.name}</td>
-            <td><span class="status ${stateCLS[sch.data.status]}">${stateLabel[sch.data.status]}</span></td>
+            <td>${sch.details.service.name}</td>
+            <td><span class="status ${stateCLS[sch.details.status]}">${stateLabel[sch.details.status]}</span></td>
             <td><span class="det" @click=${() => { this.indexDetail = index; this.changeScneray('add')}}>Detalhes</span></td>
         </tr>`;
     }
@@ -115,7 +114,7 @@ export class organismViewMyAppointments extends IcaOrganismBase {
             </div>
         </div>`;
 
-        const data = this.getDataHorario(sch.data.startDateTime);
+        const data = this.getDataHorario(sch.details.startDateTime);
 
         const stateLabel = {
             'PENDING': 'Pendente',
@@ -138,15 +137,15 @@ export class organismViewMyAppointments extends IcaOrganismBase {
                 </div>
                 <div class="form-group">
                     <label>Serviço:</label>
-                    <span class="field-value">${sch.data.jsonBin.service.name}</span>
+                    <span class="field-value">${sch.details.service.name}</span>
                 </div>
                 <div class="form-group">
                     <label>Pet:</label>
-                    <span class="field-value">${sch.data.jsonBin.pet.name}</span>
+                    <span class="field-value">${sch.details.pet.name}</span>
                 </div>
                 <div class="form-group">
                     <label>Status:</label>
-                    <span class="field-value">${stateLabel[sch.data.status]}</span>
+                    <span class="field-value">${stateLabel[sch.details.status]}</span>
                 </div>
                 <div class="form-actions">
                     <button class="btn btn-delete" @click=${()=> this.handleClickCancel()} >Cancelar Agendamento</button>
@@ -224,12 +223,12 @@ export class organismViewMyAppointments extends IcaOrganismBase {
             return;
         } 
 
-        if (sch.data.status === SchedulingStatus.CANCELED) {
+        if (sch.details.status === SchedulingStatus.CANCELED) {
             this.error = 'Não pode alterar o status de um agendamento cancelado!';
             return;
         }
 
-        sch.data.status = SchedulingStatus.CANCELED;
+        sch.details.status = SchedulingStatus.CANCELED;
 
         const req: RequestSchedulingUpd = {
             action: 'SchedulingUpd',

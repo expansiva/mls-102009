@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { setState, getState } from '_100554_/l2/collabState';
-import { exec } from "./_102019_layer1Exec";
+import { exec as execMdm } from "./_102019_layer1Exec";
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { RequestMDMUpd  } from "./_102019_layer4ResReq";
 import { MdmData, RegistrationDataPF, Address, MdmAddresType, AttachmentType } from "./_102019_layer4Mdm";
@@ -191,7 +191,7 @@ export class organismViewIdentifyPf extends IcaOrganismBase {
       params,
     };
 
-    const response = await exec(req);
+    const response = await execMdm(req);
     if (response.error) {
       this.error = response.error;
       this.loading = false;

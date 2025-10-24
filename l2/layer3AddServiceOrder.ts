@@ -1,10 +1,10 @@
 /// <mls shortName="layer3AddServiceOrder" project="102009" enhancement="_blank" />
 
-import { ServiceOrderData } from "./_102009_layer4ServiceOrder";
-import { Ctx } from "./_102009_layer1Context";
+import { ServiceOrderRecord } from "./_102009_layer4ServiceOrder";
+import { Ctx } from "./_102009_commonLocal";
 
-export async function addServiceOrder(ctx:Ctx, data: ServiceOrderData): Promise<ServiceOrderData | null> {
+export async function addServiceOrder(ctx:Ctx, data: ServiceOrderRecord): Promise<ServiceOrderRecord > {
 
-    return await ctx.io.serviceOrder.add(data); 
+    return await ctx.io.petshopDB.serviceOrder.add(data); 
 
 }

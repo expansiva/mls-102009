@@ -1,7 +1,6 @@
-/// <mls shortName="layer1SchedulingDB" project="102009" enhancement="_blank" />
-
+/// <mls shortName="layer1SchedulingIndexedDB" project="102009" enhancement="_blank" />
 import { SchedulingBase } from "./_102009_layer4SchedulingBase";
-import { SchedulingData } from "./_102009_layer4Scheduling";
+import { SchedulingRecord } from "./_102009_layer4Scheduling";
 import { STORE_NAME_SCHEDULING, openDB } from "./_102009_layer1IndexedDb";
 
 class Scheduling implements SchedulingBase {
@@ -9,39 +8,38 @@ class Scheduling implements SchedulingBase {
 
     //-----------METHODS----------- 
 
-
-    public async upd(param: SchedulingData): Promise<SchedulingData> {
-        return await this.saveSchedulingData(param);
+    public async upd(param: SchedulingRecord): Promise<SchedulingRecord> {
+        return await this.saveSchedulingRecord(param);
     }
 
-    public async add(param: SchedulingData): Promise<SchedulingData> {
-        return await this.saveSchedulingData(param);
+    public async add(param: SchedulingRecord): Promise<SchedulingRecord> {
+        return await this.saveSchedulingRecord(param);
     }
 
     public async del(id: number): Promise<boolean> {
-        return await this.deleteSchedulingData(id);
+        return await this.deleteSchedulingRecord(id);
     }
 
-    public async list(): Promise<SchedulingData[]> {
-        return await this.getAllSchedulingData();
+    public async list(): Promise<SchedulingRecord[]> {
+        return await this.getAllSchedulingRecord();
     }
 
-    public async getById(id: number): Promise<SchedulingData | null> {
-        return await this.getSchedulingData(id);
+    public async getById(id: number): Promise<SchedulingRecord | null> {
+        return await this.getSchedulingRecord(id);
     }
 
     public async recordCount(): Promise<number> {
         return await this.getRecordCount();
     }
 
-    public async listByClient(clientId: number): Promise<SchedulingData[]> {
+    public async listByClient(clientId: number): Promise<SchedulingRecord[]> {
         return await this.getRecordsByClient(clientId);
     }
 
     //-----------IMPLEMENTS------------
 
 
-    private async saveSchedulingData(data: SchedulingData): Promise<SchedulingData> {
+    private async saveSchedulingRecord(data: SchedulingRecord): Promise<SchedulingRecord> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SCHEDULING, "readwrite");
         const store = tx.objectStore(STORE_NAME_SCHEDULING);
@@ -81,7 +79,7 @@ class Scheduling implements SchedulingBase {
         });
     }
 
-    private async getSchedulingData(id: number): Promise<SchedulingData | null> {
+    private async getSchedulingRecord(id: number): Promise<SchedulingRecord | null> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SCHEDULING, "readonly");
         const request = tx.objectStore(STORE_NAME_SCHEDULING).get(id);
@@ -92,18 +90,18 @@ class Scheduling implements SchedulingBase {
         });
     }
 
-    private async getAllSchedulingData(): Promise<SchedulingData[]> {
+    private async getAllSchedulingRecord(): Promise<SchedulingRecord[]> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SCHEDULING, "readonly");
         const request = tx.objectStore(STORE_NAME_SCHEDULING).getAll();
 
         return new Promise((resolve, reject) => {
-            request.onsuccess = () => resolve(request.result as SchedulingData[]);
+            request.onsuccess = () => resolve(request.result as SchedulingRecord[]);
             request.onerror = () => reject(request.error);
         });
     }
 
-    private async deleteSchedulingData(id: number): Promise<boolean> {
+    private async deleteSchedulingRecord(id: number): Promise<boolean> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SCHEDULING, "readwrite");
         tx.objectStore(STORE_NAME_SCHEDULING).delete(id);
@@ -114,7 +112,7 @@ class Scheduling implements SchedulingBase {
         });
     }
 
-    private async getRecordsByClient(clientId: number): Promise<SchedulingData[]> {
+    private async getRecordsByClient(clientId: number): Promise<SchedulingRecord[]> {
         const db = await openDB();
         const tx = db.transaction(STORE_NAME_SCHEDULING, "readonly");
         const index = tx.objectStore(STORE_NAME_SCHEDULING).index("clientMdmId");
@@ -125,24 +123,8 @@ class Scheduling implements SchedulingBase {
             request.onerror = () => reject(request.error);
         });
 
-        /*const db = await openDB();
-        const tx = db.transaction(STORE_NAME_SCHEDULING, "readonly");
-        const request = tx.objectStore(STORE_NAME_SCHEDULING).getAll();
-
-        return new Promise((resolve, reject) => {
-            request.onsuccess = () => {
-
-                const allRecords = request.result || [];
-                const filtered = allRecords.filter(
-                    (item: SchedulingData) => item?.data.clientMdmId === clientId
-                );
-                resolve(filtered);
-            };
-            request.onerror = () => reject(request.error);
-        });*/
-
     }
 
 }
 
-export const scheduling = new Scheduling();
+export const schedulingIndexedDB = new Scheduling();

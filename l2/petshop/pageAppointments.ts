@@ -7,5 +7,5 @@ import { customElement } from 'lit/decorators.js';
 export class PageAppointments extends CollabPageElement { 
     initPage() {
 
-    }
+    } 
 }

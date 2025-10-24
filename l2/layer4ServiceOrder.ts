@@ -1,58 +1,51 @@
 /// <mls shortName="layer4ServiceOrder" project="102009" enhancement="_blank" />
 
-export interface ServiceOrderData {
+export interface ServiceOrderRecord {
   id?: number,
-  data: ServiceOrderRecord,
+  details: ServiceOrderDetails,
   version?: string,
 }
 
 export enum ServiceOrderStatus {
-  'WAITING' = 'WAITING',
-  'IN_PROGRESS' = 'IN_PROGRESS',
-  'READY_FOR_COLLECTION' = 'READY_FOR_COLLECTION',
-  'BILLED' = 'BILLED',
-  'CANCELED' = 'CANCELED'
+  WAITING = 'WAITING',
+  IN_PROGRESS = 'IN_PROGRESS',
+  READY_FOR_COLLECTION = 'READY_FOR_COLLECTION',
+  BILLED = 'BILLED',
+  CANCELED = 'CANCELED'
 };
 
-interface ServiceOrderRecord {
+export interface ServiceOrderDetails {
   schedulingId: number;
-  clientMdmId: number;
-  petMdmId: number;
-  employeeMdmId: number;
-  serviceMdmId: number;
   executionDateTime: string;
   status: ServiceOrderStatus;
   totalAmount: number;
-  jsonBin: ServiceOrderJsonBin;
-}
-
-interface ServiceOrderJsonBin {
   client: {
+    clientMdmId: number;
     name: string;
     phone: string;
   };
   pet: {
+    petMdmId: number;
     name: string;
     breed: string;
   };
   employee: {
+    employeeMdmId: number;
     name: string;
   };
-  serviceProvided: ServiceProvided;
+  serviceProvided: {
+    serviceMdmId: number;
+    name: string;
+    priceCharged: number;
+  };
   notes: string;
   isExternalAuthorization: boolean;
   history: ServiceOrderHistoryEntry[];
+
 }
 
-
-interface ServiceOrderHistoryEntry {
+export interface ServiceOrderHistoryEntry {
   date: string;
   description: string;
   login: string;
-}
-
-
-interface ServiceProvided {
-  name: string;
-  priceCharged: number;
 }

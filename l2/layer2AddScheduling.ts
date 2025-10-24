@@ -1,9 +1,8 @@
 /// <mls shortName="layer2AddScheduling" project="102009" enhancement="_blank" />
 
 import * as layer3 from "./_102009_layer3AddScheduling";
-import { SchedulingData } from "./_102009_layer4Scheduling";
-import { Ctx } from "./_102009_layer1Context";
-import { ResponseBase } from "./_102009_layer4ResReqBase";
+import { SchedulingRecord, ResponseBase } from "./_102009_commonGlobal";
+import { Ctx } from "./_102009_commonLocal";
 
 export async function addScheduling(ctx: Ctx, data: Record<string, any> | undefined): Promise<ResponseBase> {
 
@@ -17,7 +16,7 @@ export async function addScheduling(ctx: Ctx, data: Record<string, any> | undefi
     try {
 
         if (!data) throw new Error('[layer2AddScheduling]:Into the data');
-        ret.data = await layer3.addScheduling(ctx, data as SchedulingData);
+        ret.data = await layer3.addScheduling(ctx, data as SchedulingRecord);
         return ret;
 
     } catch (e: any) {

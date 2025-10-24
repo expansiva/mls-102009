@@ -1,4 +1,4 @@
-/// <mls shortName="layer4ResReqBase" project="102009" enhancement="_blank" folder="" />
+/// <mls shortName="commonLocal" project="102009" enhancement="_blank" folder="" />
 
  import { ICANTest, ICANIntegration, ICANSchema  } from './_100554_tsTestAST';
  export const integrations: ICANIntegration[] = [];

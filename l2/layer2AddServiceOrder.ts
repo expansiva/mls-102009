@@ -1,9 +1,9 @@
 /// <mls shortName="layer2AddServiceOrder" project="102009" enhancement="_blank" />
 
 import * as layer3 from "./_102009_layer3AddServiceOrder";
-import { ServiceOrderData } from "./_102009_layer4ServiceOrder";
-import { Ctx } from "./_102009_layer1Context";
-import { ResponseBase } from "./_102009_layer4ResReqBase";
+import { ServiceOrderRecord } from "./_102009_layer4ServiceOrder";
+import { Ctx } from "./_102009_commonLocal";
+import { ResponseBase } from "./_102009_commonGlobal"; 
 
 export async function addServiceOrder(ctx: Ctx, data: Record<string, any> | undefined): Promise<ResponseBase> {
 
@@ -17,7 +17,7 @@ export async function addServiceOrder(ctx: Ctx, data: Record<string, any> | unde
     try {
 
         if (!data) throw new Error('[layer2AddServiceOrder]:Into the data');
-        ret.data = await layer3.addServiceOrder(ctx, data as ServiceOrderData);
+        ret.data = await layer3.addServiceOrder(ctx, data as ServiceOrderRecord);
         return ret;
 
     } catch (e: any) {

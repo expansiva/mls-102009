@@ -5,8 +5,7 @@ import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { setState } from '_100554_/l2/collabState';
 import { petshopExec } from "./_102009_layer1Exec";
-import { SchedulingData } from './_102009_layer4Scheduling'
-import { RequestSchedulingList } from './_102009_layer4SchedulingBase'
+import { SchedulingRecord, RequestSchedulingList } from './_102009_commonGlobal'
 
 @customElement('petshop--organism-admin-bookings-102009')
 export class OrganismAdminBookings extends IcaOrganismBase {
@@ -23,8 +22,8 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 	@property() private filterDateStart = '';
 	@property() private filterDateEnd = '';
 
-	@state() private schedulings: SchedulingData[] = [];
-	@state() private filtered: SchedulingData[] = [];
+	@state() private schedulings: SchedulingRecord[] = [];
+	@state() private filtered: SchedulingRecord[] = [];
 	@state() private currentPage = 1;
 
 	@propertyDataSource() labelError?: string;
@@ -54,7 +53,7 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 
 	}
 
-	private handleEdit(e: MouseEvent, scheduling: SchedulingData) {
+	private handleEdit(e: MouseEvent, scheduling: SchedulingRecord) {
 		e.preventDefault();
 		setState('ui.petshop.admin.scheduling.selected', scheduling);
 		if (this.linkToEdit) this.linkToEdit.click();
@@ -87,12 +86,12 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 		let list = [...this.schedulings];
 		if (this.search) {
 			list = list.filter(b =>
-				b.data.jsonBin.tutor.name.toLowerCase().includes(this.search) ||
-				b.data.jsonBin.pet.name.toLowerCase().includes(this.search)
+				b.details.tutor.name.toLowerCase().includes(this.search) ||
+				b.details.pet.name.toLowerCase().includes(this.search)
 			);
 		}
 		if (this.statusFilter) {
-			list = list.filter(b => b.data.status === this.statusFilter);
+			list = list.filter(b => b.details.status === this.statusFilter);
 		}
 
 		let startDate: Date | null = this.filterDateStart ? new Date(this.filterDateStart) : null;
@@ -116,7 +115,7 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 
 		if (startDate || endDate) {
 			list = list.filter(b => {
-				const date = new Date(b.data.startDateTime);
+				const date = new Date(b.details.startDateTime);
 				const d = new Date(date);
 				d.setUTCHours(0, 0, 0, 0);
 				if (startDate) startDate.setUTCHours(0, 0, 0, 0);
@@ -136,7 +135,7 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 		}
 
 		if (this.filterService) {
-			list = list.filter(b => b.data.jsonBin.service.name === this.filterService);
+			list = list.filter(b => b.details.service.name === this.filterService);
 		}
 		this.currentPage = 1;
 		this.filtered = list;
@@ -214,13 +213,13 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 		<tbody>
 			${this.paginated.map(b => html`
 			<tr>
-				<td>${b.data.jsonBin.tutor.name}</td>
-				<td>${b.data.jsonBin.pet.name}</td>
-				<td>${b.data.jsonBin.service.name}</td>
-				<td>${new Date(b.data.startDateTime).toLocaleString()}</td>
+				<td>${b.details.tutor.name}</td>
+				<td>${b.details.pet.name}</td>
+				<td>${b.details.service.name}</td>
+				<td>${new Date(b.details.startDateTime).toLocaleString()}</td>
 				<td>
-					<span class="admin-bookings__status admin-bookings__${this.getStatusCls(b.data.status)}">
-					${this.getStatusLabel(b.data.status)}
+					<span class="admin-bookings__status admin-bookings__${this.getStatusCls(b.details.status)}">
+					${this.getStatusLabel(b.details.status)}
 					</span>
 				</td>
 				<td class="admin-bookings__action_td">
@@ -262,7 +261,7 @@ export class OrganismAdminBookings extends IcaOrganismBase {
 
 	}
 	private getUniqueServices() {
-		const services = this.schedulings.map(b => b.data.jsonBin.service.name);
+		const services = this.schedulings.map(b => b.details.service.name);
 		return [...new Set(services)];
 	}
 }
