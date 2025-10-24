@@ -5,19 +5,18 @@ import { propertyDataSource } from './_100554_collabDecorators';
 import { setState, getState } from '_100554_/l2/collabState';
 import { exec } from "./_102019_layer1Exec";
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { RequestMDMAdd, RequestMDMAddRelationship, RequestMDMGetById, RequestMDMGetListByIds, RequestMDMUpd  } from "./_102019_layer4ResReq";
-import { MdmData,  MdmType, RegistrationDataPet  } from "./_102019_layer4Mdm";
+import { MdmRecord,  MdmType, RegistrationDataPet, RequestMDMAdd, RequestMDMAddRelationship, RequestMDMGetById, RequestMDMGetListByIds, RequestMDMUpd  } from "./_102019_commonGlobal";
 
 @customElement('petshop--organism-view-my-pets-102009')
 export class organismViewMyPets extends IcaOrganismBase {
 
   private editIndex = -1;
 
-  @state() mdmData: MdmData | undefined;
+  @state() mdmData: MdmRecord | undefined;
   @state() scenary = 'list';
   @state() error = '';
   @state() loading: boolean = false;
-  @state() myPets: MdmData[] = [];
+  @state() myPets: MdmRecord[] = [];
 
   @state() filterTp: string = '';
   @state() filterTxt: string = '';
@@ -87,9 +86,9 @@ export class organismViewMyPets extends IcaOrganismBase {
       </div>`;
   }
 
-  renderItem(pet: MdmData, idx: number) {
+  renderItem(pet: MdmRecord, idx: number) {
 
-    const reg = (pet.data.registrationData as RegistrationDataPet);
+    const reg = (pet.details.registrationData as RegistrationDataPet);
     const filter = reg.species + reg.name.toLocaleLowerCase(); 
 
     return html`
@@ -161,9 +160,9 @@ export class organismViewMyPets extends IcaOrganismBase {
     
     this.changeScneray('add');
     const mdmUpd = { ...this.myPets[index] };
-    this.namePet = (mdmUpd.data.registrationData as RegistrationDataPet).name;
-    this.species = (mdmUpd.data.registrationData as RegistrationDataPet).species;
-    this.breed = (mdmUpd.data.registrationData as RegistrationDataPet).breed;
+    this.namePet = (mdmUpd.details.registrationData as RegistrationDataPet).name;
+    this.species = (mdmUpd.details.registrationData as RegistrationDataPet).species;
+    this.breed = (mdmUpd.details.registrationData as RegistrationDataPet).breed;
     this.editIndex = index;
   }
 
@@ -194,8 +193,8 @@ export class organismViewMyPets extends IcaOrganismBase {
 
     this.loading = true;
 
-    const params: MdmData = {
-      data: {
+    const params: MdmRecord = {
+      details: {
         registrationData: {
           name: this.namePet,
           species: this.species,
@@ -255,9 +254,9 @@ export class organismViewMyPets extends IcaOrganismBase {
 
     const mdmUpd = { ...this.myPets[this.editIndex] };
 
-    (mdmUpd.data.registrationData as RegistrationDataPet).name = this.namePet;
-    (mdmUpd.data.registrationData as RegistrationDataPet).species = this.species;
-    (mdmUpd.data.registrationData as RegistrationDataPet).breed = this.breed;
+    (mdmUpd.details.registrationData as RegistrationDataPet).name = this.namePet;
+    (mdmUpd.details.registrationData as RegistrationDataPet).species = this.species;
+    (mdmUpd.details.registrationData as RegistrationDataPet).breed = this.breed;
 
     
     const req: RequestMDMUpd = {
@@ -283,7 +282,7 @@ export class organismViewMyPets extends IcaOrganismBase {
 
   }
 
-  private async addRelationship(pet: MdmData) {
+  private async addRelationship(pet: MdmRecord) {
 
     if (!pet || !this.mdmData) {
       this.error = 'Falata parametros para fazer o relacionamento';
@@ -354,8 +353,8 @@ export class organismViewMyPets extends IcaOrganismBase {
 
     const ids: number[] = [];
 
-    if (this.mdmData.data.relationships) {
-      this.mdmData.data.relationships.forEach((r) => {
+    if (this.mdmData.details.relationships) {
+      this.mdmData.details.relationships.forEach((r) => {
 
         if (r.type === 'R_PF_OWNER_OF_PET') ids.push(r.relatedMdmId);
 

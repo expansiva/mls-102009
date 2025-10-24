@@ -4,15 +4,15 @@ import { customElement, state } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState } from '_100554_/l2/collabState';
 import { exec } from "./_102019_layer1Exec";
-import { RequestMDMGetListByType } from "./_102019_layer4ResReq";
-import { MdmData, MdmType } from "./_102019_layer4Mdm";
-import { mdm } from "./_102019_layer1MDMDb";
+import { mdmIndexedDB } from "./_102019_layer1MDMIndexedDB";
+import { MdmRecord, MdmType, RequestMDMGetListByType } from "./_102019_commonGlobal";
+
 
 @customElement('petshop--organism-simulate-login-102009')
 export class organismSimulateLogin extends IcaOrganismBase {
 
-    @state() users: MdmData[] = [];
-    @state() enterprise: MdmData[] = [];
+    @state() users: MdmRecord[] = [];
+    @state() enterprise: MdmRecord[] = [];
     @state() exists: boolean = false;
 
     firstUpdated() {
@@ -26,13 +26,13 @@ export class organismSimulateLogin extends IcaOrganismBase {
             <div class="form-group">
                 <label for="user-select">Selecionar Usuário</label>
                 <select id="user-select">
-                    ${this.users.map((user, index) => html`<option value="${index}">${(user.data.registrationData as any).name}</option>`)}
+                    ${this.users.map((user, index) => html`<option value="${index}">${(user.details.registrationData as any).name}</option>`)}
                 </select>
             </div>
             <div class="form-group">
                 <label for="company-select"">Selecionar Empresa</label>
                 <select id="company-select"">
-                ${this.enterprise.map((ent, index) => html`<option value="${index}" id="petshop--organism-simulate-login-102009-enterprise-${index}">${(ent.data.registrationData as any).corporateName}</option>`)}
+                ${this.enterprise.map((ent, index) => html`<option value="${index}" id="petshop--organism-simulate-login-102009-enterprise-${index}">${(ent.details.registrationData as any).corporateName}</option>`)}
                 </select>
             </div>
     
@@ -104,7 +104,7 @@ export class organismSimulateLogin extends IcaOrganismBase {
 
         try {
             await this.clearIndexedDB(dbName);
-            await mdm.openDB();
+            await mdmIndexedDB.openDB();
             const importData: any = database;
 
             const db: any = await new Promise((resolve, reject) => {
@@ -209,7 +209,7 @@ export class organismSimulateLogin extends IcaOrganismBase {
 let database = {
     "mdm_data": [
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "cpf": "43265194876",
                     "name": "Guilherme Pereira",
@@ -271,7 +271,7 @@ let database = {
             "id": 1
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "cpf": "58208533009",
                     "name": "Guilherme Santiago",
@@ -323,7 +323,7 @@ let database = {
             "id": 2
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "cpf": "42214306056",
                     "name": "Lucas Mafra",
@@ -375,7 +375,7 @@ let database = {
             "id": 3
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "cpf": "80196597064",
                     "name": "Gilberto Pereira",
@@ -427,7 +427,7 @@ let database = {
             "id": 4
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "cpf": "89375309029",
                     "name": "Roberius",
@@ -509,7 +509,7 @@ let database = {
             "id": 5
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "cpf": "14116399019",
                     "name": "Maria Beatriz",
@@ -591,7 +591,7 @@ let database = {
             "id": 6
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "cnpj": "31649763000191",
                     "corporateName": "PetLove Comércio de Produtos para Animais LTDA",
@@ -655,7 +655,7 @@ let database = {
             "id": 7
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "cnpj": "75095916000171",
                     "corporateName": "Bicho Feliz Comércio de Animais e Acessórios LTDA",
@@ -704,7 +704,7 @@ let database = {
             "id": 8
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Rex",
                     "species": "dog",
@@ -733,7 +733,7 @@ let database = {
             "id": 9
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Mimi",
                     "species": "cat",
@@ -762,7 +762,7 @@ let database = {
             "id": 10
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Thor",
                     "species": "dog",
@@ -791,7 +791,7 @@ let database = {
             "id": 11
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Luna",
                     "species": "cat",
@@ -820,7 +820,7 @@ let database = {
             "id": 12
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Nina",
                     "species": "dog",
@@ -849,7 +849,7 @@ let database = {
             "id": 13
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Toby",
                     "species": "dog",
@@ -878,7 +878,7 @@ let database = {
             "id": 14
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Mel",
                     "species": "cat",
@@ -907,7 +907,7 @@ let database = {
             "id": 15
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Zeca",
                     "species": "bird",
@@ -936,7 +936,7 @@ let database = {
             "id": 16
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Bob",
                     "species": "dog",
@@ -965,7 +965,7 @@ let database = {
             "id": 17
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Pipoca",
                     "species": "others",
@@ -994,7 +994,7 @@ let database = {
             "id": 18
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Ração Premium Cães Adultos 15kg",
                     "descriptionShort": "Ração balanceada para cães adultos de médio e grande porte."
@@ -1014,7 +1014,7 @@ let database = {
             "id": 19
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Areia Sanitária Granulada 4kg",
                     "descriptionShort": "Areia higiênica com alta absorção e controle de odor para gatos."
@@ -1034,7 +1034,7 @@ let database = {
             "id": 20
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Coleira Antipulgas e Carrapatos",
                     "descriptionShort": "Proteção de até 8 meses contra pulgas e carrapatos."
@@ -1054,7 +1054,7 @@ let database = {
             "id": 21
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Brinquedo Mordedor de Borracha",
                     "descriptionShort": "Mordedor resistente e atóxico para cães de todos os portes."
@@ -1074,7 +1074,7 @@ let database = {
             "id": 22
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Shampoo Neutro para Cães e Gatos 500ml",
                     "descriptionShort": "Limpeza suave e fragrância agradável para pelagens sensíveis."
@@ -1094,7 +1094,7 @@ let database = {
             "id": 23
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Caminha Acolchoada Pet Média",
                     "descriptionShort": "Cama macia e lavável, ideal para cães e gatos de porte médio."
@@ -1114,7 +1114,7 @@ let database = {
             "id": 24
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Coleira com Guia Refletiva",
                     "descriptionShort": "Coleira ajustável com guia resistente e fita refletiva para passeios noturnos."
@@ -1134,7 +1134,7 @@ let database = {
             "id": 25
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Comedouro e Bebedouro Duplo Inox",
                     "descriptionShort": "Tigela dupla em aço inoxidável com suporte antiderrapante."
@@ -1154,7 +1154,7 @@ let database = {
             "id": 26
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Petisco Natural de Frango 80g",
                     "descriptionShort": "Snack saudável e sem corantes artificiais, feito com frango desidratado."
@@ -1174,7 +1174,7 @@ let database = {
             "id": 27
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Casa Plástica Pet Pequena",
                     "descriptionShort": "Abrigo leve, ventilado e fácil de limpar para cães e gatos de pequeno porte."
@@ -1194,7 +1194,7 @@ let database = {
             "id": 28
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Banho Completo",
                     "descriptionShort": "Banho com shampoo neutro, secagem e perfume suave.",
@@ -1223,7 +1223,7 @@ let database = {
             "id": 29
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Tosa Higiênica",
                     "descriptionShort": "Tosa leve em regiões íntimas e patas, mantendo o conforto do pet.",
@@ -1252,7 +1252,7 @@ let database = {
             "id": 30
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Tosa Completa",
                     "descriptionShort": "Tosa completa conforme o padrão da raça ou preferência do tutor.",
@@ -1281,7 +1281,7 @@ let database = {
             "id": 31
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Hidratação de Pelagem",
                     "descriptionShort": "Tratamento com produtos específicos para brilho e maciez dos pelos.",
@@ -1310,7 +1310,7 @@ let database = {
             "id": 32
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Corte de Unhas",
                     "descriptionShort": "Corte seguro de unhas para cães e gatos, com ferramentas esterilizadas.",
@@ -1339,7 +1339,7 @@ let database = {
             "id": 33
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Limpeza de Ouvidos",
                     "descriptionShort": "Higienização com produtos específicos para evitar infecções auriculares.",
@@ -1368,7 +1368,7 @@ let database = {
             "id": 34
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Consulta Veterinária",
                     "descriptionShort": "Atendimento clínico completo com veterinário parceiro do petshop.",
@@ -1397,7 +1397,7 @@ let database = {
             "id": 35
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Banho Medicamentoso",
                     "descriptionShort": "Banho terapêutico com produtos prescritos pelo veterinário.",
@@ -1426,7 +1426,7 @@ let database = {
             "id": 36
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Hospedagem Pet",
                     "descriptionShort": "Serviço de hotelzinho com monitoramento e alimentação incluída.",
@@ -1455,7 +1455,7 @@ let database = {
             "id": 37
         },
         {
-            "data": {
+            "details": {
                 "registrationData": {
                     "name": "Adestramento Básico",
                     "descriptionShort": "Treinamento comportamental inicial com reforço positivo.",
