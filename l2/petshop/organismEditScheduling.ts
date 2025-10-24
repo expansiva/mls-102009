@@ -6,10 +6,8 @@ import { setState, getState } from '_100554_/l2/collabState';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { petshopExec } from "./_102009_layer1Exec";
 import { exec } from "./_102019_layer1Exec";
-import { RequestSchedulingUpd } from './_102009_layer4SchedulingBase'
-import { RequestServiceOrderAdd, RequestServiceOrderGetById } from './_102009_layer4ServiceOrderBase'
-import { SchedulingData, SchedulingStatus } from './_102009_layer4Scheduling'
-import { ServiceOrderData, ServiceOrderStatus } from './_102009_layer4ServiceOrder'
+import { RequestSchedulingUpd, RequestServiceOrderAdd, RequestServiceOrderGetById, SchedulingRecord, SchedulingStatus, ServiceOrderRecord, ServiceOrderStatus } from './_102009_commonGlobal'
+
 import { MdmData, RegistrationDataPF, RegistrationDataPJ, MdmType, RegistrationDataService, ServiceRecord } from "./_102019_layer4Mdm";
 import { RequestMDMGetListByIds, RequestMDMGetById } from "./_102019_layer4ResReq";
 
@@ -18,11 +16,11 @@ export class organismEditScheduling extends IcaOrganismBase {
 
     @state() loadingCancel: boolean = false;
     @state() loadingConfirm: boolean = false;
-    @state() schedulingData?: SchedulingData;
+    @state() schedulingData?: SchedulingRecord;
     @state() employees: MdmData[] = [];
     @state() employerSelected?: MdmData;
     @state() service?: MdmData;
-    @state() orderData?: ServiceOrderData;
+    @state() orderData?: ServiceOrderRecord;
 
     @propertyDataSource() labelError?: string;
     @propertyDataSource() labelOk?: string;
@@ -30,29 +28,29 @@ export class organismEditScheduling extends IcaOrganismBase {
 
     async firstUpdated(_changedProperties: Map<PropertyKey, unknown>) {
         super.firstUpdated(_changedProperties);
-        const data: SchedulingData = getState('ui.petshop.admin.scheduling.selected');
+        const data: SchedulingRecord = getState('ui.petshop.admin.scheduling.selected');
         this.schedulingData = data;
-        await this.getService(data.data.serviceMdmId);
+        await this.getService(data.details.service.serviceMdmId);
         await this.getEmployers();
-        if (this.schedulingData.data.serviceOrderId) {
-            this.getOrderData(this.schedulingData.data.serviceOrderId);
+        if (this.schedulingData.details.serviceOrderId) {
+            this.getOrderData(this.schedulingData.details.serviceOrderId);
         }
     }
 
     render() {
-        const statusText = this.schedulingData?.data.status === SchedulingStatus.CONFIRMED ? 'Confirmado' : this.schedulingData?.data.status === SchedulingStatus.CANCELED ? 'Cancelado' : 'Pendente';
-        const isPending = this.schedulingData?.data.status === SchedulingStatus.PENDING;
+        const statusText = this.schedulingData?.details.status === SchedulingStatus.CONFIRMED ? 'Confirmado' : this.schedulingData?.details.status === SchedulingStatus.CANCELED ? 'Cancelado' : 'Pendente';
+        const isPending = this.schedulingData?.details.status === SchedulingStatus.PENDING;
         return html`
         <div class="section-card">
         <h3>Detalhes do Agendamento</h3>
         <ul class="scheduling-summary">
-            <li>Nome do Cliente: <span>${this.schedulingData?.data.jsonBin.tutor.name || ''}</span></li>
-            <li>Nome do Serviço: <span>${this.schedulingData?.data.jsonBin.service.name || ''}</span></li>
-            <li>Pet: <span>${this.schedulingData?.data.jsonBin.pet.name || ''}</span></li>
-            <li>Data: <span>${new Date(this.schedulingData?.data.startDateTime || '').toLocaleString() || ''}</span></li>
+            <li>Nome do Cliente: <span>${this.schedulingData?.details.tutor.name || ''}</span></li>
+            <li>Nome do Serviço: <span>${this.schedulingData?.details.service.name || ''}</span></li>
+            <li>Pet: <span>${this.schedulingData?.details.pet.name || ''}</span></li>
+            <li>Data: <span>${new Date(this.schedulingData?.details.startDateTime || '').toLocaleString() || ''}</span></li>
             <li>Status: <span>${statusText}</span></li>
 
-            ${this.schedulingData?.data.status === SchedulingStatus.PENDING ? html`
+            ${this.schedulingData?.details.status === SchedulingStatus.PENDING ? html`
                     <li class="li-edit">
 
                         <div class="form-group">
@@ -73,7 +71,7 @@ export class organismEditScheduling extends IcaOrganismBase {
             }
         </ul>
         <div class="form-actions">
-            ${this.schedulingData?.data.status === SchedulingStatus.PENDING ?
+            ${this.schedulingData?.details.status === SchedulingStatus.PENDING ?
                 html`
                     <button class="btn btn-delete" @click=${this.handleClickCancel} ?disabled=${this.loadingCancel || this.loadingConfirm} ?hidden=${!isPending}>
                         Recusar Serviço
@@ -82,7 +80,7 @@ export class organismEditScheduling extends IcaOrganismBase {
 
 
             }
-            ${this.schedulingData?.data.status === SchedulingStatus.PENDING ?
+            ${this.schedulingData?.details.status === SchedulingStatus.PENDING ?
                 html`<button class="btn btn-save" @click=${this.handleClickGenerateOS} ?disabled=${this.loadingConfirm || this.loadingCancel} ?hidden=${!isPending}>
                     Aprovar Serviço
                     ${this.loadingConfirm ? html`<span class="loading"></span>` : html``}
@@ -105,21 +103,21 @@ export class organismEditScheduling extends IcaOrganismBase {
             CANCELED: 'Cancelado',
             READY_FOR_COLLECTION: 'Pronto para retirada',
         };
-        const statusText = status[this.orderData?.data?.status || ''];
+        const statusText = status[this.orderData?.details?.status || ''];
 
         return html`
         
-            ${this.schedulingData?.data.serviceOrderId ? html`
+            ${this.schedulingData?.details.serviceOrderId ? html`
                 <div class="section-card">
                     <h3>Detalhes Ordem de serviço </h3>
 
                     <ul class="scheduling-summary">
-                        <li>Nome do Funcionario: <span>${this.orderData?.data.jsonBin.employee.name || ''}</span></li>
+                        <li>Nome do Funcionario: <span>${this.orderData?.details.employee.name || ''}</span></li>
                         <li>
                             Valor:
                             <span>
-                                ${this.orderData?.data.totalAmount != null
-                    ? this.orderData.data.totalAmount.toLocaleString('pt-BR', {
+                                ${this.orderData?.details.totalAmount != null
+                    ? this.orderData.details.totalAmount.toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL',
                     })
@@ -210,12 +208,12 @@ export class organismEditScheduling extends IcaOrganismBase {
             this.labelError = 'Nenhum agendamento selecionado!';
             return;
         }
-        if (this.schedulingData.data.status !== SchedulingStatus.PENDING) {
+        if (this.schedulingData.details.status !== SchedulingStatus.PENDING) {
             this.labelError = 'Ação permitida apenas para agendamentos pendentes';
             return;
         }
         this.loadingCancel = true;
-        this.schedulingData.data.status = SchedulingStatus.CANCELED;
+        this.schedulingData.details.status = SchedulingStatus.CANCELED;
         const req: RequestSchedulingUpd = {
             action: 'SchedulingUpd',
             inDeveloped: true,
@@ -238,12 +236,12 @@ export class organismEditScheduling extends IcaOrganismBase {
             return;
         }
 
-        if (this.schedulingData.data.status !== SchedulingStatus.PENDING) {
+        if (this.schedulingData.details.status !== SchedulingStatus.PENDING) {
             this.labelError = 'Ação permitida apenas para agendamentos pendentes';
             return;
         }
 
-        const agendamentoDate = new Date(this.schedulingData.data.startDateTime);
+        const agendamentoDate = new Date(this.schedulingData.details.startDateTime);
         const agora = new Date();
 
         if (agendamentoDate < agora) {
@@ -260,33 +258,30 @@ export class organismEditScheduling extends IcaOrganismBase {
 
         const nameEmployer = this.employerSelected.data.type === MdmType.PessoaFisica ? (this.employerSelected.data.registrationData as RegistrationDataPF).name : (this.employerSelected.data.registrationData as RegistrationDataPJ).fantasyName;
 
-        const data: ServiceOrderData = {
-            data: {
-                clientMdmId: this.schedulingData.data.clientMdmId,
-                employeeMdmId: this.employerSelected.id,
+        const data: ServiceOrderRecord = {
+            details: {
                 schedulingId: this.schedulingData.id,
-                petMdmId: this.schedulingData.data.petMdmId,
-                serviceMdmId: this.service?.id || 0,
-
                 status: ServiceOrderStatus.WAITING,
                 totalAmount: (this.service?.data as ServiceRecord).serviceData?.priceRegular || 0,
-
                 executionDateTime: new Date(Date.now()).toISOString(),
-                jsonBin: {
-                    client: this.schedulingData.data.jsonBin.tutor,
-                    pet: this.schedulingData.data.jsonBin.pet,
-                    serviceProvided:
-                    {
-                        priceCharged: (this.service?.data as ServiceRecord).serviceData?.priceRegular || 0,
-                        name: (this.service?.data.registrationData as RegistrationDataService).name || '',
-                    },
-                    employee: {
-                        name: nameEmployer
-                    },
-                    history: [],
-                    isExternalAuthorization: false,
-                    notes: ''
-                }
+                client:this.schedulingData.details.tutor
+                ,
+                pet: this.schedulingData.details.pet
+                ,
+                serviceProvided:
+                {   
+                    serviceMdmId:this.service?.id || 0,
+                    priceCharged: (this.service?.data as ServiceRecord).serviceData?.priceRegular || 0,
+                    name: (this.service?.data.registrationData as RegistrationDataService).name || '',
+                },
+                employee: {
+                    employeeMdmId: this.employerSelected.id || 0,
+                    name: nameEmployer
+                },
+                history: [],
+                isExternalAuthorization: false,
+                notes: ''
+
             }
         }
 
@@ -305,7 +300,7 @@ export class organismEditScheduling extends IcaOrganismBase {
 
         this.orderData = response.data;
 
-        const ok = await this.updateScheduling((response.data as ServiceOrderData).id);
+        const ok = await this.updateScheduling((response.data as ServiceOrderRecord).id);
         if (ok) {
             this.loadingConfirm = false;
         }
@@ -323,8 +318,8 @@ export class organismEditScheduling extends IcaOrganismBase {
             return false;
         }
 
-        this.schedulingData.data.status = SchedulingStatus.CONFIRMED;
-        this.schedulingData.data.serviceOrderId = id;
+        this.schedulingData.details.status = SchedulingStatus.CONFIRMED;
+        this.schedulingData.details.serviceOrderId = id;
 
         const req: RequestSchedulingUpd = {
             action: 'SchedulingUpd',

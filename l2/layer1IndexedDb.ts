@@ -34,17 +34,32 @@ function migrationScheduling(event: IDBVersionChangeEvent, request: IDBOpenDBReq
         store = request.transaction!.objectStore(STORE_NAME_SCHEDULING);
     }
 
+    // Migração de dados (se necessário)
+    if (oldVersion === 2) {
+        // exemplo: corrigir estrutura ou adicionar campos novos nos registros existentes
+
+    }
+
+    if (oldVersion === 3) {
+        // exemplo: corrigir estrutura ou adicionar campos novos nos registros existentes
+
+    }
+
+    if (oldVersion === 4) {
+        // exemplo: corrigir estrutura ou adicionar campos novos nos registros existentes
+
+    }
+
     // Garante índices
     if (!store.indexNames.contains("clientMdmId")) {
-        store.createIndex("clientMdmId", "data.clientMdmId", { unique: false });
+        store.createIndex("clientMdmId", "details.tutor.clientMdmId", { unique: false });
     }
 
     if (!store.indexNames.contains("startDateTime")) {
-        store.createIndex("startDateTime", "data.startDateTime", { unique: false });
+        store.createIndex("startDateTime", "details.startDateTime", { unique: false });
     }
 
-    // Migração de dados (se necessário)
-    if (oldVersion != newVersion) {
+    if (oldVersion === 5) {
         // exemplo: corrigir estrutura ou adicionar campos novos nos registros existentes
 
     }
@@ -61,7 +76,7 @@ function migrationServiceOrder(event: IDBVersionChangeEvent, request: IDBOpenDBR
 
     if (!db.objectStoreNames.contains(STORE_NAME_SERVICEORDER)) {
         store = db.createObjectStore(STORE_NAME_SERVICEORDER, { keyPath: "id", autoIncrement: true });
-    }else {
+    } else {
         store = request.transaction!.objectStore(STORE_NAME_SERVICEORDER);
     }
 

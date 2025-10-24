@@ -9,8 +9,7 @@ import { exec } from "./_102019_layer1Exec";
 import { MdmData, MdmType, RegistrationDataPF, RegistrationDataPet, RegistrationDataService } from "./_102019_layer4Mdm";
 import { RequestMDMGetListByIds, RequestMDMGetList, RequestMDMGetListByType } from "./_102019_layer4ResReq";
 import { petshopExec } from "./_102009_layer1Exec";
-import { RequestSchedulingAdd } from './_102009_layer4SchedulingBase'
-import { SchedulingData, SchedulingStatus } from './_102009_layer4Scheduling'
+import { RequestSchedulingAdd, SchedulingRecord, SchedulingStatus } from './_102009_commonGlobal'
 
 @customElement('petshop--organism-admin-scheduling-102009')
 export class organismAdminScheduling extends IcaOrganismBase {
@@ -71,7 +70,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
         <h2>Novo Agendamento</h2>
         <div class="form-group">
             <label for="user-search">Buscar por nome, e-mail ou ID</label>
-            <input type="text" id="user-search" placeholder="Digite para pesquisar" @input=${(e: KeyboardEvent) => { this.searchText = (e.target as HTMLInputElement).value}} @keydown=${(e: KeyboardEvent)=>{if (e.key === 'Enter') setState('ui.petshop.admin.organismAdminScheduling.action', 'search')}}>
+            <input type="text" id="user-search" placeholder="Digite para pesquisar" @input=${(e: KeyboardEvent) => { this.searchText = (e.target as HTMLInputElement).value }} @keydown=${(e: KeyboardEvent) => { if (e.key === 'Enter') setState('ui.petshop.admin.organismAdminScheduling.action', 'search') }}>
         </div>
         <div class="form-actions"">
             <button class="btn btn-save"  @click="${this.handleSearch}">Pesquisar</button>
@@ -85,7 +84,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
 `
     }
 
-    renderItemList(user:MdmData) {
+    renderItemList(user: MdmData) {
         return html`
         <li class="user-item" @click=${() => this.handleContinue(user)}>
             <span class="icon">👤</span>
@@ -234,30 +233,31 @@ export class organismAdminScheduling extends IcaOrganismBase {
             phoneClient = this.userSelected.data.contactData.phone[0].number;
         }
 
-        const params: SchedulingData = {
-            data: {
-                clientMdmId: this.userSelected.id || 0,
-                petMdmId: this.petSelected.id || 0,
-                serviceMdmId: this.serviceSelected.id || 0,
+        const params: SchedulingRecord = {
+            details: {
+                
                 startDateTime: new Date(this.date || '').toISOString(),
-                status: SchedulingStatus.PENDING,
+                status: SchedulingStatus.PENDING, 
                 serviceOrderId: null,
-                jsonBin: {
-                    tutor: {
-                        name: (this.userSelected.data.registrationData as RegistrationDataPF).name,
-                        phone: phoneClient,
-                    },
-                    pet: {
-                        name: (this.petSelected.data.registrationData as RegistrationDataPet).name,
-                        species: (this.petSelected.data.registrationData as RegistrationDataPet).species,
-                        breed: (this.petSelected.data.registrationData as RegistrationDataPet).breed,
-                        allergies: [],
-                    },
-                    service: {
-                        name: (this.serviceSelected.data.registrationData as RegistrationDataService).name,
-                        serviceCode: (this.serviceSelected.data.registrationData as RegistrationDataService).serviceCode,
-                    },
+
+                tutor: {
+                    clientMdmId: this.userSelected.id || 0,
+                    name: (this.userSelected.data.registrationData as RegistrationDataPF).name,
+                    phone: phoneClient,
                 },
+                pet: {
+                    petMdmId: this.petSelected.id || 0,
+                    name: (this.petSelected.data.registrationData as RegistrationDataPet).name,
+                    species: (this.petSelected.data.registrationData as RegistrationDataPet).species,
+                    breed: (this.petSelected.data.registrationData as RegistrationDataPet).breed,
+                    allergies: [],
+                },
+                service: {
+                    serviceMdmId: this.serviceSelected.id || 0,
+                    name: (this.serviceSelected.data.registrationData as RegistrationDataService).name,
+                    serviceCode: (this.serviceSelected.data.registrationData as RegistrationDataService).serviceCode,
+                },
+
             }
         }
         const req: RequestSchedulingAdd = {
@@ -305,7 +305,7 @@ export class organismAdminScheduling extends IcaOrganismBase {
         }
         this.users = (mdm.data as MdmData[]).filter((item) => item.data.type === MdmType.PessoaFisica);
         this.loading = false;
-        setState('ui.petshop.admin.organismAdminScheduling.action','')
+        setState('ui.petshop.admin.organismAdminScheduling.action', '')
 
     }
 }

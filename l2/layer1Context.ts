@@ -1,10 +1,10 @@
 /// <mls shortName="layer1Context" project="102009" enhancement="_blank" />
 
-import { scheduling } from "./_102009_layer1SchedulingDB";
-import { serviceOrder } from "./_102009_layer1ServiceOrderDB";
-import { SchedulingBase } from "./_102009_layer4SchedulingBase";
-import { ServiceOrderBase } from "./_102009_layer4ServiceOrderBase";
-import { RequestBase } from "./_102009_layer4ResReqBase";
+import {schedulingIndexedDB}  from "./_102009_layer1SchedulingIndexedDB";
+import { serviceOrderIndexedDB } from "./_102009_layer1ServiceOrderIndexedDB";
+
+import { Ctx } from "./_102009_commonLocal"; 
+import { RequestBase } from "./_102009_commonGlobal";
 
 
 export function createContext(param: RequestBase): Ctx {
@@ -14,8 +14,10 @@ export function createContext(param: RequestBase): Ctx {
     const ctx: Ctx = {
 
         io: {
-            scheduling,
-            serviceOrder
+            petshopDB: {
+                scheduling: schedulingIndexedDB,
+                serviceOrder: serviceOrderIndexedDB
+            }
         }
     }
 
@@ -23,12 +25,5 @@ export function createContext(param: RequestBase): Ctx {
 
 }
 
-export interface Ctx {
 
-    io: {
-        scheduling: SchedulingBase
-        serviceOrder: ServiceOrderBase
-    }
-
-} 
 

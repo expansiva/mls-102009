@@ -12,17 +12,29 @@ petshop--page-appointments-102009 {
     }
 
     main {
-        flex: 1 0 auto;
         display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 1rem;
-        justify-content: center;
+        flex-direction: column;
+        gap: .5rem;
         padding: @space-32 0 @space-32 0;
         background: @bg-secondary-color;
 
+        petshop--organism-view-my-appointments-102009 {
+            max-width: 978px;
+            margin: 0 auto;
+        }
+
         @media (max-width: @breakpoint-medium) {
             padding: @space-16 0 @space-16 0;
+        }
+
+        #agendamento-core-main-1 {
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 1rem;
+            justify-content: center;
+
         }
     }
 

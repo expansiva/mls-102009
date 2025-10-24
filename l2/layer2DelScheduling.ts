@@ -1,8 +1,8 @@
 /// <mls shortName="layer2DelScheduling" project="102009" enhancement="_blank" />
 
 import * as layer3 from "./_102009_layer3DelScheduling";
-import { Ctx } from "./_102009_layer1Context";
-import { ResponseBase } from "./_102009_layer4ResReqBase";
+import { Ctx } from "./_102009_commonLocal";
+import { ResponseBase } from "./_102009_commonGlobal"; 
 
 export async function delScheduling(ctx: Ctx, data: Record<string, any> | undefined): Promise<ResponseBase> {
 

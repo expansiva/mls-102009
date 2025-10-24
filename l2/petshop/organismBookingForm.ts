@@ -6,8 +6,7 @@ import { propertyDataSource } from './_100554_collabDecorators';
 import { setState, getState } from '_100554_/l2/collabState';
 import { exec } from "./_102019_layer1Exec";
 import { petshopExec } from "./_102009_layer1Exec";
-import { SchedulingData, SchedulingStatus } from './_102009_layer4Scheduling'
-import { RequestSchedulingAdd } from './_102009_layer4SchedulingBase'
+import { SchedulingRecord, SchedulingStatus, RequestSchedulingAdd } from './_102009_commonGlobal'
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { RequestMDMGetListByIds, RequestMDMGetListByType } from "./_102019_layer4ResReq";
 import { MdmData, RegistrationDataService, RegistrationDataPF, RegistrationDataPet, MdmType } from "./_102019_layer4Mdm";
@@ -196,7 +195,7 @@ export class organismBookingForm extends IcaOrganismBase {
       return
     }
 
-  
+
     const dataHoraInformada = new Date(`${this.data}T${this.horario}`);
     const agora = new Date();
 
@@ -228,30 +227,31 @@ export class organismBookingForm extends IcaOrganismBase {
       phoneClient = this.mdmData.data.contactData.phone[0].number;
     }
 
-    const params: SchedulingData = {
-      data: {
-        clientMdmId: this.mdmData.id || 0,
-        petMdmId: this.myPets[this.petIndex].id || 0,
-        serviceMdmId: this.services[this.serviceIndex].id || 0,
+    const params: SchedulingRecord = {
+      details: {
+
         startDateTime: utcString,
         status: SchedulingStatus.PENDING,
         serviceOrderId: null,
-        jsonBin: {
-          tutor: {
-            name: (this.mdmData.data.registrationData as RegistrationDataPF).name,
-            phone: phoneClient,
-          },
-          pet: {
-            name: (pet.data.registrationData as RegistrationDataPet).name,
-            species: (pet.data.registrationData as RegistrationDataPet).species,
-            breed: (pet.data.registrationData as RegistrationDataPet).breed,
-            allergies: [],
-          },
-          service: {
-            name: (serv.data.registrationData as RegistrationDataService).name,
-            serviceCode: (serv.data.registrationData as RegistrationDataService).serviceCode,
-          },
+
+        tutor: {
+          clientMdmId: this.mdmData.id || 0,
+          name: (this.mdmData.data.registrationData as RegistrationDataPF).name,
+          phone: phoneClient,
         },
+        pet: {
+          petMdmId: this.myPets[this.petIndex].id || 0,
+          name: (pet.data.registrationData as RegistrationDataPet).name,
+          species: (pet.data.registrationData as RegistrationDataPet).species,
+          breed: (pet.data.registrationData as RegistrationDataPet).breed,
+          allergies: [],
+        },
+        service: {
+          serviceMdmId: this.services[this.serviceIndex].id || 0,
+          name: (serv.data.registrationData as RegistrationDataService).name,
+          serviceCode: (serv.data.registrationData as RegistrationDataService).serviceCode,
+        },
+
       }
     }
     const req: RequestSchedulingAdd = {
