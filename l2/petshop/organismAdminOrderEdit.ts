@@ -6,16 +6,16 @@ import { setState, getState } from '_100554_/l2/collabState';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { petshopExec } from "./_102009_layer1Exec";
 import { exec } from "./_102019_layer1Exec";
-import { RequestServiceOrderUpd } from './_102009_layer4ServiceOrderBase'
-import { ServiceOrderRecord as ServiceOrderData, ServiceOrderStatus, } from './_102009_layer4ServiceOrder'
-import { MdmData, RegistrationDataService, RegistrationDataPF, RegistrationDataPJ, MdmType, ServiceData, ServiceRecord } from "./_102019_layer4Mdm";
-import { RequestMDMGetListByIds, RequestMDMGetById } from "./_102019_layer4ResReq";
+
+import { ServiceOrderRecord as ServiceOrderData, ServiceOrderStatus, RequestServiceOrderUpd} from "./_102009_commonGlobal";
+import { MdmRecord, RegistrationDataService, RegistrationDataPF, RegistrationDataPJ, MdmType, ServiceData, ServiceRecord, RequestMDMGetListByIds, RequestMDMGetById } from "./_102019_commonGlobal";
+
 @customElement('petshop--organism-admin-order-edit-102009')
 export class organismAdminOrderEdit extends IcaOrganismBase {
     @state() loading: boolean = false;
     @state() orderData?: ServiceOrderData;
-    @state() employees: MdmData[] = [];
-    @state() service?: MdmData;
+    @state() employees: MdmRecord[] = [];
+    @state() service?: MdmRecord;
     @propertyDataSource() labelError?: string;
     @propertyDataSource() labelOk?: string;
     @propertyDataSource() action?: string;
@@ -43,7 +43,7 @@ export class organismAdminOrderEdit extends IcaOrganismBase {
 </div>
 <div class="form-group">
 <label for="service">Serviço</label>
-<input type="text" id="service" .value=${(this.service?.data.registrationData as RegistrationDataService)?.name} readonly >
+<input type="text" id="service" .value=${(this.service?.details.registrationData as RegistrationDataService)?.name} readonly >
 </div>
 <div class="form-group">
 <label for="pet">Pet</label>
@@ -61,7 +61,7 @@ export class organismAdminOrderEdit extends IcaOrganismBase {
 @change=${this.onChangeEmployer}
 >
 ${this.employees.map((item, index) => {
-            const name = item.data.type === MdmType.PessoaFisica ? (item.data.registrationData as RegistrationDataPF).name : (item.data.registrationData as RegistrationDataPJ).fantasyName;
+            const name = item.details.type === MdmType.PessoaFisica ? (item.details.registrationData as RegistrationDataPF).name : (item.details.registrationData as RegistrationDataPJ).fantasyName;
             return html`<option value=${index}> ${name}</option>`
         })}
 </select>
@@ -102,7 +102,7 @@ ${this.labelOk ? html`<span class="ok-message">${this.labelOk}</span>` : ''}
         const selected = this.employees[+value];
         if (!selected || !selected.id) return;
         this.orderData.details.employee.employeeMdmId = selected.id;
-        const name = selected.data.type === MdmType.PessoaFisica ? (selected.data.registrationData as RegistrationDataPF).name : (selected.data.registrationData as RegistrationDataPJ).fantasyName;
+        const name = selected.details.type === MdmType.PessoaFisica ? (selected.details.registrationData as RegistrationDataPF).name : (selected.details.registrationData as RegistrationDataPJ).fantasyName;
         this.orderData.details.employee.name = name;
     }
     private async getService(id: number) {
@@ -125,8 +125,8 @@ ${this.labelOk ? html`<span class="ok-message">${this.labelOk}</span>` : ''}
             this.labelError = 'Não encontrado informações do serviço';
             return;
         }
-        if (this.service.data.relationships) {
-            this.service.data.relationships.forEach((r) => {
+        if (this.service.details.relationships) {
+            this.service.details.relationships.forEach((r) => {
                 ids.push(r.relatedMdmId);
             })
         }

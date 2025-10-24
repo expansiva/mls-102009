@@ -4,12 +4,12 @@ import { html } from 'lit';
 import { customElement, state, query } from 'lit/decorators.js';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { setState, getState } from '_100554_/l2/collabState';
-import { exec } from "./_102019_layer1Exec";
 import { petshopExec } from "./_102009_layer1Exec";
 import { SchedulingRecord, SchedulingStatus, RequestSchedulingAdd } from './_102009_commonGlobal'
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { RequestMDMGetListByIds, RequestMDMGetListByType } from "./_102019_layer4ResReq";
-import { MdmData, RegistrationDataService, RegistrationDataPF, RegistrationDataPet, MdmType } from "./_102019_layer4Mdm";
+
+import { exec } from "./_102019_layer1Exec";
+import { MdmRecord, MdmType, RequestMDMGetListByIds, RequestMDMGetListByType, RegistrationDataService, RegistrationDataPF, RegistrationDataPet } from "./_102019_commonGlobal";
 
 
 @customElement('petshop--organism-booking-form-102009')
@@ -17,9 +17,9 @@ export class organismBookingForm extends IcaOrganismBase {
 
   @query('#meusagendamentos') meusagendamentos: HTMLElement | undefined;
 
-  @state() mdmData: MdmData | undefined;
-  @state() myPets: MdmData[] = [];
-  @state() services: MdmData[] = [];
+  @state() mdmData: MdmRecord | undefined;
+  @state() myPets: MdmRecord[] = [];
+  @state() services: MdmRecord[] = [];
   @state() error = '';
   @state() loading: boolean = false;
 
@@ -43,8 +43,8 @@ export class organismBookingForm extends IcaOrganismBase {
             <label for="service">Serviço *</label>
             <select id="service" .value=${this.serviceIndex} name="service" required="" @change=${(e: KeyboardEvent) => { this.serviceIndex = +(e.target as HTMLInputElement).value }}>
               <option value="-1">Selecione</option>
-              ${this.services.map((serv: MdmData, index) => html`
-                  <option value="${index}">${(serv.data.registrationData as RegistrationDataService).name}</option>
+              ${this.services.map((serv: MdmRecord, index) => html`
+                  <option value="${index}">${(serv.details.registrationData as RegistrationDataService).name}</option>
               `)}
             </select>
           </div>
@@ -54,8 +54,8 @@ export class organismBookingForm extends IcaOrganismBase {
             <label for="service">Pet *</label>
             <select id="service" .value=${this.petIndex} name="service" required="" @change=${(e: KeyboardEvent) => { this.petIndex = +(e.target as HTMLInputElement).value }}>
               <option value="-1">Selecione</option>
-              ${this.myPets.map((serv: MdmData, index) => html`
-                  <option value="${index}">${(serv.data.registrationData as RegistrationDataService).name}</option>
+              ${this.myPets.map((serv: MdmRecord, index) => html`
+                  <option value="${index}">${(serv.details.registrationData as RegistrationDataService).name}</option>
               `)}
             </select>
           </div>
@@ -118,8 +118,8 @@ export class organismBookingForm extends IcaOrganismBase {
 
     const ids: number[] = [];
 
-    if (this.mdmData.data.relationships) {
-      this.mdmData.data.relationships.forEach((r) => {
+    if (this.mdmData.details.relationships) {
+      this.mdmData.details.relationships.forEach((r) => {
 
         if (r.type === 'R_PF_OWNER_OF_PET') ids.push(r.relatedMdmId);
 
@@ -223,8 +223,8 @@ export class organismBookingForm extends IcaOrganismBase {
 
 
     let phoneClient = '';
-    if (this.mdmData.data.contactData && this.mdmData.data.contactData.phone) {
-      phoneClient = this.mdmData.data.contactData.phone[0].number;
+    if (this.mdmData.details.contactData && this.mdmData.details.contactData.phone) {
+      phoneClient = this.mdmData.details.contactData.phone[0].number;
     }
 
     const params: SchedulingRecord = {
@@ -236,20 +236,20 @@ export class organismBookingForm extends IcaOrganismBase {
 
         tutor: {
           clientMdmId: this.mdmData.id || 0,
-          name: (this.mdmData.data.registrationData as RegistrationDataPF).name,
+          name: (this.mdmData.details.registrationData as RegistrationDataPF).name,
           phone: phoneClient,
         },
         pet: {
           petMdmId: this.myPets[this.petIndex].id || 0,
-          name: (pet.data.registrationData as RegistrationDataPet).name,
-          species: (pet.data.registrationData as RegistrationDataPet).species,
-          breed: (pet.data.registrationData as RegistrationDataPet).breed,
+          name: (pet.details.registrationData as RegistrationDataPet).name,
+          species: (pet.details.registrationData as RegistrationDataPet).species,
+          breed: (pet.details.registrationData as RegistrationDataPet).breed,
           allergies: [],
         },
         service: {
           serviceMdmId: this.services[this.serviceIndex].id || 0,
-          name: (serv.data.registrationData as RegistrationDataService).name,
-          serviceCode: (serv.data.registrationData as RegistrationDataService).serviceCode,
+          name: (serv.details.registrationData as RegistrationDataService).name,
+          serviceCode: (serv.details.registrationData as RegistrationDataService).serviceCode,
         },
 
       }

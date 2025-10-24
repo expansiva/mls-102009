@@ -1,16 +1,16 @@
 /// <mls shortName="organismAdminProductList" project="102009" folder="petshop" enhancement="_100554_enhancementLit" groupName="petshop" />
+
 import { html } from 'lit';
 import { customElement, state, query } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState } from '_100554_/l2/collabState';
-import { RequestMDMGetListByType  } from "./_102019_layer4ResReq";
-import { MdmData, RegistrationDataProduct, MdmType } from "./_102019_layer4Mdm";
 import { exec } from "./_102019_layer1Exec";
+import { MdmRecord, RegistrationDataProduct, MdmType, RequestMDMGetListByType } from "./_102019_commonGlobal";
 
 @customElement('petshop--organism-admin-product-list-102009')
 export class organismAdminProductList extends IcaOrganismBase {
 
-    @state() mdmProducts?: MdmData[];
+    @state() mdmProducts?: MdmRecord[];
     @state() filterText: string = '';
     @state() sortColumn: string = 'name';
     @state() sortDirection: 'asc' | 'desc' = 'asc';
@@ -30,53 +30,27 @@ export class organismAdminProductList extends IcaOrganismBase {
 
         const response = await exec(req);
         if (response.ok) {
-            this.mdmProducts = response.data.map((item: MdmData) => {
-                const item2: MdmData = item;
+            this.mdmProducts = response.data.map((item: MdmRecord) => {
+                const item2: MdmRecord = item;
                 return item2;
             });
         }
 
-
-        /*
-        this.products = [{ name: 'Ração Premium Cães Adultos', descriptionShort: 'Ração completa e balanceada para cães adultos.' },
-        { name: 'Areia Sanitária Biodegradável', descriptionShort: 'Areia higiênica natural e sem perfume para gatos.' },
-        { name: 'Coleira Antipulgas MaxProtect', descriptionShort: 'Proteção contra pulgas e carrapatos por até 8 meses.' },
-        { name: 'Brinquedo Mordedor Dental', descriptionShort: 'Ajuda na limpeza dos dentes e na redução do tédio.' },
-        { name: 'Shampoo Hipoalergênico PetSoft', descriptionShort: 'Fórmula suave para peles sensíveis.' },
-        { name: 'Ração Premium Gatos Castrados', descriptionShort: 'Controle de peso e saúde urinária para gatos adultos.' },
-        { name: 'Cama Pet Luxo Redonda', descriptionShort: 'Cama confortável com base antiderrapante.' },
-        { name: 'Comedouro Inox Antiderrapante', descriptionShort: 'Durável e fácil de limpar.' },
-        { name: 'Arranhador Compact CatTree', descriptionShort: 'Estrutura resistente com poste de sisal.' },
-        { name: 'Petiscos Naturais DogBites', descriptionShort: 'Sem corantes e conservantes.' },
-        { name: 'Coleira Retrátil 5m', descriptionShort: 'Ideal para passeios seguros e confortáveis.' },
-        { name: 'Tapete Higiênico Super Absorvente', descriptionShort: 'Neutraliza odores e seca rapidamente.' },
-        { name: 'Escova Dupla para Pelagem', descriptionShort: 'Remove pelos soltos e desembaraça facilmente.' },
-        { name: 'Ração Filhotes Cães Mini', descriptionShort: 'Ração balanceada para filhotes de raças pequenas.' },
-        { name: 'Cortador de Unhas PetCare', descriptionShort: 'Lâmina afiada e empunhadura ergonômica.' },
-        { name: 'Perfume Pet Vanilla', descriptionShort: 'Aroma suave e duradouro para pets.' },
-        { name: 'Ração Natural Gatos Adultos', descriptionShort: 'Feita com ingredientes naturais e sem transgênicos.' },
-        { name: 'Bolinha Interativa com Som', descriptionShort: 'Estimula o exercício e a curiosidade do pet.' },
-        { name: 'Casinha Pet Madeira Compact', descriptionShort: 'Design resistente e fácil de montar.' },
-        { name: 'Lenços Umedecidos PetClean', descriptionShort: 'Para limpeza rápida entre banhos.' },
-        { name: 'Ração Light Cães Adultos', descriptionShort: 'Ajuda no controle de peso com baixo teor de gordura.' },
-        { name: 'Brinquedo Corda Trançada', descriptionShort: 'Excelente para brincar de cabo de guerra.' },
-        { name: 'Fonte Automática para Gatos', descriptionShort: 'Mantém a água sempre fresca e filtrada.' }
-        ]*/
     }
-    // Filter products based on filterText
+
     get filteredProducts() {
         if (!this.mdmProducts) return [];
         return this.mdmProducts.filter(mdmProducts =>
-            (mdmProducts.data.registrationData as RegistrationDataProduct)?.name.toLowerCase().includes(this.filterText.toLowerCase()) ||
-            (mdmProducts.data.registrationData as RegistrationDataProduct).descriptionShort.toLowerCase().includes(this.filterText.toLowerCase())
+            (mdmProducts.details.registrationData as RegistrationDataProduct)?.name.toLowerCase().includes(this.filterText.toLowerCase()) ||
+            (mdmProducts.details.registrationData as RegistrationDataProduct).descriptionShort.toLowerCase().includes(this.filterText.toLowerCase())
         );
     }
     // Sort filtered products
     get sortedProducts() {
         const sorted = [...this.filteredProducts];
         sorted.sort((a, b) => {
-            let aVal = (a.data?.registrationData as RegistrationDataProduct)[this.sortColumn as keyof RegistrationDataProduct];
-            let bVal = (b.data?.registrationData as RegistrationDataProduct)[this.sortColumn as keyof RegistrationDataProduct];
+            let aVal = (a.details?.registrationData as RegistrationDataProduct)[this.sortColumn as keyof RegistrationDataProduct];
+            let bVal = (b.details?.registrationData as RegistrationDataProduct)[this.sortColumn as keyof RegistrationDataProduct];
             if (typeof aVal === 'string') aVal = aVal.toLowerCase();
             if (typeof bVal === 'string') bVal = bVal.toLowerCase();
             if (aVal < bVal) return this.sortDirection === 'asc' ? -1 : 1;
@@ -116,7 +90,7 @@ export class organismAdminProductList extends IcaOrganismBase {
     }
 
     // Handle edit action
-    handleEdit(e: MouseEvent, product: MdmData) {
+    handleEdit(e: MouseEvent, product: MdmRecord) {
         e.preventDefault();
         setState('ui.petshop.admin.product.selected', product);
         if (this.linkToEdit) this.linkToEdit.click();
@@ -159,8 +133,8 @@ export class organismAdminProductList extends IcaOrganismBase {
 <tbody id="petshop--organism-admin-product-list-102009-14">
 ${this.paginatedProducts.map(product => html`
 <tr>
-<td>${(product.data.registrationData as RegistrationDataProduct)?.name}</td>
-<td>${(product.data.registrationData as RegistrationDataProduct)?.descriptionShort}</td>
+<td>${(product.details.registrationData as RegistrationDataProduct)?.name}</td>
+<td>${(product.details.registrationData as RegistrationDataProduct)?.descriptionShort}</td>
 
 <td>
 <a href="#" @click="${(e: MouseEvent) => this.handleEdit(e, product)}">Editar</button>

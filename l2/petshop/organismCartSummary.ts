@@ -2,16 +2,17 @@
 
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { exec } from "./_102019_layer1Exec";
+
 import { setState, getState, subscribe, unsubscribe } from '_100554_/l2/collabState';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { RequestMDMGetListByIds  } from "./_102019_layer4ResReq";
-import { MdmData, RegistrationDataProduct,  MdmType } from "./_102019_layer4Mdm";
+
+import { MdmRecord, RequestMDMGetListByIds, RegistrationDataProduct } from "./_102019_commonGlobal";
+
 
 @customElement('petshop--organism-cart-summary-102009')
 export class organismCartSummary extends IcaOrganismBase {
 
-  @state() carProducts: MdmData[] = [];
+  @state() carProducts: MdmRecord[] = [];
 
   //--------------------------------------
 
@@ -59,9 +60,9 @@ export class organismCartSummary extends IcaOrganismBase {
       `
   }
 
-  renderItem(prod: MdmData, index: number) {
+  renderItem(prod: MdmRecord, index: number) {
 
-    const reg = (prod.data.registrationData as RegistrationDataProduct);
+    const reg = (prod.details.registrationData as RegistrationDataProduct);
     return html`
     <div class="cart-item">
       <img src="https://images.unsplash.com/photo-1544198841-10f34f31f8dd?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2NDU4NjB8MHwxfHNlYXJjaHwxfHxhdXRvbWF0aWMlMjBwZXQlMjB3YXRlciUyMGRpc3BlbnNlcnxlbnwwfHx8fDE3NTQ0MTE0MTZ8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" alt="Bebedouro Automático">

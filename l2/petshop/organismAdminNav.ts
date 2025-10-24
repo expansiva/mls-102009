@@ -5,7 +5,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState, getState } from './_100554_collabState';
 import { collab_user } from './_100554_collabIcons';
-import { MdmData, RegistrationDataPJ, AttachmentType, RegistrationDataPF, MdmType } from "./_102019_layer4Mdm";
+import { MdmRecord, RegistrationDataPJ, AttachmentType, RegistrationDataPF, MdmType } from "./_102019_commonGlobal";
 
 @customElement('petshop--organism-admin-nav-102009')
 export class OrganismAdminNav extends IcaOrganismBase {
@@ -18,9 +18,9 @@ export class OrganismAdminNav extends IcaOrganismBase {
     super.firstUpdated(_changedProperties);
     const mode: IMenuItens = getState('ui.petshop.admin.menu.selected');
     this.selected = mode || 'dashboard';
-    const logged: MdmData = getState('ui.petshop.login');
-    this.avatarUrl = logged.data.attachments?.find((item) => item.type === AttachmentType.MEDIA_PROFILE_PIC)?.url || '';
-    this.userName = logged.data.type === MdmType.PessoaFisica ? (logged.data.registrationData as RegistrationDataPF).name : (logged.data.registrationData as RegistrationDataPJ).fantasyName;
+    const logged: MdmRecord = getState('ui.petshop.login');
+    this.avatarUrl = logged.details.attachments?.find((item) => item.type === AttachmentType.MEDIA_PROFILE_PIC)?.url || '';
+    this.userName = logged.details.type === MdmType.PessoaFisica ? (logged.details.registrationData as RegistrationDataPF).name : (logged.details.registrationData as RegistrationDataPJ).fantasyName;
 
   }
 

@@ -4,12 +4,12 @@ import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { getState } from '_100554_/l2/collabState';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { MdmData, RegistrationDataPF, AttachmentType, RegistrationDataPJ } from "./_102019_layer4Mdm";
+import { MdmRecord } from "./_102019_commonGlobal";
 
 @customElement('petshop--organism-footer-info-102009')
 export class organismFooterInfo extends IcaOrganismBase {
 
-  @state() mdmData: MdmData | undefined;
+  @state() mdmData: MdmRecord | undefined;
   @state() tel: string = '(99) 99999-9999';
   @state() email: string = 'contato@petshopamigo.com';
   @state() end: string = 'Endereço: Av. dos Pets, 123 - Centro, Cidade/UF';
@@ -75,16 +75,16 @@ export class organismFooterInfo extends IcaOrganismBase {
     if (this.mdmData) {
     
 
-      if (this.mdmData.data.contactData && this.mdmData.data.contactData.phone.length > 0) {
-        this.tel = this.mdmData.data.contactData.phone[0].number;
+      if (this.mdmData.details.contactData && this.mdmData.details.contactData.phone.length > 0) {
+        this.tel = this.mdmData.details.contactData.phone[0].number;
       }
 
-      if (this.mdmData.data.contactData && this.mdmData.data.contactData.email) {
-        this.email = this.mdmData.data.contactData.email;
+      if (this.mdmData.details.contactData && this.mdmData.details.contactData.email) {
+        this.email = this.mdmData.details.contactData.email;
       }
 
-      if (this.mdmData.data.addresses && this.mdmData.data.addresses.length > 0) {
-        const end = this.mdmData.data.addresses[0];
+      if (this.mdmData.details.addresses && this.mdmData.details.addresses.length > 0) {
+        const end = this.mdmData.details.addresses[0];
         this.end = `${end.street}, ${end.number} - ${end.neighborhood}`
       }
     

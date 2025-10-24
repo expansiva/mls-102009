@@ -5,11 +5,9 @@ import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState, getState } from '_100554_/l2/collabState';
 import { propertyDataSource } from './_100554_collabDecorators';
 import { petshopExec } from "./_102009_layer1Exec";
-import { exec } from "./_102019_layer1Exec";
 import { RequestSchedulingUpd, RequestServiceOrderAdd, RequestServiceOrderGetById, SchedulingRecord, SchedulingStatus, ServiceOrderRecord, ServiceOrderStatus } from './_102009_commonGlobal'
-
-import { MdmData, RegistrationDataPF, RegistrationDataPJ, MdmType, RegistrationDataService, ServiceRecord } from "./_102019_layer4Mdm";
-import { RequestMDMGetListByIds, RequestMDMGetById } from "./_102019_layer4ResReq";
+import { exec } from "./_102019_layer1Exec";
+import { MdmRecord, MdmType, RegistrationDataPF, RegistrationDataPJ, RegistrationDataService, ServiceRecord, RequestMDMGetListByIds, RequestMDMGetById } from "./_102019_commonGlobal";
 
 @customElement('petshop--organism-edit-scheduling-102009')
 export class organismEditScheduling extends IcaOrganismBase {
@@ -17,9 +15,9 @@ export class organismEditScheduling extends IcaOrganismBase {
     @state() loadingCancel: boolean = false;
     @state() loadingConfirm: boolean = false;
     @state() schedulingData?: SchedulingRecord;
-    @state() employees: MdmData[] = [];
-    @state() employerSelected?: MdmData;
-    @state() service?: MdmData;
+    @state() employees: MdmRecord[] = [];
+    @state() employerSelected?: MdmRecord;
+    @state() service?: MdmRecord;
     @state() orderData?: ServiceOrderRecord;
 
     @propertyDataSource() labelError?: string;
@@ -61,7 +59,7 @@ export class organismEditScheduling extends IcaOrganismBase {
                             >
                                 <option value="">Selecione o funcionário</option>
                                 ${this.employees.map((item, index) => {
-            const name = item.data.type === MdmType.PessoaFisica ? (item.data.registrationData as RegistrationDataPF).name : (item.data.registrationData as RegistrationDataPJ).fantasyName;
+            const name = item.details.type === MdmType.PessoaFisica ? (item.details.registrationData as RegistrationDataPF).name : (item.details.registrationData as RegistrationDataPJ).fantasyName;
             return html`<option value=${index}> ${name}</option>`
         })}
                             </select>
@@ -179,8 +177,8 @@ export class organismEditScheduling extends IcaOrganismBase {
             return;
         }
 
-        if (this.service.data.relationships) {
-            this.service.data.relationships.forEach((r) => {
+        if (this.service.details.relationships) {
+            this.service.details.relationships.forEach((r) => {
                 ids.push(r.relatedMdmId);
             })
         }
@@ -256,13 +254,13 @@ export class organismEditScheduling extends IcaOrganismBase {
 
         this.loadingConfirm = true;
 
-        const nameEmployer = this.employerSelected.data.type === MdmType.PessoaFisica ? (this.employerSelected.data.registrationData as RegistrationDataPF).name : (this.employerSelected.data.registrationData as RegistrationDataPJ).fantasyName;
+        const nameEmployer = this.employerSelected.details.type === MdmType.PessoaFisica ? (this.employerSelected.details.registrationData as RegistrationDataPF).name : (this.employerSelected.details.registrationData as RegistrationDataPJ).fantasyName;
 
         const data: ServiceOrderRecord = {
             details: {
                 schedulingId: this.schedulingData.id,
                 status: ServiceOrderStatus.WAITING,
-                totalAmount: (this.service?.data as ServiceRecord).serviceData?.priceRegular || 0,
+                totalAmount: (this.service?.details as ServiceRecord).serviceData?.priceRegular || 0,
                 executionDateTime: new Date(Date.now()).toISOString(),
                 client:this.schedulingData.details.tutor
                 ,
@@ -271,8 +269,8 @@ export class organismEditScheduling extends IcaOrganismBase {
                 serviceProvided:
                 {   
                     serviceMdmId:this.service?.id || 0,
-                    priceCharged: (this.service?.data as ServiceRecord).serviceData?.priceRegular || 0,
-                    name: (this.service?.data.registrationData as RegistrationDataService).name || '',
+                    priceCharged: (this.service?.details as ServiceRecord).serviceData?.priceRegular || 0,
+                    name: (this.service?.details.registrationData as RegistrationDataService).name || '',
                 },
                 employee: {
                     employeeMdmId: this.employerSelected.id || 0,

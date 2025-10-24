@@ -5,9 +5,12 @@ import { ServiceOrderRecord , ServiceOrderStatus } from "./_102009_layer4Service
 
 //------------------BASE-----------------------
 
-export type { SchedulingRecord } from "./_102009_layer4Scheduling";
-export type { ServiceOrderRecord, ServiceOrderDetails, ServiceOrderHistoryEntry } from "./_102009_layer4ServiceOrder";
-export { ServiceOrderStatus, SchedulingStatus };
+export * from "./_102009_layer4Scheduling";
+export * from "./_102009_layer4ServiceOrder";
+
+// export type { SchedulingRecord } from "./_102009_layer4Scheduling";
+// export type { ServiceOrderRecord, ServiceOrderDetails, ServiceOrderHistoryEntry } from "./_102009_layer4ServiceOrder";
+// export { ServiceOrderStatus, SchedulingStatus };
 
 export interface RequestBase{
     action: ActionTypes,

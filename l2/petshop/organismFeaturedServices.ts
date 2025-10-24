@@ -2,16 +2,14 @@
 
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { exec } from "./_102019_layer1Exec";
-import { setState, getState, subscribe, unsubscribe } from '_100554_/l2/collabState';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
-import { RequestMDMGetListByType  } from "./_102019_layer4ResReq";
-import { MdmData, RegistrationDataService, MdmType } from "./_102019_layer4Mdm";
+import { exec } from "./_102019_layer1Exec";
+import { MdmRecord, MdmType, RequestMDMGetListByType, RegistrationDataService } from "./_102019_commonGlobal";
 
 @customElement('petshop--organism-featured-services-102009')
 export class organismFeaturedServices extends IcaOrganismBase {
 
-  @state() mdmServices: MdmData[] = [];
+  @state() mdmServices: MdmRecord[] = [];
 
   //--------------------------------
 
@@ -29,10 +27,10 @@ export class organismFeaturedServices extends IcaOrganismBase {
       `
   }
 
-  renderItem(serv: MdmData, index: number) {
+  renderItem(serv: MdmRecord, index: number) {
 
     if (index > 3) return html``;
-    const reg = (serv.data.registrationData as RegistrationDataService);
+    const reg = (serv.details.registrationData as RegistrationDataService);
     return html`
     <div class="service-card">
       <div class="icon">
@@ -64,8 +62,8 @@ export class organismFeaturedServices extends IcaOrganismBase {
 
     const response = await exec(req);
     if (response.ok) {
-      this.mdmServices = response.data.map((item: MdmData) => {
-        const item2: MdmData = item;
+      this.mdmServices = response.data.map((item: MdmRecord) => {
+        const item2: MdmRecord = item;
         return item2;
       });
     }

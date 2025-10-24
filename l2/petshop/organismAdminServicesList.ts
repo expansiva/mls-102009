@@ -3,14 +3,13 @@ import { html } from 'lit';
 import { customElement, state, query } from 'lit/decorators.js';
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { setState } from '_100554_/l2/collabState';
-import { RequestMDMGetListByType  } from "./_102019_layer4ResReq";
-import { MdmData, RegistrationDataService, MdmType } from "./_102019_layer4Mdm";
 import { exec } from "./_102019_layer1Exec";
+import { MdmRecord, RegistrationDataService, MdmType, RequestMDMGetListByType } from "./_102019_commonGlobal";
 
 @customElement('petshop--organism-admin-services-list-102009')
 export class organismAdminServicesList extends IcaOrganismBase {
 
-	@state() mdmServices?: MdmData[];
+	@state() mdmServices?: MdmRecord[];
 
 	@state() filterText: string = '';
 	@state() sortColumn: string = 'name';
@@ -30,41 +29,28 @@ export class organismAdminServicesList extends IcaOrganismBase {
 
 		const response = await exec(req);
 		if (response.ok) {
-			this.mdmServices = response.data.map((item: MdmData) => {
-				const item2: MdmData = item;
+			this.mdmServices = response.data.map((item: MdmRecord) => {
+				const item2: MdmRecord = item;
 				return item2;
 			});
 		}
 
-		/*
-		this.services = [
-			{ name: 'Banho e Tosa', descriptionShort: 'Serviço completo de banho e tosa para cães e gatos.', serviceCode: 'SRV001' },
-			{ name: 'Consulta Veterinária', descriptionShort: 'Consulta geral com veterinário para check-up.', serviceCode: 'SRV002' },
-			{ name: 'Hospedagem', descriptionShort: 'Hospedagem diária para pets com supervisão.', serviceCode: 'SRV003' },
-			{ name: 'Vacinação', descriptionShort: 'Aplicação de vacinas com acompanhamento veterinário.', serviceCode: 'SRV004' },
-			{ name: 'Transporte Pet', descriptionShort: 'Serviço de transporte seguro e confortável.', serviceCode: 'SRV005' },
-			{ name: 'Adestramento', descriptionShort: 'Treinamento comportamental para cães.', serviceCode: 'SRV006' },
-			{ name: 'Banho Medicamentoso', descriptionShort: 'Banho com produtos terapêuticos para tratamento de pele.', serviceCode: 'SRV007' },
-			{ name: 'Corte de Unhas', descriptionShort: 'Corte seguro e higiênico das unhas do pet.', serviceCode: 'SRV008' },
-			{ name: 'Higienização Dental', descriptionShort: 'Limpeza dos dentes para prevenção de tártaro.', serviceCode: 'SRV009' },
-			{ name: 'Tosa Higiênica', descriptionShort: 'Tosa leve para higiene e conforto do pet.', serviceCode: 'SRV010' }
-		];*/
 	}
 
 	get filteredServices() {
 		if (!this.mdmServices) return [];
 		return this.mdmServices.filter(mdmServices =>
-			(mdmServices.data.registrationData as RegistrationDataService)?.name.toLowerCase().includes(this.filterText.toLowerCase()) ||
-			(mdmServices.data.registrationData as RegistrationDataService)?.descriptionShort.toLowerCase().includes(this.filterText.toLowerCase()) ||
-			(mdmServices.data.registrationData as RegistrationDataService)?.serviceCode?.toLowerCase().includes(this.filterText.toLowerCase())
+			(mdmServices.details.registrationData as RegistrationDataService)?.name.toLowerCase().includes(this.filterText.toLowerCase()) ||
+			(mdmServices.details.registrationData as RegistrationDataService)?.descriptionShort.toLowerCase().includes(this.filterText.toLowerCase()) ||
+			(mdmServices.details.registrationData as RegistrationDataService)?.serviceCode?.toLowerCase().includes(this.filterText.toLowerCase())
 		);
 	}
 
 	get sortedServices() {
 		const sorted = [...this.filteredServices];
 		sorted.sort((a, b) => {
-			let aVal = (a.data?.registrationData as RegistrationDataService)[this.sortColumn as keyof RegistrationDataService];
-			let bVal = (b.data?.registrationData as RegistrationDataService)[this.sortColumn as keyof RegistrationDataService];
+			let aVal = (a.details?.registrationData as RegistrationDataService)[this.sortColumn as keyof RegistrationDataService];
+			let bVal = (b.details?.registrationData as RegistrationDataService)[this.sortColumn as keyof RegistrationDataService];
 			if (!bVal || !aVal) return 0;
 			if (typeof aVal === 'string') aVal = aVal.toLowerCase();
 			if (typeof bVal === 'string') bVal = bVal.toLowerCase();
@@ -103,7 +89,7 @@ export class organismAdminServicesList extends IcaOrganismBase {
 	}
 
 
-	handleEdit(e: MouseEvent, service: MdmData) {
+	handleEdit(e: MouseEvent, service: MdmRecord) {
 		e.preventDefault();
 		setState('ui.petshop.admin.service.selected', service);
 		if (this.linkToEdit) this.linkToEdit.click();
@@ -160,9 +146,9 @@ export class organismAdminServicesList extends IcaOrganismBase {
 				<tbody>
 					${this.paginatedServices.map(service => html`
 						<tr>
-							<td>${(service.data.registrationData as RegistrationDataService)?.name}</td>
-							<td>${(service.data.registrationData as RegistrationDataService)?.descriptionShort}</td>
-							<td>${(service.data.registrationData as RegistrationDataService)?.serviceCode}</td>
+							<td>${(service.details.registrationData as RegistrationDataService)?.name}</td>
+							<td>${(service.details.registrationData as RegistrationDataService)?.descriptionShort}</td>
+							<td>${(service.details.registrationData as RegistrationDataService)?.serviceCode}</td>
 
 							<td>
 								<a href="#" @click="${(e: MouseEvent) => this.handleEdit(e, service)}">Editar</a>
