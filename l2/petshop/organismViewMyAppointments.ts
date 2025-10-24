@@ -5,13 +5,13 @@ import { setState, getState } from '_100554_/l2/collabState';
 import { petshopExec } from "./_102009_layer1Exec";
 import { IcaOrganismBase } from './_100554_icaOrganismBase';
 import { SchedulingRecord, SchedulingStatus, RequestSchedulingGetByClient, RequestSchedulingUpd } from './_102009_commonGlobal';  
-import { MdmData } from "./_102019_layer4Mdm";  
+import { MdmRecord } from "./_102019_commonGlobal";  
 
 @customElement('petshop--organism-view-my-appointments-102009')
 export class organismViewMyAppointments extends IcaOrganismBase {
 
     @state() scenary = 'list';
-    @state() mdmData: MdmData | undefined;
+    @state() mdmData: MdmRecord | undefined;
     @state() scheduling: SchedulingRecord[] = [];
     @state() error = '';
     @state() indexDetail = -1;

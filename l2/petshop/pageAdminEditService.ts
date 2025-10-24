@@ -2,7 +2,7 @@
 
 import { CollabPageElement } from '_100554_/l2/collabPageElement';
 import { customElement } from 'lit/decorators.js';
-import { MdmData, RegistrationDataService, ServiceRecord } from "./_102019_layer4Mdm";
+import { MdmRecord, RegistrationDataService, ServiceRecord } from "./_102019_commonGlobal";
 import { setState, getState, initState } from '_100554_/l2/collabState';
 
 @customElement('petshop--page-admin-edit-service-102009')
@@ -11,9 +11,9 @@ export class PageAdminEditService102009 extends CollabPageElement {
     initPage() {
 
         setState('ui.petshop.admin.menu.selected', 'service');
-        const selected: MdmData = getState('ui.petshop.admin.service.selected');
-        const serviceData: RegistrationDataService = selected?.data?.registrationData as RegistrationDataService;
-        const serviceDataMore = (selected?.data as ServiceRecord)?.serviceData;
+        const selected: MdmRecord = getState('ui.petshop.admin.service.selected');
+        const serviceData: RegistrationDataService = selected?.details?.registrationData as RegistrationDataService;
+        const serviceDataMore = (selected?.details as ServiceRecord)?.serviceData;
         
         initState('ui.petshop.admin.organismAdminServiceEdit', {
             name: serviceData?.name,
