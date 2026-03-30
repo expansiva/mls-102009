@@ -27,7 +27,10 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '14'  # ou a versão do Node.js que você está usando
+        node-version: '20'  # ou a versão do Node.js que você está usando
+        
+    - name: Fix package name
+      run: mv packagelib.json package.json
 
     - name: Install dependencies
       run: npm install
