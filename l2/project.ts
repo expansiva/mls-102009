@@ -1,4 +1,4 @@
-/// <mls shortName="project" project="102009" enhancement="_100554_enhancementLit" groupName="other" folder="" />
+/// <mls fileReference="_102009_/l2/project.ts" enhancement="_blank"  />
 
 export const modules = [
   {
