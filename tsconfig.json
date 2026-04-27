@@ -3,8 +3,8 @@
         "target": "es2020",
         "module": "ES2020",
         "esModuleInterop": true,
-        "outDir": "./preBuild/",
-        "rootDir": "./project",
+        "outDir": "./preBuild/_102009_/",
+        "rootDir": "./project/_102009_",
         "strict": true,
         "removeComments": false,
         "noUnusedParameters": false,
@@ -17,11 +17,17 @@
         "noImplicitAny": false,
         "strictNullChecks": false,
         "paths": {
-            "lit": [
-                "./project/_100554_/l2/litElement.ts"
+            "/_102009_/*": [
+                "./project/_102009_/*"
             ],
-            "lit/decorators.js": [
-                "./project/_100554_/l2/litDecorators.ts"
+            "/_102020_/*": [
+                "./project/_102020_/*"
+            ],
+            "/_102027_/*": [
+                "./project/_102027_/*"
+            ],
+            "/_102029_/*": [
+                "./project/_102029_/*"
             ]
         },
         "lib": [
@@ -30,7 +36,7 @@
         ]
     },
     "include": [
-        "project/**/*",
+        "project/_102009_/**/*",
         "monaco.d.ts",
         "mls.d.ts"
     ],
