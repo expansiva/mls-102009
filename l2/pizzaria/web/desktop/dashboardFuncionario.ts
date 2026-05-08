@@ -2,7 +2,7 @@
 
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { Loading } from '_102009_/l1/pizzaria/layer_2_controller/dashboardFuncionario.js';
+import { Loading } from '/_102009_/l1/pizzaria/layer_2_controller/dashboardFuncionario.js';
 import { DashboardFuncionarioShared } from '/_102009_/l2/pizzaria/web/shared/dashboardFuncionario.js';
 
 /// **collab_i18n_start**

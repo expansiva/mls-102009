@@ -1,8 +1,8 @@
 /// <mls fileReference="_102009_/l2/designSystem.ts" enhancement="_blank" />
 
-import { IDesignSystemTokens } from '/_102027_/l2/designSystemBase.js';
+import { IDesignSystemTokens } from '/_102029_/l2/designSystemBase.js';
 
-export const tokens: IDesignSystemTokens[] = [
+export const tokens: any[] = [
 
 {
     "themeName": "Default",

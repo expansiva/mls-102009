@@ -1,9 +1,10 @@
 /// <mls fileReference="_102009_/l2/pizzaria/web/shared/login.ts" enhancement="_102020_/l2/enhancementAura" />
 
-import { CollabLitElement } from '/_102027_/l2/collabLitElement.js';
+import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { execBff } from '/_102029_/l2/bffClient.js';
-import type { user } from '_102009_/l1/pizzaria/layer_2_controller/login.js';
+import { bindExpectedNavigationLoad, consumeExpectedNavigationLoad } from '/_102029_/l2/interactionRuntime.js';
+import type { user } from '/_102009_/l1/pizzaria/layer_2_controller/login.js';
 import {
   TempStateAction,
   NavigationFieldsAction,
@@ -11,11 +12,21 @@ import {
   Loading,
   Error,
   Mock_user,
-} from '_102009_/l1/pizzaria/layer_2_controller/login.js';
+} from '/_102009_/l1/pizzaria/layer_2_controller/login.js';
 
-export class LoginShared extends CollabLitElement {
+export class LoginShared extends LitElement {
   // ── @property() fields ──────────────────────────────
   // No route/input params specified in spec
+
+  createRenderRoot() {
+    return this;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    const pendingLoad = consumeExpectedNavigationLoad();
+    bindExpectedNavigationLoad(pendingLoad, Promise.resolve());
+  }
 
   // ── @state() fields ─────────────────────────────────
   @state() action: TempStateAction | NavigationFieldsAction | EmitsAction | null = null;

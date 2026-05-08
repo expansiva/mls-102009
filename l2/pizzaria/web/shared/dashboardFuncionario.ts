@@ -1,9 +1,10 @@
 /// <mls fileReference="_102009_/l2/pizzaria/web/shared/dashboardFuncionario.ts" enhancement="_102020_/l2/enhancementAura" />
 
-import { CollabLitElement } from '/_102027_/l2/collabLitElement.js';
+import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { execBff } from '/_102029_/l2/bffClient.js';
-import type { staff, pedido, itemPedido, dashboardResumo } from '_102009_/l1/pizzaria/layer_2_controller/dashboardFuncionario.js';
+import { bindExpectedNavigationLoad, consumeExpectedNavigationLoad } from '/_102029_/l2/interactionRuntime.js';
+import type { staff, pedido, itemPedido, dashboardResumo } from '/_102009_/l1/pizzaria/layer_2_controller/dashboardFuncionario.js';
 import {
   TempStateAction,
   NavigationFieldsAction,
@@ -12,10 +13,20 @@ import {
   Mock_staff,
   Mock_pedido,
   Mock_dashboardResumo,
-} from '_102009_/l1/pizzaria/layer_2_controller/dashboardFuncionario.js';
+} from '/_102009_/l1/pizzaria/layer_2_controller/dashboardFuncionario.js';
 
-export class DashboardFuncionarioShared extends CollabLitElement {
+export class DashboardFuncionarioShared extends LitElement {
   // --- @property() fields (none: no route/input params) ---
+
+  createRenderRoot() {
+    return this;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    const pendingLoad = consumeExpectedNavigationLoad();
+    bindExpectedNavigationLoad(pendingLoad, Promise.resolve());
+  }
 
   // --- @state() fields ---
   @state() action: TempStateAction | NavigationFieldsAction | EmitsAction | null = null;

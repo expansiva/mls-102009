@@ -2,7 +2,7 @@
   
 import { html } from 'lit'; 
 import { customElement } from 'lit/decorators.js'; 
-import { EmitsAction } from '_102009_/l1/pizzaria/layer_2_controller/login.js'; 
+import { EmitsAction } from '/_102009_/l1/pizzaria/layer_2_controller/login.js'; 
 import { LoginShared } from '/_102009_/l2/pizzaria/web/shared/login.js';
 
 /// **collab_i18n_start**

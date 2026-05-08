@@ -49,16 +49,16 @@
       "type": "client",
       "persistenceModules": [
         {
-          "moduleId": "petshop",
-          "persistenceEntrypoint": "./_102009_/l1/petshop/persistence.js"
+          "moduleId": "pizzaria",
+          "persistenceEntrypoint": "./_102009_/l1/pizzaria/persistence.js"
         }
       ],
       "modules": [
         {
-          "moduleId": "petshop",
-          "basePath": "/petshop",
+          "moduleId": "pizzaria",
+          "basePath": "/pizzaria",
           "shellMode": "spa",
-          "backendRouter": "./_102009_/l1/petshop/layer_2_controllers/router.js"
+          "backendRouter": "./_102009_/l1/pizzaria/layer_2_controllers/router.js"
         }
       ]
     },
