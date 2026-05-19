@@ -6,7 +6,7 @@ import type {
   PizzariaSeedResult,
   PizzariaUpdateItemParams,
 } from '/_102009_/l1/pizzaria/module.js';
-import { getPizzariaMockItems } from '/_102009_/l2/pizzaria/shared/mock/adminMock.js';
+import { getPizzariaMockItems } from '/_102009_/l1/pizzaria/mock/adminMock.js';
 import { AuditLogService, StatusHistoryService } from '/_102034_/l1/mdm/layer_3_usecases/core/DataRecordService.js';
 import { AppError, type RequestContext } from '/_102034_/l1/server/layer_2_controllers/contracts.js';
 

@@ -8,20 +8,27 @@ void bootstrapCollabApp({
   shellMode: 'spa',
   navigation: [
     { label: 'Cardapio', href: '/pizzaria/cardapio' },
+    { label: 'Edit items', href: '/pizzaria/edit-items' },
     { label: 'Monitor', href: '/monitor' },
   ],
   pages: [
     {
       path: '/pizzaria/index.html',
-      title: 'Home',
-      tagName: 'pizzaria-web-desktop-home-page',
+      title: 'Cardapio',
+      tagName: 'pizzaria-web-desktop-catalog-page',
       loader: () => import('/_102009_/l2/pizzaria/web/desktop/page11/home.js'),
     },
     {
       path: '/pizzaria/cardapio',
-      title: 'Home',
-      tagName: 'pizzaria-web-desktop-home-page',
+      title: 'Cardapio',
+      tagName: 'pizzaria-web-desktop-catalog-page',
       loader: () => import('/_102009_/l2/pizzaria/web/desktop/page11/home.js'),
+    },
+    {
+      path: '/pizzaria/edit-items',
+      title: 'Edit items',
+      tagName: 'pizzaria-web-desktop-edit-items-page',
+      loader: () => import('/_102009_/l2/pizzaria/web/desktop/page11/edit-items.js'),
     },
   ],
 });

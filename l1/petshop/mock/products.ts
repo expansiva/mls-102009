@@ -1,4 +1,4 @@
-/// <mls fileReference="_102009_/l2/petshop/shared/mock/products.ts" enhancement="_blank" />
+/// <mls fileReference="_102009_/l1/petshop/mock/products.ts" enhancement="_blank" />
 import type { PetshopCatalogProduct } from '/_102009_/l1/petshop/module.js';
 
 export function buildPetshopMockProducts(): PetshopCatalogProduct[] {

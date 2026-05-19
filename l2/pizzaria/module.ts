@@ -49,14 +49,14 @@ export const moduleFrontendDefinition: AuraModuleFrontendDefinition = {
     {
       path: '/pizzaria',
       aliases: ['/pizzaria/index.html', '/pizzaria/cardapio'],
-      entrypoint: '/_102009_/l2/pizzaria/web/routes/catalog.js',
-      tag: 'pizzaria-web-desktop-home-page',
+      entrypoint: '/_102009_/l2/pizzaria/web/desktop/page11/home.js',
+      tag: 'pizzaria-web-desktop-catalog-page',
       title: 'Cardapio',
     },
     {
       path: '/pizzaria/edit-items',
-      entrypoint: '/_102009_/l2/pizzaria/web/routes/edit-items.js',
-      tag: 'pizzaria-web-desktop-home-page',
+      entrypoint: '/_102009_/l2/pizzaria/web/desktop/page11/edit-items.js',
+      tag: 'pizzaria-web-desktop-edit-items-page',
       title: 'Edit items',
     },
   ],

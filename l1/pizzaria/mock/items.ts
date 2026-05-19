@@ -1,4 +1,4 @@
-/// <mls fileReference="_102009_/l2/pizzaria/shared/mock/items.ts" enhancement="_blank" />
+/// <mls fileReference="_102009_/l1/pizzaria/mock/items.ts" enhancement="_blank" />
 import type { PizzariaMenuItem } from '/_102009_/l1/pizzaria/module.js';
 
 export function buildPizzariaMockItems(): PizzariaMenuItem[] {

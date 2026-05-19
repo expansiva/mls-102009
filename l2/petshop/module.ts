@@ -49,14 +49,14 @@ export const moduleFrontendDefinition: AuraModuleFrontendDefinition = {
     {
       path: '/petshop',
       aliases: ['/petshop/index.html', '/petshop/catalogo'],
-      entrypoint: '/_102009_/l2/petshop/web/routes/catalog.js',
-      tag: 'petshop-web-desktop-home-page',
+      entrypoint: '/_102009_/l2/petshop/web/desktop/page11/home.js',
+      tag: 'petshop-web-desktop-catalog-page',
       title: 'Catalog',
     },
     {
       path: '/petshop/edit-products',
-      entrypoint: '/_102009_/l2/petshop/web/routes/edit-products.js',
-      tag: 'petshop-web-desktop-home-page',
+      entrypoint: '/_102009_/l2/petshop/web/desktop/page11/edit-products.js',
+      tag: 'petshop-web-desktop-edit-products-page',
       title: 'Edit products',
     },
   ],
