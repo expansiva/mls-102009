@@ -1,23 +1,18 @@
-/// <mls fileReference="_102030_/l1/petshop/persistence.ts" enhancement="_blank" />
+/// <mls fileReference="_102009_/l1/pizzaria/persistence.ts" enhancement="_blank" />
 import type { TableDefinition } from '/_102034_/l1/server/layer_1_external/persistence/contracts.js';
-
-export const tableDefinitions: TableDefinition[] = [];
-
-
-/* example with table definitions:
 
 export const tableDefinitions: TableDefinition[] = [
   {
-    moduleId: 'petshop',
-    repositoryName: 'petshopProduct',
-    tableName: 'petshop_product',
+    moduleId: 'pizzaria',
+    repositoryName: 'pizzariaMenuItem',
+    tableName: 'pizzaria_menu_item',
     purpose: 'cadastro',
-    description: 'Petshop product catalog used by the storefront BFF and replicated as hot backup.',
+    description: 'Pizzaria menu item catalog used by the storefront BFF and replicated as hot backup.',
     backupHot: true,
     storageProfile: 'postgresHotBackup',
     writeMode: 'writeBehind',
     columns: [
-      { name: 'productId', postgresType: 'TEXT' },
+      { name: 'menuItemId', postgresType: 'TEXT' },
       { name: 'name', postgresType: 'TEXT' },
       { name: 'category', postgresType: 'TEXT' },
       { name: 'priceInCents', postgresType: 'INTEGER' },
@@ -27,23 +22,20 @@ export const tableDefinitions: TableDefinition[] = [
       { name: 'description', postgresType: 'TEXT' },
       { name: 'updatedAt', postgresType: 'TIMESTAMPTZ' },
     ],
-    primaryKey: ['productId'],
+    primaryKey: ['menuItemId'],
     indexes: [
-      { name: 'idx_petshop_product_category', columns: ['category'] },
-      { name: 'idx_petshop_product_highlight', columns: [{ name: 'highlightScore', direction: 'desc' }] },
-      { name: 'idx_petshop_product_updated', columns: [{ name: 'updatedAt', direction: 'desc' }] },
+      { name: 'idx_pizzaria_menu_item_category', columns: ['category'] },
+      { name: 'idx_pizzaria_menu_item_highlight', columns: [{ name: 'highlightScore', direction: 'desc' }] },
+      { name: 'idx_pizzaria_menu_item_updated', columns: [{ name: 'updatedAt', direction: 'desc' }] },
     ],
     dynamo: {
       tableNameByEnv: {
-        development: 'petshop_product_documents',
-        staging: 'petshop_product_documents_test',
-        production: 'petshop_product_documents',
+        development: 'pizzaria_menu_item_documents',
+        staging: 'pizzaria_menu_item_documents_test',
+        production: 'pizzaria_menu_item_documents',
       },
-      partitionKey: 'productId',
+      partitionKey: 'menuItemId',
     },
     version: 1,
   },
 ];
-
-
-*/

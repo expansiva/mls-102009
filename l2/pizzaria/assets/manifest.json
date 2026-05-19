@@ -1,0 +1,15 @@
+{
+  "name": "Collab Test Pizzaria",
+  "short_name": "Pizzaria",
+  "display": "standalone",
+  "start_url": "/pizzaria/index.html",
+  "background_color": "#fffdfa",
+  "theme_color": "#17324d",
+  "icons": [
+    {
+      "src": "/pizzaria/assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

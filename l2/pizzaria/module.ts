@@ -12,8 +12,11 @@ export const moduleGenome = {
   },
 } as const;
 
-
 export const moduleStates = {
+  currentSection: 'ui.pizzaria.currentSection',
+  selectedCategory: 'ui.pizzaria.selectedCategory',
+  searchQuery: 'ui.pizzaria.searchQuery',
+  editorAuthor: 'ui.pizzaria.editorAuthor',
 } as const;
 
 export const moduleShellPreferences = {
@@ -30,31 +33,31 @@ export const moduleFrontendDefinition: AuraModuleFrontendDefinition = {
   device: 'desktop',
   navigation: [
     {
-      id: 'login',
-      label: 'Login',
+      id: 'catalog',
+      label: 'Cardapio',
       href: '/pizzaria',
-      description: 'Login page for employees and customers',
+      description: 'Storefront menu view',
     },
     {
-      id: 'dashboardFuncionario',
-      label: 'Dashboard Funcionario',
-      href: '/pizzaria/dashboardFuncionario',
-      description: 'Dashboard for employees to manage orders and view statistics',
+      id: 'edit-items',
+      label: 'Edit items',
+      href: '/pizzaria/edit-items',
+      description: 'Simulate menu item changes with author',
     },
   ],
   routes: [
     {
       path: '/pizzaria',
-      aliases: ['/pizzaria/index.html', '/pizzaria/login'],
-      entrypoint: '/_102009_/l2/pizzaria/web/desktop/login.js',
-      tag: 'pizzaria--web--desktop--login-102009',
-      title: 'Login',
+      aliases: ['/pizzaria/index.html', '/pizzaria/cardapio'],
+      entrypoint: '/_102009_/l2/pizzaria/web/routes/catalog.js',
+      tag: 'pizzaria-web-desktop-home-page',
+      title: 'Cardapio',
     },
     {
-      path: '/pizzaria/dashboardFuncionario',
-      entrypoint: '/_102009_/l2/pizzaria/web/desktop/dashboardFuncionario.js',
-      tag: 'pizzaria--web--desktop--dashboard-funcionario-102009',
-      title: 'Dashboard Funcionario',
+      path: '/pizzaria/edit-items',
+      entrypoint: '/_102009_/l2/pizzaria/web/routes/edit-items.js',
+      tag: 'pizzaria-web-desktop-home-page',
+      title: 'Edit items',
     },
   ],
 };
