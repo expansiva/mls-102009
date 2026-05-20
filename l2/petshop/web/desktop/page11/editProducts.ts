@@ -1,4 +1,4 @@
-/// <mls fileReference="_102009_/l2/petshop/web/desktop/page11/editProducts.ts" enhancement="_blank" />
+/// <mls fileReference="_102009_/l2/petshop/web/desktop/page11/editProducts.ts" enhancement="_102027_/l2/enhancementLit.ts" />
 import { html } from 'lit';
 import { PetshopEditProductsBase } from '/_102009_/l2/petshop/web/shared/editProducts.js';
 

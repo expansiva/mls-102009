@@ -1,4 +1,4 @@
-/// <mls fileReference="_102009_/l2/petshop/web/desktop/page11/catalogo.ts" enhancement="_blank" />
+/// <mls fileReference="_102009_/l2/petshop/web/desktop/page11/catalogo.ts" enhancement="_102027_/l2/enhancementLit.ts" />
 import { html } from 'lit';
 import { PetshopCatalogoBase, formatPrice } from '/_102009_/l2/petshop/web/shared/catalogo.js';
 

@@ -1,4 +1,4 @@
-/// <mls fileReference="_102009_/l2/pizzaria/web/desktop/page11/cardapio.ts" enhancement="_blank" />
+/// <mls fileReference="_102009_/l2/pizzaria/web/desktop/page11/cardapio.ts" enhancement="_102027_/l2/enhancementLit.ts" />
 import { html } from 'lit';
 import { PizzariaCardapioBase, formatPrice } from '/_102009_/l2/pizzaria/web/shared/cardapio.js';
 
