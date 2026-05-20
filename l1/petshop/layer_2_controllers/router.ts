@@ -5,8 +5,10 @@ import {
   petshopHomeLoadHandler,
   petshopListCatalogHandler,
   petshopSeedMockDataHandler,
+} from '/_102009_/l1/petshop/layer_2_controllers/catalogo.js';
+import {
   petshopUpdateProductHandler,
-} from '/_102009_/l1/petshop/layer_2_controllers/catalogHandlers.js';
+} from '/_102009_/l1/petshop/layer_2_controllers/editProducts.js';
 
 export function createPetshopRouter(): Map<string, BffHandler> {
   return new Map<string, BffHandler>([

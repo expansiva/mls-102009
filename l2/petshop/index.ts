@@ -15,20 +15,20 @@ void bootstrapCollabApp({
     {
       path: '/petshop/index.html',
       title: 'Catalog',
-      tagName: 'petshop-web-desktop-catalog-page',
-      loader: () => import('/_102009_/l2/petshop/web/desktop/page11/home.js'),
+      tagName: 'petshop-web-desktop-catalogo-page',
+      loader: () => import('/_102009_/l2/petshop/web/desktop/page11/catalogo.js'),
     },
     {
       path: '/petshop/catalogo',
       title: 'Catalog',
-      tagName: 'petshop-web-desktop-catalog-page',
-      loader: () => import('/_102009_/l2/petshop/web/desktop/page11/home.js'),
+      tagName: 'petshop-web-desktop-catalogo-page',
+      loader: () => import('/_102009_/l2/petshop/web/desktop/page11/catalogo.js'),
     },
     {
       path: '/petshop/edit-products',
       title: 'Edit products',
       tagName: 'petshop-web-desktop-edit-products-page',
-      loader: () => import('/_102009_/l2/petshop/web/desktop/page11/edit-products.js'),
+      loader: () => import('/_102009_/l2/petshop/web/desktop/page11/editProducts.js'),
     },
   ],
 });

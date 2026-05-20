@@ -15,20 +15,20 @@ void bootstrapCollabApp({
     {
       path: '/pizzaria/index.html',
       title: 'Cardapio',
-      tagName: 'pizzaria-web-desktop-catalog-page',
-      loader: () => import('/_102009_/l2/pizzaria/web/desktop/page11/home.js'),
+      tagName: 'pizzaria-web-desktop-cardapio-page',
+      loader: () => import('/_102009_/l2/pizzaria/web/desktop/page11/cardapio.js'),
     },
     {
       path: '/pizzaria/cardapio',
       title: 'Cardapio',
-      tagName: 'pizzaria-web-desktop-catalog-page',
-      loader: () => import('/_102009_/l2/pizzaria/web/desktop/page11/home.js'),
+      tagName: 'pizzaria-web-desktop-cardapio-page',
+      loader: () => import('/_102009_/l2/pizzaria/web/desktop/page11/cardapio.js'),
     },
     {
       path: '/pizzaria/edit-items',
       title: 'Edit items',
       tagName: 'pizzaria-web-desktop-edit-items-page',
-      loader: () => import('/_102009_/l2/pizzaria/web/desktop/page11/edit-items.js'),
+      loader: () => import('/_102009_/l2/pizzaria/web/desktop/page11/editItems.js'),
     },
   ],
 });

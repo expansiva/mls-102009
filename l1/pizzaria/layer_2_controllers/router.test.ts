@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequestContext, execBff } from '/_102034_/l1/server/layer_2_controllers/execBff.js';
-import { resetPizzariaMenuForTests } from '/_102009_/l1/pizzaria/layer_3_usecases/catalogUsecases.js';
+import { resetPizzariaMenuForTests } from '/_102009_/l1/pizzaria/layer_2_controllers/cardapio.js';
 
 test.beforeEach(() => {
   resetPizzariaMenuForTests();

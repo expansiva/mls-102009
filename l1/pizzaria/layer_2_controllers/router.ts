@@ -5,8 +5,10 @@ import {
   pizzariaHomeLoadHandler,
   pizzariaListMenuHandler,
   pizzariaSeedMockDataHandler,
+} from '/_102009_/l1/pizzaria/layer_2_controllers/cardapio.js';
+import {
   pizzariaUpdateItemHandler,
-} from '/_102009_/l1/pizzaria/layer_2_controllers/catalogHandlers.js';
+} from '/_102009_/l1/pizzaria/layer_2_controllers/editItems.js';
 
 export function createPizzariaRouter(): Map<string, BffHandler> {
   return new Map<string, BffHandler>([

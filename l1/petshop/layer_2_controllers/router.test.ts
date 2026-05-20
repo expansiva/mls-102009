@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequestContext, execBff } from '/_102034_/l1/server/layer_2_controllers/execBff.js';
-import { resetPetshopCatalogForTests } from '/_102009_/l1/petshop/layer_3_usecases/catalogUsecases.js';
+import { resetPetshopCatalogForTests } from '/_102009_/l1/petshop/layer_2_controllers/catalogo.js';
 
 test.beforeEach(() => {
   resetPetshopCatalogForTests();

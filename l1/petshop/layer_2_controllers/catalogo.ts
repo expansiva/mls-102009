@@ -1,16 +1,14 @@
-/// <mls fileReference="_102009_/l1/petshop/layer_3_usecases/catalogUsecases.ts" enhancement="_blank" />
+/// <mls fileReference="_102009_/l1/petshop/layer_2_controllers/catalogo.ts" enhancement="_blank" />
 import type {
   PetshopCatalogProduct,
   PetshopHomeLoadParams,
   PetshopHomeLoadResult,
   PetshopSeedResult,
-  PetshopUpdateProductParams,
 } from '/_102009_/l1/petshop/module.js';
 import { getPetshopMockProducts } from '/_102009_/l1/petshop/mock/adminMock.js';
-import { AuditLogService, StatusHistoryService } from '/_102034_/l1/mdm/layer_3_usecases/core/DataRecordService.js';
-import { AppError, type RequestContext } from '/_102034_/l1/server/layer_2_controllers/contracts.js';
+import { AppError, ok, type BffHandler, type RequestContext } from '/_102034_/l1/server/layer_2_controllers/contracts.js';
 
-async function getPetshopProductRepository(ctx: RequestContext) {
+export async function getPetshopProductRepository(ctx: RequestContext) {
   return ctx.data.moduleData.getTable<PetshopCatalogProduct>('petshopProduct');
 }
 
@@ -119,79 +117,43 @@ export async function loadPetshopHome(
   };
 }
 
-export async function updatePetshopProduct(
-  ctx: RequestContext,
-  input: PetshopUpdateProductParams,
-): Promise<PetshopCatalogProduct> {
-  const productId = input.productId?.trim();
-  if (!productId) {
-    throw new AppError('VALIDATION_ERROR', 'productId is required', 400, { field: 'productId' });
+function parseLimit(value: unknown) {
+  if (value === undefined) {
+    return 3;
   }
 
-  const repository = await getPetshopProductRepository(ctx);
-  const current = await repository.findOne({
-    where: {
-      productId,
-    },
-  });
-
-  if (!current) {
-    throw new AppError('NOT_FOUND', 'Petshop product not found', 404, { productId });
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed <= 0) {
+    throw new AppError('VALIDATION_ERROR', 'limit must be a positive integer', 400);
   }
 
-  const next: PetshopCatalogProduct = {
-    ...current,
-    name: input.name ?? current.name,
-    category: input.category ?? current.category,
-    priceInCents: input.priceInCents ?? current.priceInCents,
-    highlightScore: input.highlightScore ?? current.highlightScore,
-    stockStatus: input.stockStatus ?? current.stockStatus,
-    description: input.description ?? current.description,
-    updatedAt: ctx.clock.nowIso(),
-  };
-
-  await repository.upsert({
-    record: next,
-  });
-
-  await AuditLogService.record(ctx, ctx.data, {
-    entityType: 'PetshopProduct',
-    entityId: next.productId,
-    action: 'update',
-    module: 'petshop',
-    routine: 'petshop.updateProduct',
-    before: current as unknown as Record<string, unknown>,
-    after: next as unknown as Record<string, unknown>,
-    actor: input.author?.trim()
-      ? {
-          actorId: input.author.trim(),
-          actorType: 'user',
-        }
-      : undefined,
-  });
-
-  if (current.stockStatus !== next.stockStatus) {
-    await StatusHistoryService.record(ctx, ctx.data, {
-      entityType: 'PetshopProduct',
-      entityId: next.productId,
-      fromStatus: current.stockStatus,
-      toStatus: next.stockStatus,
-      reason: 'Petshop catalog stock status changed',
-      reasonCode: 'PETSHOP_STOCK_STATUS_UPDATED',
-      module: 'petshop',
-      routine: 'petshop.updateProduct',
-      metadata: {
-        name: next.name,
-        category: next.category,
-      },
-      actor: input.author?.trim()
-        ? {
-            actorId: input.author.trim(),
-            actorType: 'user',
-          }
-        : undefined,
-    });
-  }
-
-  return next;
+  return parsed;
 }
+
+export const petshopListCatalogHandler: BffHandler = async ({ request, ctx }) => {
+  const params = (request.params ?? {}) as Record<string, unknown>;
+  return ok(await listPetshopCatalog(ctx, {
+    category: typeof params.category === 'string' ? params.category : undefined,
+    query: typeof params.query === 'string' ? params.query : undefined,
+  }));
+};
+
+export const petshopGetTopProductsHandler: BffHandler = async ({ request, ctx }) => {
+  const params = (request.params ?? {}) as Record<string, unknown>;
+  return ok(await getPetshopTopProducts(ctx, parseLimit(params.limit)));
+};
+
+export const petshopSeedMockDataHandler: BffHandler = async ({ request, ctx }) => {
+  const params = (request.params ?? {}) as Record<string, unknown>;
+  return ok(await seedPetshopMockData(ctx, params.force === true));
+};
+
+export const petshopHomeLoadHandler: BffHandler = async ({ request, ctx }) => {
+  const params = (request.params ?? {}) as Record<string, unknown>;
+  return ok(await loadPetshopHome(ctx, {
+    category: typeof params.category === 'string' ? params.category : undefined,
+    query: typeof params.query === 'string' ? params.query : undefined,
+    topLimit: params.topLimit === undefined ? undefined : parseLimit(params.topLimit),
+    forceSeed: params.forceSeed === true,
+  }));
+};

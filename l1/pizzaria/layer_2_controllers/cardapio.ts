@@ -1,16 +1,14 @@
-/// <mls fileReference="_102009_/l1/pizzaria/layer_3_usecases/catalogUsecases.ts" enhancement="_blank" />
+/// <mls fileReference="_102009_/l1/pizzaria/layer_2_controllers/cardapio.ts" enhancement="_blank" />
 import type {
   PizzariaHomeLoadParams,
   PizzariaHomeLoadResult,
   PizzariaMenuItem,
   PizzariaSeedResult,
-  PizzariaUpdateItemParams,
 } from '/_102009_/l1/pizzaria/module.js';
 import { getPizzariaMockItems } from '/_102009_/l1/pizzaria/mock/adminMock.js';
-import { AuditLogService, StatusHistoryService } from '/_102034_/l1/mdm/layer_3_usecases/core/DataRecordService.js';
-import { AppError, type RequestContext } from '/_102034_/l1/server/layer_2_controllers/contracts.js';
+import { AppError, ok, type BffHandler, type RequestContext } from '/_102034_/l1/server/layer_2_controllers/contracts.js';
 
-async function getPizzariaMenuItemRepository(ctx: RequestContext) {
+export async function getPizzariaMenuItemRepository(ctx: RequestContext) {
   return ctx.data.moduleData.getTable<PizzariaMenuItem>('pizzariaMenuItem');
 }
 
@@ -119,79 +117,43 @@ export async function loadPizzariaHome(
   };
 }
 
-export async function updatePizzariaItem(
-  ctx: RequestContext,
-  input: PizzariaUpdateItemParams,
-): Promise<PizzariaMenuItem> {
-  const menuItemId = input.menuItemId?.trim();
-  if (!menuItemId) {
-    throw new AppError('VALIDATION_ERROR', 'menuItemId is required', 400, { field: 'menuItemId' });
+function parseLimit(value: unknown) {
+  if (value === undefined) {
+    return 3;
   }
 
-  const repository = await getPizzariaMenuItemRepository(ctx);
-  const current = await repository.findOne({
-    where: {
-      menuItemId,
-    },
-  });
-
-  if (!current) {
-    throw new AppError('NOT_FOUND', 'Pizzaria menu item not found', 404, { menuItemId });
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed <= 0) {
+    throw new AppError('VALIDATION_ERROR', 'limit must be a positive integer', 400);
   }
 
-  const next: PizzariaMenuItem = {
-    ...current,
-    name: input.name ?? current.name,
-    category: input.category ?? current.category,
-    priceInCents: input.priceInCents ?? current.priceInCents,
-    highlightScore: input.highlightScore ?? current.highlightScore,
-    stockStatus: input.stockStatus ?? current.stockStatus,
-    description: input.description ?? current.description,
-    updatedAt: ctx.clock.nowIso(),
-  };
-
-  await repository.upsert({
-    record: next,
-  });
-
-  await AuditLogService.record(ctx, ctx.data, {
-    entityType: 'PizzariaMenuItem',
-    entityId: next.menuItemId,
-    action: 'update',
-    module: 'pizzaria',
-    routine: 'pizzaria.updateItem',
-    before: current as unknown as Record<string, unknown>,
-    after: next as unknown as Record<string, unknown>,
-    actor: input.author?.trim()
-      ? {
-          actorId: input.author.trim(),
-          actorType: 'user',
-        }
-      : undefined,
-  });
-
-  if (current.stockStatus !== next.stockStatus) {
-    await StatusHistoryService.record(ctx, ctx.data, {
-      entityType: 'PizzariaMenuItem',
-      entityId: next.menuItemId,
-      fromStatus: current.stockStatus,
-      toStatus: next.stockStatus,
-      reason: 'Pizzaria menu item stock status changed',
-      reasonCode: 'PIZZARIA_STOCK_STATUS_UPDATED',
-      module: 'pizzaria',
-      routine: 'pizzaria.updateItem',
-      metadata: {
-        name: next.name,
-        category: next.category,
-      },
-      actor: input.author?.trim()
-        ? {
-            actorId: input.author.trim(),
-            actorType: 'user',
-          }
-        : undefined,
-    });
-  }
-
-  return next;
+  return parsed;
 }
+
+export const pizzariaListMenuHandler: BffHandler = async ({ request, ctx }) => {
+  const params = (request.params ?? {}) as Record<string, unknown>;
+  return ok(await listPizzariaMenu(ctx, {
+    category: typeof params.category === 'string' ? params.category : undefined,
+    query: typeof params.query === 'string' ? params.query : undefined,
+  }));
+};
+
+export const pizzariaGetTopItemsHandler: BffHandler = async ({ request, ctx }) => {
+  const params = (request.params ?? {}) as Record<string, unknown>;
+  return ok(await getPizzariaTopItems(ctx, parseLimit(params.limit)));
+};
+
+export const pizzariaSeedMockDataHandler: BffHandler = async ({ request, ctx }) => {
+  const params = (request.params ?? {}) as Record<string, unknown>;
+  return ok(await seedPizzariaMockData(ctx, params.force === true));
+};
+
+export const pizzariaHomeLoadHandler: BffHandler = async ({ request, ctx }) => {
+  const params = (request.params ?? {}) as Record<string, unknown>;
+  return ok(await loadPizzariaHome(ctx, {
+    category: typeof params.category === 'string' ? params.category : undefined,
+    query: typeof params.query === 'string' ? params.query : undefined,
+    topLimit: params.topLimit === undefined ? undefined : parseLimit(params.topLimit),
+    forceSeed: params.forceSeed === true,
+  }));
+};
