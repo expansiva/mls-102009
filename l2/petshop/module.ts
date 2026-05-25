@@ -1,16 +1,20 @@
 /// <mls fileReference="_102009_/l2/petshop/module.ts" enhancement="_blank" />
-import type { AuraModuleFrontendDefinition } from '/_102029_/l2/contracts/bootstrap.js';
+import type { AuraModuleFrontendDefinition, IPaths, IGenomeConfig } from '/_102029_/l2/contracts/bootstrap.js';
 
-export const moduleGenome = {
-  page11: {
+export const moduleGenome: Record<string, IGenomeConfig> = {
+  'web/desktop/page11': {
+    designSystem: 'default',
+    designSystemSkill:  '/_102029_/l2/skills/designsystem/default.js',
     device: 'desktop',
-    layout: 'standard',
-  },
-  page21: {
-    device: 'mobile',
-    layout: 'standard',
-  },
-} as const;
+    layout: 'standart',
+    layoutSkill: '/_102029_/l2/skills/layout/stardart.js',
+  }
+}
+
+export const skills: IPaths = {
+  webSharedPath: '/_102029_/l2/web/shared',
+  webSharedSkill: '/_102029_/l2/skills/shared.js',
+}
 
 export const moduleStates = {
   currentSection: 'ui.petshop.currentSection',
