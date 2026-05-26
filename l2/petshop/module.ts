@@ -4,16 +4,19 @@ import type { AuraModuleFrontendDefinition, IPaths, IGenomeConfig } from '/_1020
 export const moduleGenome: Record<string, IGenomeConfig> = {
   'web/desktop/page11': {
     designSystem: 'default',
-    designSystemSkill:  '/_102029_/l2/skills/designsystem/default.js',
+    designSystemSkill: '/_102029_/l2/skills/designsystem/default.js',
     device: 'desktop',
     layout: 'standart',
     layoutSkill: '/_102029_/l2/skills/layout/stardart.js',
   }
 }
 
+
 export const skills: IPaths = {
-  webSharedPath: '/_102029_/l2/web/shared',
-  webSharedSkill: '/_102029_/l2/skills/shared.js',
+  web: {
+    sharedPath: '/_102029_/l2/web/shared',
+    sharedSkill: '/_102029_/l2/skills/shared.js',
+  }
 }
 
 export const moduleStates = {
@@ -57,11 +60,6 @@ export const moduleFrontendDefinition: AuraModuleFrontendDefinition = {
       tag: 'petshop-web-desktop-catalogo-page',
       title: 'Catalog',
     },
-    {
-      path: '/petshop/editProducts',
-      entrypoint: '/_102009_/l2/petshop/web/desktop/page11/editProducts.js',
-      tag: 'petshop-web-desktop-edit-products-page',
-      title: 'Edit products',
-    },
+
   ],
 };
