@@ -11,26 +11,6 @@
       "language": "en",
       "name": "English",
       "path": "/"
-    },
-    {
-      "language": "pt",
-      "name": "Portuguese",
-      "path": "/pt"
-    },
-    {
-      "language": "es",
-      "name": "Spanish, Castilian",
-      "path": "/es"
-    },
-    {
-      "language": "af",
-      "name": "Afrikaans",
-      "path": "/af"
-    },
-    {
-      "language": "it",
-      "name": "Italian",
-      "path": "/it"
     }
   ]
 }

@@ -12,27 +12,7 @@ import {
 import type { PetshopCatalogProduct } from '/_102009_/l1/petshop/module.js';
 
 /// **collab_i18n_start**
-const message_pt = {
-  brand: 'Petshop',
-  pageTitle: 'Catalogo',
-  pageSubtitle: 'Navegue pelos produtos e destaques.',
-  preparingCatalog: 'Preparando catalogo...',
-  loadingCatalog: 'Carregando catalogo...',
-  filteringBy: 'Filtrando por',
-  filteringCatalog: 'Filtrando catalogo...',
-  updatingCatalog: 'Atualizando catalogo...',
-  couldNotLoad: 'Nao foi possivel carregar os dados do petshop.',
-  couldNotUpdate: 'Nao foi possivel atualizar o catalogo',
-  productsAvailable: 'produtos disponiveis',
-  reload: 'Recarregar',
-  catBanho: 'Banho',
-  catAlimentacao: 'Alimentacao',
-  catHigiene: 'Higiene',
-  topProducts: 'Produtos em destaque',
-  sectionTitle: 'Catalogo',
-  score: 'score',
-};
-const message_en = {
+const message_en: Record<string, string> = {
   brand: 'Petshop',
   pageTitle: 'Catalog',
   pageSubtitle: 'Browse products and featured highlights.',
@@ -51,75 +31,10 @@ const message_en = {
   topProducts: 'Top products',
   sectionTitle: 'Catalog',
   score: 'score',
-};
-const message_es = {
-  brand: 'Petshop',
-  pageTitle: 'Catálogo',
-  pageSubtitle: 'Explora los productos y destacados.',
-  preparingCatalog: 'Preparando catálogo...',
-  loadingCatalog: 'Cargando catálogo...',
-  filteringBy: 'Filtrando por',
-  filteringCatalog: 'Filtrando catálogo...',
-  updatingCatalog: 'Actualizando catálogo...',
-  couldNotLoad: 'No se pudo cargar los datos de la tienda de mascotas.',
-  couldNotUpdate: 'No se pudo actualizar el catálogo',
-  productsAvailable: 'productos disponibles',
-  reload: 'Recargar',
-  catBanho: 'Baño',
-  catAlimentacao: 'Alimentación',
-  catHigiene: 'Higiene',
-  topProducts: 'Productos destacados',
-  sectionTitle: 'Catálogo',
-  score: 'score',
-};
-const message_af = {
-  brand: 'Petshop',
-  pageTitle: 'Katalogus',
-  pageSubtitle: 'Blaai deur produkte en uitgeligte hoogtepunte.',
-  preparingCatalog: 'Berei katalogus voor...',
-  loadingCatalog: 'Laai katalogus...',
-  filteringBy: 'Filtreer volgens',
-  filteringCatalog: 'Filtreer katalogus...',
-  updatingCatalog: 'Werk katalogus by...',
-  couldNotLoad: 'Kon nie petshop-data laai nie.',
-  couldNotUpdate: 'Kon nie katalogus bywerk nie',
-  productsAvailable: 'produkte beskikbaar',
-  reload: 'Herlaai',
-  catBanho: 'Bad',
-  catAlimentacao: 'Voeding',
-  catHigiene: 'Higiëne',
-  topProducts: 'Topprodukte',
-  sectionTitle: 'Katalogus',
-  score: 'teling',
-};
-const message_it = {
-  brand: 'Petshop',
-  pageTitle: 'Catalogo',
-  pageSubtitle: 'Sfoglia i prodotti e i punti salienti.',
-  preparingCatalog: 'Preparazione del catalogo...',
-  loadingCatalog: 'Caricamento del catalogo...',
-  filteringBy: 'Filtrando per',
-  filteringCatalog: 'Filtro del catalogo...',
-  updatingCatalog: 'Aggiornamento del catalogo...',
-  couldNotLoad: 'Impossibile caricare i dati del petshop.',
-  couldNotUpdate: 'Impossibile aggiornare il catalogo',
-  productsAvailable: 'prodotti disponibili',
-  reload: 'Ricarica',
-  catBanho: 'Bagno',
-  catAlimentacao: 'Alimentazione',
-  catHigiene: 'Igiene',
-  topProducts: 'Prodotti in evidenza',
-  sectionTitle: 'Catalogo',
-  score: 'punteggio',
-};
+}
+
 type MessageType = typeof message_en;
-const messages: { [key: string]: MessageType } = {
-  en: message_en,
-  pt: message_pt,
-  es: message_es,
-  af: message_af,
-  it: message_it,
-};
+const messages: { [key: string]: MessageType } = { en: message_en };
 /// **collab_i18n_end**
 
 

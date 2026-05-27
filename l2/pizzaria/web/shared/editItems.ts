@@ -11,32 +11,6 @@ import {
 import type { PizzariaMenuItem } from '/_102009_/l1/pizzaria/module.js';
 
 /// **collab_i18n_start**
-const message_pt = {
-  brand: 'Pizzaria',
-  pageTitle: 'Editar itens',
-  pageSubtitle: 'Simule alteracoes de itens e envie um autor explicito para o registro de auditoria.',
-  preparingItems: 'Preparando itens...',
-  loadingItems: 'Carregando itens...',
-  couldNotLoadItems: 'Nao foi possivel carregar os itens.',
-  itemsLoaded: 'itens carregados',
-  authorLabel: 'Autor',
-  authorHint: 'Este valor e enviado para o registro de auditoria como usuario simulado.',
-  sectionTitle: 'Editar itens',
-  fieldName: 'Nome',
-  fieldCategory: 'Categoria',
-  fieldPriceInCents: 'Preco em centavos',
-  fieldHighlightScore: 'Score de destaque',
-  fieldStockStatus: 'Status de estoque',
-  fieldDescription: 'Descricao',
-  lastUpdate: 'Ultima atualizacao:',
-  save: 'Salvar',
-  saving: 'Salvando',
-  updated: 'Atualizado',
-  by: 'por',
-  couldNotUpdate: 'Nao foi possivel atualizar o item.',
-  couldNotSave: 'Nao foi possivel salvar o item',
-};
-
 const message_en = {
   brand: 'Pizzaria',
   pageTitle: 'Edit items',
@@ -66,7 +40,6 @@ const message_en = {
 type MessageType = typeof message_en;
 const messages: { [key: string]: MessageType } = {
   en: message_en,
-  pt: message_pt,
 };
 /// **collab_i18n_end**
 
