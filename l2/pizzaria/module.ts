@@ -13,11 +13,10 @@ export const moduleGenome: Record<string, IGenomeConfig> = {
 
 export const skills: IPaths = {
   web: {
-    sharedPath: '/_102029_/l2/web/shared',
+    sharedPath: 'web/shared',
     sharedSkill: '/_102029_/l2/skills/shared.js',
   }
 }
-
 
 export const moduleStates = {
   currentSection: 'ui.pizzaria.currentSection',
