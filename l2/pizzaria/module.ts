@@ -49,6 +49,12 @@ export const moduleFrontendDefinition: AuraModuleFrontendDefinition = {
       label: 'Edit items',
       href: '/pizzaria/editItems',
       description: 'Simulate menu item changes with author',
+    }, 
+    {
+      id: 'areaPublicaCheckout',
+      label: 'areaPublicaCheckout',
+      href: '/pizzaria/areaPublicaCheckout',
+      description: 'areaPublicaCheckout',
     },
   ],
   routes: [
@@ -64,6 +70,13 @@ export const moduleFrontendDefinition: AuraModuleFrontendDefinition = {
       entrypoint: '/_102009_/l2/pizzaria/web/desktop/page11/editItems.js',
       tag: 'pizzaria-web-desktop-edit-items-page',
       title: 'Edit items',
+    },
+    {
+      path: '/pizzaria/areaPublicaCheckout',
+      aliases: [],
+      entrypoint: '/_102009_/l2/pizzaria/web/desktop/page11/areaPublicaCheckout.js',
+      tag: 'pizzaria--web--desktop--page11--area-publica-checkout-102009',
+      title: 'areaPublicaCheckout',
     },
   ],
 };

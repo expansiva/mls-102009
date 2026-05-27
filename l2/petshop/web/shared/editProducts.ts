@@ -8,7 +8,7 @@ import {
   consumeExpectedNavigationLoad,
   runBlockingUiAction,
 } from '/_102029_/l2/interactionRuntime.js';
-import type { PetshopCatalogProduct } from '_102009_/l1/petshop/module.js';
+import type { PetshopCatalogProduct } from '/_102009_/l1/petshop/module.js';
 
 /// **collab_i18n_start**
 const message_pt = {

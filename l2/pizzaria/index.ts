@@ -9,6 +9,7 @@ void bootstrapCollabApp({
   navigation: [
     { label: 'Cardapio', href: '/pizzaria/cardapio' },
     { label: 'Edit items', href: '/pizzaria/edit-items' },
+    { label: 'areaPublicaCheckout', href: '/pizzaria/areaPublicaCheckout' },
     { label: 'Monitor', href: '/monitor' },
   ],
   pages: [
@@ -29,6 +30,12 @@ void bootstrapCollabApp({
       title: 'Edit items',
       tagName: 'pizzaria-web-desktop-edit-items-page',
       loader: () => import('/_102009_/l2/pizzaria/web/desktop/page11/editItems.js'),
+    },
+    {
+      path: '/pizzaria/areaPublicaCheckout',
+      title: 'areaPublicaCheckout',
+      tagName: 'pizzaria--web--desktop--page11--area-publica-checkout-102009',
+      loader: () => import('/_102009_/l2/pizzaria/web/desktop/page11/areaPublicaCheckout.js'),
     },
   ],
 });

@@ -9,6 +9,12 @@ import {
 import {
   pizzariaUpdateItemHandler,
 } from '/_102009_/l1/pizzaria/layer_2_controllers/editItems.js';
+import {
+  areaPublicaCheckoutGetResumoCheckoutPublicoHandler,
+  areaPublicaCheckoutListarItensPedidoHandler,
+  areaPublicaCheckoutListarCombosAtivosHandler,
+  areaPublicaCheckoutListarPoliticasCancelamentoAtivasHandler,
+} from '/_102009_/l1/pizzaria/layer_2_controllers/areaPublicaCheckout.js';
 
 export function createPizzariaRouter(): Map<string, BffHandler> {
   return new Map<string, BffHandler>([
@@ -17,5 +23,8 @@ export function createPizzariaRouter(): Map<string, BffHandler> {
     ['pizzaria.getTopItems', pizzariaGetTopItemsHandler],
     ['pizzaria.seedMockData', pizzariaSeedMockDataHandler],
     ['pizzaria.updateItem', pizzariaUpdateItemHandler],
-  ]);
+    ['pizzaria.getResumoCheckoutPublico', areaPublicaCheckoutGetResumoCheckoutPublicoHandler],
+    ['pizzaria.listarItensPedido', areaPublicaCheckoutListarItensPedidoHandler],
+    ['pizzaria.listarCombosAtivos', areaPublicaCheckoutListarCombosAtivosHandler],
+    ['pizzaria.listarPoliticasCancelamentoAtivas', areaPublicaCheckoutListarPoliticasCancelamentoAtivasHandler],]);
 }

@@ -1,9 +1,9 @@
 /// <mls fileReference="_102009_/l2/petshop/web/desktop/page11/catalogo.ts" enhancement="_102027_/l2/enhancementLit.ts" />
 import { html } from 'lit';
 import { PetshopCatalogoBase, formatPrice } from '/_102009_/l2/petshop/web/shared/catalogo.js';
-import '/_102040_/l2/molecules/groupselectone/ml-radio-group';
+//import '/_102040_/l2/molecules/groupselectone/ml-radio-group';
 
-import '/_102040_/l2/molecules/groupselectone/ml-card-selector.js';
+//import '/_102040_/l2/molecules/groupselectone/ml-card-selector.js';
 export class PetshopWebDesktopCatalogoPage extends PetshopCatalogoBase {
   render() {
     return html`
