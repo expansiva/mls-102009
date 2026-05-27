@@ -11,28 +11,6 @@ import {
 import type { PizzariaMenuItem } from '/_102009_/l1/pizzaria/module.js';
 
 /// **collab_i18n_start**
-const message_pt = {
-  brand: 'Pizzaria',
-  pageTitle: 'Cardapio',
-  pageSubtitle: 'Navegue pelos itens do menu e destaques.',
-  preparingMenu: 'Preparando cardapio...',
-  loadingMenu: 'Carregando cardapio...',
-  filteringBy: 'Filtrando por',
-  filteringMenu: 'Filtrando cardapio...',
-  updatingMenu: 'Atualizando cardapio...',
-  couldNotLoad: 'Nao foi possivel carregar os dados da pizzaria.',
-  couldNotUpdate: 'Nao foi possivel atualizar o cardapio',
-  itemsAvailable: 'itens disponiveis',
-  reload: 'Recarregar',
-  catPizzas: 'Pizzas',
-  catBebidas: 'Bebidas',
-  catSobremesas: 'Sobremesas',
-  catBordas: 'Bordas',
-  topItems: 'Itens em destaque',
-  sectionTitle: 'Cardapio',
-  score: 'score',
-};
-
 const message_en = {
   brand: 'Pizzaria',
   pageTitle: 'Menu',
@@ -58,7 +36,6 @@ const message_en = {
 type MessageType = typeof message_en;
 const messages: { [key: string]: MessageType } = {
   en: message_en,
-  pt: message_pt,
 };
 /// **collab_i18n_end**
 

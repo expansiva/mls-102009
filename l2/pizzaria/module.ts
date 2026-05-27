@@ -11,7 +11,7 @@ export const moduleGenome: Record<string, IGenomeConfig> = {
 
 export const skills: IPaths = {
   web: {
-    sharedPath: '/_102029_/l2/petshop/web/shared',  
+    sharedPath: '/_102029_/l2/pizzaria/web/shared',  
     sharedSkill: '/_102029_/l2/skills/shared.js',
   }
 }

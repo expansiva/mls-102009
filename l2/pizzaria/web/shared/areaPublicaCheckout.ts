@@ -20,80 +20,45 @@ import type {
 } from '/_102009_/l1/pizzaria/module.js';
 
 /// **collab_i18n_start**
-const message_pt = {
-    brand: 'Pizzaria',
-    pageTitle: 'areaPublicaCheckout',
-    pageSubtitle: 'Finalizar pedido publico online com dados do cliente, entrega, pagamento e confirmacao.',
-    loadingResumoCheckout: 'Carregando resumo do pedido...',
-    loadingItensPedido: 'Carregando itens do pedido...',
-    loadingCombosAtivos: 'Carregando sugestoes de combos...',
-    loadingPoliticasCancelamento: 'Carregando politica de cancelamento...',
-    couldNotLoad: 'Nao foi possivel carregar os dados.',
-    reload: 'Recarregar',
-    // form/field labels
-    pedidoId: 'Pedido',
-    tipoPedido: 'Tipo',
-    statusPedido: 'Status',
-    totalPedido: 'Total',
-    cliente: 'Cliente',
-    enderecoEntrega: 'Endereco de entrega',
-    zonaEntregaId: 'Zona de entrega',
-    taxaEntrega: 'Taxa de entrega',
-    metodoPagamento: 'Metodo de pagamento',
-    valorPagamento: 'Valor',
-    statusPagamento: 'Status do pagamento',
-    politicaAceite: 'Li e aceito a politica',
-    whatsappOptIn: 'Receber atualizacoes por WhatsApp',
-    // actions
-    save: 'Salvar',
-    saving: 'Salvando...',
-    confirm: 'Confirmar',
-    confirming: 'Confirmando...',
-    couldNotSave: 'Nao foi possivel salvar.',
-    savedSuccessfully: 'Salvo com sucesso.',
-    couldNotConfirm: 'Nao foi possivel confirmar o pedido.',
-    confirmedSuccessfully: 'Pedido confirmado com sucesso.',
-    // misc
-    itemsAvailable: 'itens disponiveis',
-};
 const message_en = {
-    brand: 'Pizzaria',
-    pageTitle: 'areaPublicaCheckout',
-    pageSubtitle: 'Finalize public online order with customer details, delivery, payment and confirmation.',
-    loadingResumoCheckout: 'Loading order summary...',
-    loadingItensPedido: 'Loading order items...',
-    loadingCombosAtivos: 'Loading combo suggestions...',
-    loadingPoliticasCancelamento: 'Loading cancellation policy...',
-    couldNotLoad: 'Could not load data.',
-    reload: 'Reload',
-    // form/field labels
-    pedidoId: 'Order',
-    tipoPedido: 'Type',
-    statusPedido: 'Status',
-    totalPedido: 'Total',
-    cliente: 'Customer',
-    enderecoEntrega: 'Delivery address',
-    zonaEntregaId: 'Delivery zone',
-    taxaEntrega: 'Delivery fee',
-    metodoPagamento: 'Payment method',
-    valorPagamento: 'Amount',
-    statusPagamento: 'Payment status',
-    politicaAceite: 'I have read and accept the policy',
-    whatsappOptIn: 'Receive WhatsApp updates',
-    // actions
-    save: 'Save',
-    saving: 'Saving...',
-    confirm: 'Confirm',
-    confirming: 'Confirming...',
-    couldNotSave: 'Could not save.',
-    savedSuccessfully: 'Saved successfully.',
-    couldNotConfirm: 'Could not confirm the order.',
-    confirmedSuccessfully: 'Order confirmed successfully.',
-    // misc
-    itemsAvailable: 'items available',
+brand: 'Pizzaria',
+pageTitle: 'areaPublicaCheckout',
+pageSubtitle: 'Finalize public online order with customer details, delivery, payment and confirmation.',
+loadingResumoCheckout: 'Loading order summary...',
+loadingItensPedido: 'Loading order items...',
+loadingCombosAtivos: 'Loading combo suggestions...',
+loadingPoliticasCancelamento: 'Loading cancellation policy...',
+couldNotLoad: 'Could not load data.',
+reload: 'Reload',
+// form/field labels
+pedidoId: 'Order',
+tipoPedido: 'Type',
+statusPedido: 'Status',
+totalPedido: 'Total',
+cliente: 'Customer',
+enderecoEntrega: 'Delivery address',
+zonaEntregaId: 'Delivery zone',
+taxaEntrega: 'Delivery fee',
+metodoPagamento: 'Payment method',
+valorPagamento: 'Amount',
+statusPagamento: 'Payment status',
+politicaAceite: 'I have read and accept the policy',
+whatsappOptIn: 'Receive WhatsApp updates',
+// actions
+save: 'Save',
+saving: 'Saving...',
+confirm: 'Confirm',
+confirming: 'Confirming...',
+couldNotSave: 'Could not save.',
+savedSuccessfully: 'Saved successfully.',
+couldNotConfirm: 'Could not confirm the order.',
+confirmedSuccessfully: 'Order confirmed successfully.',
+// misc
+itemsAvailable: 'items available',
 };
+
 type MessageType = typeof message_en;
-const messages: { [key: string]: MessageType } = { en: message_en, pt: message_pt };
+const messages: { [key: string]: MessageType } = { en: message_en };
 /// **collab_i18n_end**
 
 export class PizzariaAreaPublicaCheckoutBase extends CollabLitElement {
