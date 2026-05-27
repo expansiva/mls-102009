@@ -4,16 +4,14 @@ import type { AuraModuleFrontendDefinition, IPaths, IGenomeConfig } from '/_1020
 export const moduleGenome: Record<string, IGenomeConfig> = {
   'web/desktop/page11': {
     designSystem: 'default',
-    designSystemSkill: '/_102029_/l2/skills/designsystem/default.js',
     device: 'desktop',
-    layout: 'standart',
-    layoutSkill: '/_102029_/l2/skills/layout/stardart.js',
+    layout: 'standard',
   }
 }
 
 export const skills: IPaths = {
   web: {
-    sharedPath: 'web/shared',
+    sharedPath: '/_102029_/l2/petshop/web/shared',  
     sharedSkill: '/_102029_/l2/skills/shared.js',
   }
 }
